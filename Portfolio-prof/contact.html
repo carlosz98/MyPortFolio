@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Welcome to my portfolio!</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Sora:wght@700&family=Work+Sans:ital,wght@0,400;0,700;1,600&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/brands.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="toggle-switch.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>Carlos Zabala</h1>
+        <ul>
+          <li><a href="index.html">Work</a></li>
+          <li><a href="/resume/Carlos Zabala - Resume.docx (2).pdf">Resume</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      
+      
+      <div class="controls">
+        <label class="toggle-switch">
+          Dark Mode
+          <input type="checkbox" id="dark-mode-toggle">
+          <div class="toggle-switch-border">
+            <div class="toggle-switch-dot"></div>
+          </div>
+        </label>
+      </div>
+    </header>
+
+    
+
+    <section class="bio">
+      <img class="profile-img" src="/img/profile.jpeg"/>
+      <div>
+        <h2>Let's work together!</h2>
+        <p>
+        Please fill out the form below to get in touch with me. I'm looking forward to working with you!
+        </p>
+        <a class="btn" href="mailto:czabala1998@gmail.com">My Email</a>
+        
+      </div>
+    </section>
+
+    
+
+    <section class="contact-form">
+    <h2>Contact Me</h2>
+    <!-- Embed Google Form here -->
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevG5w_HO_Yw9AmMwyyfULVNRcqZfoU1SJxzykcFvtIZTvYEQ/viewform?embedded=true" width="640" height="753" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <style>
+      
+      .contact-form {
+        padding: 20px;
+      background-color: #FFFFE3;
+      margin: 20px auto;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, color 0.3s;
+      max-width: 600px;
+        
+        
+      }
+      .contact-form h2 {
+        margin-top: 0;
+      }
+      .contact-form label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+      .contact-form input, .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      .contact-form button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .contact-form button:hover {
+        background-color: #555;
+      }
+    </style>
+    
+
+      
+
+    <footer>
+      <ul>
+        <li>
+          <a href="www.linkedin.com/in/carlos-zabala-589208336">
+            LinkedIn
+            <span class="link-icon">
+              <i class="fa-brands fa-linkedin"></i>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            Back to Top
+            <span class="link-icon">
+              <i class="fa-solid fa-user"></i>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/carlosz98?tab=repositories">
+            GitHub
+            <span class="link-icon">
+              <i class="fa-brands fa-github"></i>
+            </span>
+          </a>
+        </li>
+      </ul>
+      <p class="copywright">© 2025 Carlos Zabala</p>
+    </footer>
+    <script src="script.js">
+      
+    </script>
+  </body>
+</html>
