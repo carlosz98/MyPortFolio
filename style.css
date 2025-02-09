@@ -50,6 +50,7 @@ h3 {
 nav,
 section {
   border-block-end: 1px solid var(--primary);
+  
 }
 
 header nav {
@@ -80,12 +81,15 @@ header .controls {
   display: flex;
   justify-content: end;
   padding: 1rem 0;
+  
+  
 }
 
 .bio {
   display: flex;
   align-items: center;
   padding-block-end: 4rem;
+  
 }
 
 .bio .profile-img {
@@ -94,6 +98,7 @@ header .controls {
   min-width: 320px;
   background: #888;
   border-radius: 160px;
+  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
 @media (max-width: 1024px) {
@@ -102,6 +107,8 @@ header .controls {
   }
   .bio .profile-img {
     margin-inline-end: 0;
+    box-shadow: 3px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
+
   }
 }
 
@@ -125,56 +132,71 @@ a.btn {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 0.875rem;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+
 }
 
 .recent-work {
   padding-block-end: 3rem;
+  
+  
 }
 
 article {
   display: flex;
   padding: 3rem 0;
+  
 }
 
 article strong {
   font-style: italic;
   font-weight: 600;
+  
 }
 
 article h3 {
   margin-block-start: 0;
+  
 }
 
 article a {
   font-weight: 700;
   padding: 2rem 0;
+  
 }
 
 article li {
   margin-block-end: 0.5rem;
+  
 }
 
 article .article-img {
   width: 512px;
   min-width: 512px;
   margin-inline-start: 4rem;
+  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
 @media (max-width: 1024px) {
   article {
     flex-direction: column;
+    
+    
   }
   article .article-img {
     width: 100%;
     min-width: 100%;
     margin-inline-start: 0;
     margin-block-start: 2rem;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
   }
 }
 
 footer {
   padding: 1rem 0;
   text-align: center;
+  
 }
 
 footer ul {
@@ -201,6 +223,7 @@ footer a {
 
 footer .copywright {
   margin: 3rem 0;
+  
 }
 
 footer .link-icon {
@@ -214,4 +237,6 @@ footer .link-icon {
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
+  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
+  
 }
