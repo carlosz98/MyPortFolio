@@ -98,7 +98,7 @@ header .controls {
   min-width: 320px;
   background: #888;
   border-radius: 160px;
-  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
+  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.4); /* Add shadow */
 }
 
 @media (max-width: 1024px) {
@@ -107,7 +107,7 @@ header .controls {
   }
   .bio .profile-img {
     margin-inline-end: 0;
-    box-shadow: 3px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
+    box-shadow: 3px 10px 9px rgba(0, 0, 0, 0.4); /* Add shadow */
 
   }
 }
@@ -132,7 +132,7 @@ a.btn {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 0.875rem;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); /* Add shadow */
 
 }
 
@@ -174,7 +174,7 @@ article .article-img {
   width: 512px;
   min-width: 512px;
   margin-inline-start: 4rem;
-  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
+  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.4); /* Add shadow */
 }
 
 @media (max-width: 1024px) {
@@ -188,8 +188,8 @@ article .article-img {
     min-width: 100%;
     margin-inline-start: 0;
     margin-block-start: 2rem;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.4); /* Add shadow */
   }
 }
 
@@ -237,6 +237,28 @@ footer .link-icon {
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.1); /* Add shadow */
+  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.4); /* Add shadow */
   
 }
+
+iframe {
+  box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.4); /* Adjust the values as needed */
+  border-radius: 8px; /* Optional: Add rounded corners */
+}
+
+#character-speech {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px; /* Adjust the font size as needed */
+  font-weight: normal; /* Ensure the font is not bold */
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid black; /* Blinking caret */
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
+}
+

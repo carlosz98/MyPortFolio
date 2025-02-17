@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="toggle-switch.css">
     <link rel="icon" href="img/logo chiquito.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+
+    
   </head>
 
   <body>
@@ -133,6 +137,24 @@
         <iframe width="800" height="315" src="https://www.youtube.com/embed/817uSUc2tYg?si=755h0HrbzbI8pvxC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </article>
 
+      <article>
+        <div>
+          <h3>Flappy Bird - Replica</h3>
+          <p>2D Project made for (MAC 280) Videogame Programming class.</p>
+          <strong>Feb 2025</strong>
+          <ul>
+            <li>Created using C#</li>
+            <li>Using Object Oriented Programming and Blueprints</li>
+            <li>Created using Unity</li>
+            <li>UI</li>
+          </ul>
+          <a href="https://github.com/carlosz98/FlappyBird-Project---Unity">GitHub Repo</a>
+        </div>
+
+        <iframe width= "500" height="315" src="https://www.youtube.com/embed/H0MAK-MvcbE?si=mG6cCFmeQ4BCpgS8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+      </article>
+
       <section class="recent-work">
         <hr>
         <h2>Currently Working On</h2>
@@ -149,9 +171,26 @@
             <li>Using C++ and Blueprints</li>
             <li>Adventure & Storytelling</li>   
           </ul>
-          <a href="https://github.com/carlosz98">GitHub Repo</a>
+          <a href="https://github.com/carlosz98">Coming Soon...</a>
         </div>
         <img class="article-img" src="img/wrom.png" />
+      </article>
+
+      <article>
+        <div>
+          <h3>2D - Pixel Art City</h3>
+          <p>2D Project made for Game Programming using sprites.</p>
+          <strong>Feb 2025 - In Progress...</strong>
+          <ul>
+            <li>Using C# and Blueprints</li>
+            <li>Created using Unity Engine</li>
+            <li>Implemented sprites for characters and environment</li>
+          </ul>
+          <a href="https://github.com/carlosz98">Coming Soon...</a>
+        </div>
+
+        <img class="article-img" src="img/live-city.png" />
+
       </article>
 
       <article>
@@ -168,23 +207,13 @@
         </div>
         <iframe width="1050" height="315" src="https://www.youtube.com/embed/luLo-Jg_ltU?si=9aaK-xu7qLLMudFF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </article>
-
-      <article>
-        <div>
-          <h3>Flappy Bird Replica</h3>
-          <p>2D Project made for (MAC 280) Videogame Programming class.</p>
-          <strong>Feb 2025 - In Progress...</strong>
-          <ul>
-            <li>Created using C#</li>
-            <li>Using Object Oriented Programming and Blueprints</li>
-            <li>Created using Unity</li>
-          </ul>
-          <a href="https://github.com/carlosz98">GitHub Repo</a>
-        </div>
-
-        <img class="article-img" src="img/fp.png"/>
-      </article>
     </section>
+
+    <div id="talking-character" style="position: fixed; bottom: 20px; right: 20px; background: white; border: 1px solid #ccc; padding: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); display: flex; align-items: center;">
+      <img src="img/robot.png" alt="Talking Character" style="width: 50px; margin-right: 10px;">
+      <p id="character-speech" style="margin: 0; flex-grow: 1;"></p>
+      <button id="close-character" style="background: none; border: none; font-size: 16px; cursor: pointer;">&times;</button>
+    </div>
 
 
     <footer>
@@ -216,6 +245,44 @@
       </ul>
       <p class="copywright">© 2025 Carlos Zabala</p>
     </footer>
+
     <script src="script.js"></script>
+    <script>
+      const scripts = [
+        "Hello! Welcome to my portfolio.",
+        "I mostly program in C++, C# and Java. But I know a bit of web development too.",
+        "Feel free to contact me anytime.",
+        "I enjoy working on personal game development projects.",
+        "I'm currently working on my videogame called Warm Rain of Summer.",
+        "More projects in Algorithms and Data Structure coming soon!",
+        "I'm currently working on a side project, a Windows 98 style website."
+      ];
+    
+      function typeWriter(text, element, speed) {
+        let i = 0;
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          } else {
+            element.style.borderRight = 'none'; // Remove the caret after typing is complete
+          }
+        }
+        type();
+      }
+    
+      document.getElementById('talking-character').addEventListener('click', function() {
+        const randomScript = scripts[Math.floor(Math.random() * scripts.length)];
+        const speechElement = document.getElementById('character-speech');
+        speechElement.innerHTML = ''; // Clear previous text
+        speechElement.style.borderRight = '2px solid black'; // Add the caret
+        typeWriter(randomScript, speechElement, 30); // Adjust speed as needed
+      });
+    
+      document.getElementById('close-character').addEventListener('click', function() {
+        document.getElementById('talking-character').style.display = 'none';
+      });
+    </script>
   </body>
 </html>
