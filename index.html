@@ -19,8 +19,7 @@
 
   <body>
     <header>
-      <nav>
-        
+      <nav> 
         <h1>Carlos Zabala</h1>
         <ul>
         <li><a href="#" target="_blank">Work</a></li>
@@ -47,10 +46,10 @@
       <div>
         <h2>Hi! My name is Carlos Zabala. Programmer and Software Developer.</h2>
         <p>
-         I am an undergraduate student at LaGuardia Community College, majoring in Programming and Software Development. I have experience with languages such as C++, C# and Java along with a strong foundtaion in Object Oriented Programming, Data Structures and Algorithms. Additionally, I have basic knowledge of web development like HTML, CSS, and JavaScript.
+         I am an undergraduate student at LaGuardia Community College, majoring in Programming and Software Development. I have experience with languages such as C++, C# and Java along with a strong foundation in Object Oriented Programming, Data Structures and Algorithms. Additionally, I have basic knowledge of web development like HTML, CSS, and JavaScript.
         </p>
         <p>
-          Beyong programming, I have experience with basic game development using Unreal Engine 5 and Unity, as well as Project Management skills that help me plan, coordinate, and execute task efficiently in both solo and team-based projects.
+          Beyond programming, I have experience with basic game development using Unreal Engine 5 and Unity, as well as Project Management skills that help me plan, coordinate, and execute task efficiently in both solo and team-based projects.
         </p>
         <p>
           In my free time, I enjoy working on personal projects, exploring new technologies, listening to music, and collecting retro hardware.
@@ -210,11 +209,13 @@
       </article>
     </section>
 
-    <div id="talking-character" style="position: fixed; bottom: 20px; right: 20px; background: white; border: 1px solid #ccc; padding: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); display: flex; align-items: center;">
-      <img src="img/robot.png" alt="Talking Character" style="width: 50px; margin-right: 10px;">
-      <p id="character-speech" style="margin: 0; flex-grow: 1;"></p>
-      <button id="close-character" style="background: none; border: none; font-size: 16px; cursor: pointer;">&times;</button>
+    <div id="talking-character">
+      <img src="img/robot.png" alt="Talking Character">
+      <div id="character-speech"></div>
+      <button id="close-character">&times;</button>
     </div>
+
+    
 
 
     <footer>
@@ -258,7 +259,7 @@
         "More projects in Algorithms and Data Structure coming soon!",
         "I'm currently working on a side project, a Windows 98 style website."
       ];
-    
+  
       function typeWriter(text, element, speed) {
         let i = 0;
         function type() {
@@ -272,18 +273,25 @@
         }
         type();
       }
-    
-      document.getElementById('talking-character').addEventListener('click', function() {
+  
+      function showTalkingCharacter() {
         const randomScript = scripts[Math.floor(Math.random() * scripts.length)];
         const speechElement = document.getElementById('character-speech');
+        const talkingCharacter = document.getElementById('talking-character');
         speechElement.innerHTML = ''; // Clear previous text
         speechElement.style.borderRight = '2px solid black'; // Add the caret
         typeWriter(randomScript, speechElement, 30); // Adjust speed as needed
-      });
-    
+        talkingCharacter.classList.add('show');
+        setTimeout(() => {
+          talkingCharacter.classList.remove('show');
+        }, 6000); // Hide after 10 seconds
+      }
+  
       document.getElementById('close-character').addEventListener('click', function() {
-        document.getElementById('talking-character').style.display = 'none';
+        document.getElementById('talking-character').classList.remove('show');
       });
+  
+      setInterval(showTalkingCharacter, 10000); // Show every 20 seconds
     </script>
   </body>
 </html>

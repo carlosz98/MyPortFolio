@@ -81,8 +81,10 @@ header .controls {
   display: flex;
   justify-content: end;
   padding: 1rem 0;
-  
-  
+}
+
+nav li:hover {
+  transform: translate(0, -10%);
 }
 
 .bio {
@@ -133,8 +135,12 @@ a.btn {
   font-weight: 700;
   font-size: 0.875rem;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4); /* Add shadow */
-
 }
+
+.btn:hover {
+  transform: translate(0, -10%);
+}
+
 
 .recent-work {
   padding-block-end: 3rem;
@@ -221,6 +227,11 @@ footer a {
   align-items: center;
 }
 
+footer a:hover {
+  transform: translate(0, -10%);
+}
+
+
 footer .copywright {
   margin: 3rem 0;
   
@@ -255,6 +266,17 @@ iframe {
   overflow: hidden;
   border-right: 2px solid black; /* Blinking caret */
   animation: blink-caret 0.75s step-end infinite;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 100%;
+  right: 0; /* Align to the right */
+  transform: translateX(0); /* Remove horizontal centering */
+  margin-bottom: 10px;
+  max-width: 80vw; /* Ensure the script fits within the screen */
 }
 
 @keyframes blink-caret {
@@ -265,15 +287,16 @@ iframe {
 #talking-character {
   position: fixed;
   bottom: 20px;
-  right: 20px;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  right: 20px; /* Adjusted to right side */
   display: flex;
   align-items: center;
   max-width: 90%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#talking-character.show {
+  opacity: 1;
 }
 
 #talking-character img {
@@ -286,12 +309,26 @@ iframe {
   border: none;
   font-size: 16px;
   cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+#character-speech::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 10px; /* Adjusted to align with the right side */
+  transform: translateX(0); /* Remove horizontal centering */
+  border-width: 10px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
 }
 
 @media (max-width: 600px) {
   #talking-character {
     bottom: 10px;
-    right: 10px;
+    right: 10px; /* Adjusted to right side */
     padding: 5px;
     flex-direction: column;
     align-items: flex-start;
@@ -305,10 +342,17 @@ iframe {
 
   #character-speech {
     font-size: 8px; /* Adjust the font size for smaller screens */
+    max-width: 80vw; /* Ensure the script fits within the screen */
   }
 
   #close-character {
     align-self: flex-end;
   }
-}
 
+  #character-speech::before {
+    bottom: -10px;
+    right: 10px; /* Adjusted to align with the right side */
+    transform: translateX(0); /* Remove horizontal centering */
+    border-color: white transparent transparent transparent;
+  }
+}
