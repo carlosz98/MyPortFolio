@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog — Carlos Zabala</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="toggle-switch.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/brands.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/solid.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo chiquito.png" type="image/x-icon">
+  <style>
+    /* override body max-width for full-bleed iframe */
+    body { max-width: 100%; padding: 0; }
+    header { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    header::after { margin: 0; }
+
+    .blog-embed-wrap {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 120px);
+      background: var(--bg-card);
+      overflow: hidden;
+    }
+
+    #blog-iframe {
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+    #blog-iframe.loaded { opacity: 1; }
+
+    /* loading state */
+    .blog-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: var(--bg-card);
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .blog-loading.hidden { opacity: 0; }
+    .loading-spinner {
+      width: 36px; height: 36px;
+      border: 2.5px solid var(--border-med);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ink-3);
+      letter-spacing: 0.05em;
+    }
+
+    /* blocked fallback */
+    .blog-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      background: var(--bg-card);
+      padding: 2rem;
+      text-align: center;
+    }
+    .blog-fallback.show { display: flex; }
+
+    .blog-fallback-mockup {
+      width: min(520px, 90%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-med);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .fallback-bar {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 0.9rem;
+      background: var(--bg-pill);
+      border-bottom: 1px solid var(--border);
+    }
+    .fallback-bar span {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+    .fallback-bar span:nth-child(1) { background: #ff5f57; }
+    .fallback-bar span:nth-child(2) { background: #febc2e; }
+    .fallback-bar span:nth-child(3) { background: #28c840; }
+    .fallback-url {
+      flex: 1; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-pill); font-family: var(--font-mono);
+      font-size: 0.65rem; color: var(--ink-3); padding: 0.2rem 0.6rem;
+      text-align: center;
+    }
+    .fallback-body {
+      padding: 1.5rem;
+      background: var(--bg);
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .fallback-hero {
+      width: 100%; height: 100px;
+      background: linear-gradient(120deg, var(--accent-light) 0%, var(--bg-pill) 100%);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: 1.1rem;
+      color: var(--accent); letter-spacing: 0.08em;
+    }
+    .fallback-lines { display: flex; flex-direction: column; gap: 0.4rem; }
+    .fallback-line {
+      height: 6px; background: var(--bg-pill); border-radius: 3px;
+      animation: shimmer 2.2s ease infinite;
+    }
+    .fallback-line.w80 { width: 80%; }
+    .fallback-line.w60 { width: 60%; animation-delay: 0.2s; }
+    .fallback-line.w90 { width: 90%; animation-delay: 0.4s; }
+    .fallback-posts { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; }
+    .fallback-post {
+      height: 48px; background: var(--bg-pill); border-radius: var(--radius-sm);
+      border: 1px solid var(--border); animation: shimmer 2.2s ease infinite;
+    }
+    .fallback-post:nth-child(2) { animation-delay: 0.3s; }
+    .fallback-post:nth-child(3) { animation-delay: 0.6s; }
+    @keyframes shimmer { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+    .fallback-message {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ink-3);
+      max-width: 36ch;
+      line-height: 1.6;
+    }
+    .fallback-message strong { color: var(--ink-2); font-style: normal; font-weight: 600; font-family: var(--font-mono); font-size: 0.75rem; }
+
+    .fallback-actions {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
+    }
+    .fallback-actions a.btn { font-size: 0.8rem; }
+    .fallback-actions a.btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600;
+      color: var(--accent); padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--accent);
+      transition: all var(--t-fast);
+    }
+    .fallback-actions a.btn-ghost:hover { background: var(--accent); color: #fff; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <h1>Carlos Zabala</h1>
+      <ul>
+        <li><a href="index.html">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="resume/CAZV-RESUME.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="controls">
+      <label class="toggle-switch">
+        Dark
+        <input type="checkbox" id="dark-mode-toggle">
+        <div class="toggle-switch-border">
+          <div class="toggle-switch-dot"></div>
+        </div>
+      </label>
+    </div>
+  </header>
+
+  <div class="blog-embed-wrap">
+
+    <!-- loading spinner -->
+    <div class="blog-loading" id="blog-loading">
+      <div class="loading-spinner"></div>
+      <span class="loading-text">Loading blog…</span>
+    </div>
+
+    <!-- the iframe attempt -->
+    <iframe
+      id="blog-iframe"
+      src="https://charlysblog.framer.website/"
+      title="Charly's Blog"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+      loading="lazy">
+    </iframe>
+
+    <!-- fallback if iframe is blocked -->
+    <div class="blog-fallback" id="blog-fallback">
+      <div class="blog-fallback-mockup">
+        <div class="fallback-bar">
+          <span></span><span></span><span></span>
+          <div class="fallback-url">charlysblog.framer.website</div>
+        </div>
+        <div class="fallback-body">
+          <div class="fallback-hero">CHARLY'S BLOG</div>
+          <div class="fallback-lines">
+            <div class="fallback-line w80"></div>
+            <div class="fallback-line w60"></div>
+            <div class="fallback-line w90"></div>
+          </div>
+          <div class="fallback-posts">
+            <div class="fallback-post"></div>
+            <div class="fallback-post"></div>
+            <div class="fallback-post"></div>
+          </div>
+        </div>
+      </div>
+      <p class="fallback-message">
+        <strong>The blog can't be embedded here</strong> — Framer blocks external embedding for security. Click below to open it directly.
+      </p>
+      <div class="fallback-actions">
+        <a class="btn" href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Blog
+        </a>
+        <a class="btn-ghost" href="index.html">
+          ← Back to Projects
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- loader + robot -->
+  <div class="loader loader--active">
+    <div class="loader__icon">
+      <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path opacity="0.25" fill="currentColor" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"></path>
+        <path fill="currentColor" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.6s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+  </div>
+
+  <div id="talking-character">
+    <img src="img/robot.png" alt="Talking Character">
+    <div id="character-speech"></div>
+    <button id="close-character">&times;</button>
+  </div>
+
+  <footer>
+    <ul>
+      <li><a href="https://www.linkedin.com/in/carloszabala98/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="link-icon"><i class="fa-brands fa-linkedin"></i></span></a></li>
+      <li><a href="#">Back to Top<span class="link-icon"><i class="fa-solid fa-arrow-up"></i></span></a></li>
+      <li><a href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub<span class="link-icon"><i class="fa-brands fa-github"></i></span></a></li>
+    </ul>
+    <p class="copywright">© 2025 Carlos Zabala</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const iframe  = document.getElementById('blog-iframe');
+    const loading = document.getElementById('blog-loading');
+    const fallback= document.getElementById('blog-fallback');
+
+    // give it 4 seconds — if it hasn't loaded, show fallback
+    const timeout = setTimeout(() => {
+      loading.classList.add('hidden');
+      fallback.classList.add('show');
+    }, 4000);
+
+    iframe.addEventListener('load', () => {
+      clearTimeout(timeout);
+      loading.classList.add('hidden');
+      // try to detect if iframe content is actually blocked
+      try {
+        // if framer blocked it, contentDocument will be null or throw
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        if (!doc || doc.body.innerHTML === '') throw new Error('blocked');
+        iframe.classList.add('loaded');
+      } catch {
+        fallback.classList.add('show');
+      }
+    });
+
+    iframe.addEventListener('error', () => {
+      clearTimeout(timeout);
+      loading.classList.add('hidden');
+      fallback.classList.add('show');
+    });
+
+    // robot
+    const scripts = ["Check out my blog!", "Writing about code, games, and retro tech.", "New posts coming soon!"];
+    function typeWriter(text, el, speed) {
+      let i = 0;
+      function type() { if (i < text.length) { el.innerHTML += text.charAt(i++); setTimeout(type, speed); } else { el.style.borderRight = 'none'; } }
+      type();
+    }
+    function showCharacter() {
+      const el  = document.getElementById('character-speech');
+      const box = document.getElementById('talking-character');
+      el.innerHTML = ''; el.style.borderRight = '2px solid black';
+      typeWriter(scripts[Math.floor(Math.random() * scripts.length)], el, 30);
+      box.classList.add('show');
+      setTimeout(() => box.classList.remove('show'), 6000);
+    }
+    document.getElementById('close-character').addEventListener('click', () => {
+      document.getElementById('talking-character').classList.remove('show');
+    });
+    setTimeout(showCharacter, 3000);
+    setInterval(showCharacter, 14000);
+  </script>
+</body>
+</html>

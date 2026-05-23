@@ -1,199 +1,133 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <title>Contact Me</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" >
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Sora:wght@700&family=Work+Sans:ital,wght@0,400;0,700;1,600&display=swap">
-    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/brands.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/solid.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
-    <link rel="icon" href="img/logo chiquito.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="toggle-switch.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <header>
-      <nav>
-        <h1>Carlos Zabala</h1>
-        <ul>
-          <li><a href="index.html">Work</a></li>
-          <li><a href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer">Blog</a></li>
-          
-          <li><a href="certificates.html">Certificates</a></li>
-          <li><a href="resume/CAZV-RESUME.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      
-      
-      <div class="controls">
-        <label class="toggle-switch">
-          Dark Mode
-          <input type="checkbox" id="dark-mode-toggle">
-          <div class="toggle-switch-border">
-            <div class="toggle-switch-dot"></div>
-          </div>
-        </label>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <title>Contact — Carlos Zabala</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="toggle-switch.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/brands.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/solid.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo chiquito.png" type="image/x-icon">
+</head>
+<body>
 
-    
-
-    <section class="bio">
-      <img class="profile-img" src="/img/2.jpg"/>
-      <div>
-        <h2>Let's work together!</h2>
-        <p>
-        Please fill out the form below to get in touch with me. I'm looking forward to working with you!
-        </p>
-        <a class="btn" href="mailto:czabala1998@gmail.com">My Email</a>
-        
-      </div>
-    </section>
-
-    
-
-    <section class="contact-form">
-    <h2>Contact Me</h2>
-    <!-- Embed Google Form here -->
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevG5w_HO_Yw9AmMwyyfULVNRcqZfoU1SJxzykcFvtIZTvYEQ/viewform?embedded=true" width="640" height="753" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-    <style>
-      
-      .contact-form {
-        padding: 20px;
-      background-color: #FFFFE3;
-      margin: 20px auto;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, color 0.3s;
-      max-width: 600px;
-        
-        
-      }
-      .contact-form h2 {
-        margin-top: 0;
-      }
-      .contact-form label {
-        display: block;
-        margin: 10px 0 5px;
-      }
-      .contact-form input, .contact-form textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-      }
-      .contact-form button {
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      .contact-form button:hover {
-        background-color: #555;
-      }
-    </style>
-    
-
-    <div class="loader loader--active">
-      <div class="loader__icon">
-        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
-          <path opacity="0.2" fill="#fff" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"></path>
-          <path fill="#fff" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0C22.32,8.481,24.301,9.057,26.013,10.047z"></path>
-          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.5s" repeatCount="indefinite"></animateTransform>
-        </svg>
-      </div>
-      <div class="loader__tile"></div>
-      <div class="loader__tile"></div>
-      <div class="loader__tile"></div>
-      <div class="loader__tile"></div>
-      <div class="loader__tile"></div>
-    </div>
-
-    <div id="talking-character">
-      <img src="img/robot.png" alt="Talking Character">
-      <div id="character-speech"></div>
-      <button id="close-character">&times;</button>
-    </div>
-
-    <script src="script.js"></script>
-    <script>
-      const scripts = [
-        "Hello! Let's work together.",
-        "Feel free to contact me anytime.",
-        "Hoping to work with you soon!.",
-      
-      ];
-  
-      function typeWriter(text, element, speed) {
-        let i = 0;
-        function type() {
-          if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-          } else {
-            element.style.borderRight = 'none'; // Remove the caret after typing is complete
-          }
-        }
-        type();
-      }
-  
-      function showTalkingCharacter() {
-        const randomScript = scripts[Math.floor(Math.random() * scripts.length)];
-        const speechElement = document.getElementById('character-speech');
-        const talkingCharacter = document.getElementById('talking-character');
-        speechElement.innerHTML = ''; // Clear previous text
-        speechElement.style.borderRight = '2px solid black'; // Add the caret
-        typeWriter(randomScript, speechElement, 30); // Adjust speed as needed
-        talkingCharacter.classList.add('show');
-        setTimeout(() => {
-          talkingCharacter.classList.remove('show');
-        }, 6000); // Hide after 10 seconds
-      }
-  
-      document.getElementById('close-character').addEventListener('click', function() {
-        document.getElementById('talking-character').classList.remove('show');
-      });
-  
-      setInterval(showTalkingCharacter, 10000); // Show every 20 seconds
-    </script>
-      
-
-    <footer>
+  <header>
+    <nav>
+      <h1>Carlos Zabala</h1>
       <ul>
-        <li>
-          <a href="https://www.linkedin.com/in/carloszabala98/">
-            LinkedIn
-            <span class="link-icon">
-              <i class="fa-brands fa-linkedin"></i>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Back to Top
-            <span class="link-icon">
-              <i class="fa-solid fa-user"></i>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/carlosz98?tab=repositories">
-            GitHub
-            <span class="link-icon">
-              <i class="fa-brands fa-github"></i>
-            </span>
-          </a>
-        </li>
+        <li><a href="index.html">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="resume/CAZV-RESUME.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
-      <p class="copywright">© 2025 Carlos Zabala</p>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+    </nav>
+    <div class="controls">
+      <label class="toggle-switch">
+        Dark
+        <input type="checkbox" id="dark-mode-toggle">
+        <div class="toggle-switch-border">
+          <div class="toggle-switch-dot"></div>
+        </div>
+      </label>
+    </div>
+  </header>
+
+  <section class="bio">
+    <div class="bio-text">
+      <h2>Let's work together.</h2>
+      <p>I'm open to internships, freelance projects, and collaborations. Fill out the form or reach out directly — I'll get back to you soon.</p>
+    </div>
+  </section>
+
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <h2>Get in touch</h2>
+      <p>Prefer direct contact? Reach out through any of the channels below.</p>
+      <div class="contact-links">
+        <a href="mailto:czabala1998@gmail.com"><i class="fa-solid fa-envelope"></i>czabala1998@gmail.com</a>
+        <a href="https://www.linkedin.com/in/carloszabala98/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i>linkedin.com/in/carloszabala98</a>
+        <a href="https://github.com/carlosz98" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i>github.com/carlosz98</a>
+        <a href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-newspaper"></i>Blog</a>
+      </div>
+      <br>
+      <a class="btn" href="mailto:czabala1998@gmail.com"><i class="fa-solid fa-envelope"></i> Send Email</a>
+    </div>
+    <div class="contact-form-wrap">
+      <h2>Send a message</h2>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevG5w_HO_Yw9AmMwyyfULVNRcqZfoU1SJxzykcFvtIZTvYEQ/viewform?embedded=true" title="Contact form" loading="lazy">Loading form…</iframe>
+    </div>
+  </div>
+
+  <div class="loader loader--active">
+    <div class="loader__icon">
+      <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path opacity="0.25" fill="currentColor" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"></path>
+        <path fill="currentColor" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.6s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+  </div>
+
+  <div id="talking-character">
+    <img src="img/robot.png" alt="Talking Character">
+    <div id="character-speech"></div>
+    <button id="close-character">&times;</button>
+  </div>
+
+  <footer>
+    <ul>
+      <li><a href="https://www.linkedin.com/in/carloszabala98/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="link-icon"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></span></a></li>
+      <li><a href="#">Back to Top<span class="link-icon"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></span></a></li>
+      <li><a href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub<span class="link-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span></a></li>
+    </ul>
+    <p class="copywright">© 2025 Carlos Zabala</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const scripts = [
+      "Hello! Let's work together.",
+      "Feel free to reach out anytime.",
+      "Hoping to collaborate with you soon!"
+    ];
+    function typeWriter(text, el, speed) {
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          el.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          el.style.borderRight = 'none';
+        }
+      }
+      type();
+    }
+    function showCharacter() {
+      const randomScript = scripts[Math.floor(Math.random() * scripts.length)];
+      const speechElement = document.getElementById('character-speech');
+      const talkingCharacter = document.getElementById('talking-character');
+      speechElement.innerHTML = '';
+      speechElement.style.borderRight = '2px solid black';
+      typeWriter(randomScript, speechElement, 30);
+      talkingCharacter.classList.add('show');
+      setTimeout(() => talkingCharacter.classList.remove('show'), 6000);
+    }
+    document.getElementById('close-character').addEventListener('click', function() {
+      document.getElementById('talking-character').classList.remove('show');
+    });
+    setTimeout(showCharacter, 3000);
+    setInterval(showCharacter, 14000);
+  </script>
+</body>
 </html>
