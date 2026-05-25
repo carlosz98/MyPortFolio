@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume — Carlos Zabala</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Resume of Carlos Zabala, Software Developer.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="toggle-switch.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/brands.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/solid.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo chiquito.png" type="image/x-icon">
+  <style>
+    /* ── Resume page specific styles ── */
+    .resume-page { padding: 3rem 0 5rem; }
+
+    .resume-page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .resume-page-name { margin-bottom: 0.5rem; }
+    .resume-page-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .resume-page-contact a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-mono); font-size: 0.75rem;
+      color: var(--ink-2); padding: 0.25rem 0.65rem;
+      border: 1px solid var(--border); border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      transition: all var(--t-fast);
+    }
+    .resume-page-contact a:hover { color: var(--accent); border-color: var(--accent); }
+    .resume-page-contact a i { color: var(--accent); font-size: 0.7rem; }
+
+    .resume-page-actions {
+      display: flex; gap: 0.75rem; flex-shrink: 0; flex-wrap: wrap;
+      align-items: flex-start; padding-top: 0.25rem;
+    }
+
+    /* sections */
+    .cv-body {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0 3.5rem;
+      padding-top: 2.5rem;
+    }
+
+    .cv-sidebar { display: flex; flex-direction: column; gap: 2.5rem; }
+    .cv-main    { display: flex; flex-direction: column; gap: 2.5rem; border-left: 1px solid var(--border); padding-left: 3rem; }
+
+    .cv-section-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cv-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* skill tags */
+    .cv-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .cv-tag {
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500;
+      color: var(--accent); background: var(--accent-light);
+      padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);
+      transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast);
+      cursor: default;
+    }
+    .cv-tag:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+
+    /* summary */
+    .cv-summary {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--ink-2);
+      padding: 1.1rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    /* entry blocks */
+    .cv-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cv-entry:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .cv-entry-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .cv-entry-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--ink);
+      font-weight: 400;
+    }
+    .cv-entry-date {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--ink-3);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .cv-entry-org {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .cv-entry-desc {
+      font-size: 0.8375rem;
+      line-height: 1.65;
+      color: var(--ink-2);
+      margin: 0;
+    }
+    .cv-entry-bullets {
+      margin: 0.25rem 0 0 0;
+      padding-left: 1.1rem;
+      list-style: disc;
+    }
+    .cv-entry-bullets li {
+      font-size: 0.8125rem;
+      color: var(--ink-2);
+      margin-bottom: 0.3rem;
+      line-height: 1.55;
+      list-style: disc;
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      font-family: var(--font-sans);
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+    .cv-entry-bullets li:hover { background: none; color: var(--ink-2); transform: none; }
+
+    /* cert status badges */
+    .cv-cert-status {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+      padding: 0.15rem 0.55rem; border-radius: var(--radius-pill);
+    }
+    .cv-cert-status.done { color: #2D7A4A; background: #E6F4EC; }
+    .cv-cert-status.wip  { color: #7A5A10; background: #FEF3DA; }
+    body.dark .cv-cert-status.done { color: #5DCA8A; background: #0D2A1A; }
+    body.dark .cv-cert-status.wip  { color: #DBA340; background: #1E1608; }
+
+    @media (max-width: 768px) {
+      .cv-body { grid-template-columns: 1fr; }
+      .cv-main { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 2rem; }
+      .resume-page-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <h1>Carlos Zabala</h1>
+      <ul>
+        <li><a href="index.html">Projects</a></li>
+        <li><a href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer">Blog</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="controls">
+      <label class="toggle-switch">
+        Dark
+        <input type="checkbox" id="dark-mode-toggle">
+        <div class="toggle-switch-border">
+          <div class="toggle-switch-dot"></div>
+        </div>
+      </label>
+    </div>
+  </header>
+
+  <div class="resume-page">
+
+    <!-- ── PAGE HEADER ─────────────────────────────── -->
+    <div class="resume-page-header reveal">
+      <div>
+        <h2 class="resume-page-name">Carlos Andre Zabala Vargas</h2>
+        <p style="color:var(--ink-3);font-family:var(--font-mono);font-size:0.8rem;margin:0.25rem 0 0.75rem;">
+          Software Developer · Programmer · Game Dev
+        </p>
+        <div class="resume-page-contact">
+          <a href="tel:9292789741"><i class="fa-solid fa-phone"></i>(929) 278-9741</a>
+          <a href="mailto:czabalav98@gmail.com"><i class="fa-solid fa-envelope"></i>czabalav98@gmail.com</a>
+          <a href="index.html"><i class="fa-solid fa-globe"></i>Portfolio</a>
+          <a href="https://www.linkedin.com/in/carloszabala98/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
+          <a href="https://github.com/carlosz98" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i>GitHub</a>
+          <a href="#"><i class="fa-solid fa-location-dot"></i>Queens, NY</a>
+        </div>
+      </div>
+      <div class="resume-page-actions">
+        <a class="btn" href="resume/CAZV-RESUME.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-download"></i> Download PDF
+        </a>
+        <a class="resume-btn-ghost" href="contact.html">
+          <i class="fa-solid fa-envelope"></i> Contact Me
+        </a>
+      </div>
+    </div>
+
+    <!-- ── TWO-COLUMN BODY ──────────────────────────── -->
+    <div class="cv-body">
+
+      <!-- ── SIDEBAR ─────────────────────────────────── -->
+      <aside class="cv-sidebar">
+
+        <!-- Education -->
+        <div class="reveal">
+          <div class="cv-section-title"><i class="fa-solid fa-graduation-cap"></i> Education</div>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">AAS — Programming &amp; Software Dev</span>
+              <span class="cv-entry-date">Expected Aug 2025</span>
+            </div>
+            <span class="cv-entry-org">LaGuardia Community College · Queens, NY</span>
+          </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="reveal">
+          <div class="cv-section-title"><i class="fa-solid fa-code"></i> Technical Skills</div>
+
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div>
+              <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">Back End</div>
+              <div class="cv-tags">
+                <span class="cv-tag">C++</span><span class="cv-tag">Java</span><span class="cv-tag">C#</span><span class="cv-tag">SQL</span><span class="cv-tag">SwiftUI</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">Front End</div>
+              <div class="cv-tags">
+                <span class="cv-tag">HTML</span><span class="cv-tag">CSS</span><span class="cv-tag">JavaScript</span><span class="cv-tag">Framer</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">Game Development</div>
+              <div class="cv-tags">
+                <span class="cv-tag">Unreal Engine 5</span><span class="cv-tag">Unity</span><span class="cv-tag">2D/3D</span><span class="cv-tag">Blueprints</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">Cloud &amp; Data</div>
+              <div class="cv-tags">
+                <span class="cv-tag">GCP</span><span class="cv-tag">MySQL</span><span class="cv-tag">UNIX/Linux</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">Concepts</div>
+              <div class="cv-tags">
+                <span class="cv-tag">OOP</span><span class="cv-tag">Data Structures</span><span class="cv-tag">Algorithms</span><span class="cv-tag">SDLC</span><span class="cv-tag">Threading</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;">Project Management</div>
+              <div class="cv-tags">
+                <span class="cv-tag">System Analysis</span><span class="cv-tag">Project Libre</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="reveal">
+          <div class="cv-section-title"><i class="fa-solid fa-certificate"></i> Certifications</div>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+
+            <div class="cv-entry">
+              <div class="cv-entry-header">
+                <span class="cv-entry-title">Master C++ — Professional</span>
+                <span class="cv-cert-status done">✓ Done</span>
+              </div>
+              <span class="cv-entry-org">Programiz</span>
+              <span class="cv-entry-date">May 2025</span>
+            </div>
+
+            <div class="cv-entry">
+              <div class="cv-entry-header">
+                <span class="cv-entry-title">Master Java — Professional</span>
+                <span class="cv-cert-status done">✓ Done</span>
+              </div>
+              <span class="cv-entry-org">Programiz</span>
+              <span class="cv-entry-date">May 2025</span>
+            </div>
+
+            <div class="cv-entry">
+              <div class="cv-entry-header">
+                <span class="cv-entry-title">Master SQL — Professional</span>
+                <span class="cv-cert-status done">✓ Done</span>
+              </div>
+              <span class="cv-entry-org">Programiz</span>
+              <span class="cv-entry-date">May 2025</span>
+            </div>
+
+            <div class="cv-entry">
+              <div class="cv-entry-header">
+                <span class="cv-entry-title">SCO ACE — Unix Engineer</span>
+                <span class="cv-cert-status wip">⏳ In Progress</span>
+              </div>
+              <span class="cv-entry-date">Expected June 2025</span>
+            </div>
+
+            <div class="cv-entry">
+              <div class="cv-entry-header">
+                <span class="cv-entry-title">Unreal Engine 5 &amp; Game Dev</span>
+                <span class="cv-cert-status wip">⏳ In Progress</span>
+              </div>
+              <span class="cv-entry-org">Coursera / Epic Games</span>
+              <span class="cv-entry-date">Expected June 2025</span>
+            </div>
+
+            <div class="cv-entry">
+              <div class="cv-entry-header">
+                <span class="cv-entry-title">Harvard CS50</span>
+                <span class="cv-cert-status wip">⏳ In Progress</span>
+              </div>
+              <span class="cv-entry-org">Harvard University</span>
+              <span class="cv-entry-date">Expected July 2025</span>
+            </div>
+
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ── MAIN COLUMN ──────────────────────────────── -->
+      <main class="cv-main">
+
+        <!-- Summary -->
+        <div class="reveal">
+          <div class="cv-section-title"><i class="fa-solid fa-user"></i> Professional Summary</div>
+          <p class="cv-summary">
+            Driven Software Developer graduating Fall 2025 with Master Professional Certifications in C++, Java, and SQL. Expertise spans Back-End development (C++, Java, C#, MySQL), Cloud Services (GCP), Front-End design (HTML, CSS, JS, Framer), and mobile app creation (SwiftUI). Passionate about 2D/3D Game Development with Unreal Engine 5 and Unity, complemented by project management skills and UNIX/Linux experience.
+          </p>
+        </div>
+
+        <!-- Experience -->
+        <div class="reveal">
+          <div class="cv-section-title"><i class="fa-solid fa-briefcase"></i> Experience</div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">After School Teacher — Teacher Assistant</span>
+              <span class="cv-entry-date">Sep 2020 – Present</span>
+            </div>
+            <span class="cv-entry-org">Pan American International High School · Queens, NY</span>
+            <ul class="cv-entry-bullets">
+              <li>Taught Computer Building fundamentals and programming languages including C++ and C# (basic and OOP concepts).</li>
+              <li>Instructed students in using the Unity game engine for 2D and 3D projects.</li>
+              <li>Assisted the Computer Science teacher with C++ OOP, Data Structures, and Algorithm concepts.</li>
+            </ul>
+          </div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Team Leader — Success Mentor</span>
+              <span class="cv-entry-date">Sep 2020 – Present</span>
+            </div>
+            <span class="cv-entry-org">Pan American International High School · Queens, NY</span>
+            <ul class="cv-entry-bullets">
+              <li>Supervised Success Mentors through project and data management, ensuring due dates and assignments were on track.</li>
+              <li>Co-directed Peer Group Connection (PGC) program.</li>
+              <li>Provided academic support to improve student learning, ensuring all graduation requirements were met on time.</li>
+              <li>Collaborated with teachers and support staff to deliver outstanding results and assist student needs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="reveal">
+          <div class="cv-section-title"><i class="fa-solid fa-folder-open"></i> Projects</div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Employee Management System</span>
+              <span class="cv-entry-date">Feb 2025</span>
+            </div>
+            <span class="cv-entry-org">C++ · Advanced Mechanics</span>
+            <p class="cv-entry-desc">C++ program to manage employee records — adding, updating, deleting, and retrieving information using advanced language mechanics.</p>
+            <div class="cv-tags" style="margin-top:0.5rem;">
+              <span class="cv-tag">Data Structures</span><span class="cv-tag">OOP</span><span class="cv-tag">File Handling</span><span class="cv-tag">Threading</span><span class="cv-tag">Algorithms</span><span class="cv-tag">STL</span>
+            </div>
+            <a href="https://github.com/carlosz98/Employee-Management-System---C--" target="_blank" rel="noopener noreferrer" style="margin-top:0.5rem;font-size:0.8rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:0.3rem;padding:0.4rem 0.9rem;border:1.5px solid var(--accent);border-radius:999px;width:fit-content;transition:all 0.15s ease;">
+              <i class="fa-brands fa-github"></i> GitHub Repo →
+            </a>
+          </div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Pet Adoption Center</span>
+              <span class="cv-entry-date">Dec 2024</span>
+            </div>
+            <span class="cv-entry-org">Project Management · Web Development</span>
+            <p class="cv-entry-desc">Full SDLC project — strategy development, analysis, planning, UI/UX design, web development, testing, and deployment managed with Project Libre.</p>
+            <div class="cv-tags" style="margin-top:0.5rem;">
+              <span class="cv-tag">WBS &amp; SWOT</span><span class="cv-tag">DFD</span><span class="cv-tag">Gantt Charts</span><span class="cv-tag">HTML</span><span class="cv-tag">CSS</span><span class="cv-tag">PHP</span>
+            </div>
+            <a href="https://github.com/carlosz98/Pet-Adoption-Center" target="_blank" rel="noopener noreferrer" style="margin-top:0.5rem;font-size:0.8rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:0.3rem;padding:0.4rem 0.9rem;border:1.5px solid var(--accent);border-radius:999px;width:fit-content;transition:all 0.15s ease;">
+              <i class="fa-brands fa-github"></i> GitHub Repo →
+            </a>
+          </div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Game Dev — Warm Rain of Summer</span>
+              <span class="cv-entry-date">Jan 2025 · In Progress</span>
+            </div>
+            <span class="cv-entry-org">Unreal Engine 5 · C++ · Blueprints</span>
+            <p class="cv-entry-desc">Adventure &amp; storytelling videogame built using Unreal Engine 5 and C++. Assets, characters, and environment designed from scratch using Blender with imported FAB assets. All game development stages implemented.</p>
+            <div class="cv-tags" style="margin-top:0.5rem;">
+              <span class="cv-tag">Unreal Engine 5</span><span class="cv-tag">C++</span><span class="cv-tag">Blueprints</span><span class="cv-tag">Blender</span><span class="cv-tag">Game Design Doc</span>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- loader + robot -->
+  <div class="loader loader--active">
+    <div class="loader__icon">
+      <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path opacity="0.25" fill="currentColor" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"></path>
+        <path fill="currentColor" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.6s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+  </div>
+
+  <div id="talking-character">
+    <img src="img/robot.png" alt="Talking Character">
+    <div id="character-speech"></div>
+    <button id="close-character">&times;</button>
+  </div>
+
+  <footer>
+    <ul>
+      <li><a href="https://www.linkedin.com/in/carloszabala98/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="link-icon"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></span></a></li>
+      <li><a href="#">Back to Top<span class="link-icon"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></span></a></li>
+      <li><a href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub<span class="link-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span></a></li>
+    </ul>
+    <p class="copywright">© 2025 Carlos Zabala</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const scripts = [
+      "Graduating Fall 2025 — open to opportunities!",
+      "Master certifications in C++, Java and SQL.",
+      "2+ years teaching programming and game dev.",
+      "Ask me about game development or cloud projects."
+    ];
+    function typeWriter(text, el, speed) {
+      let i = 0;
+      function type() {
+        if (i < text.length) { el.innerHTML += text.charAt(i++); setTimeout(type, speed); }
+        else { el.style.borderRight = 'none'; }
+      }
+      type();
+    }
+    function showCharacter() {
+      const el  = document.getElementById('character-speech');
+      const box = document.getElementById('talking-character');
+      el.innerHTML = ''; el.style.borderRight = '2px solid black';
+      typeWriter(scripts[Math.floor(Math.random() * scripts.length)], el, 30);
+      box.classList.add('show');
+      setTimeout(() => box.classList.remove('show'), 6000);
+    }
+    document.getElementById('close-character').addEventListener('click', () => {
+      document.getElementById('talking-character').classList.remove('show');
+    });
+    setTimeout(showCharacter, 3000);
+    setInterval(showCharacter, 14000);
+  </script>
+  <script>
+  // Force reveal all elements on this page since scroll observer
+  // doesn't fire for elements already in the viewport on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        el.classList.add('visible');
+      });
+    }, 100);
+  });
+</script>
+</body>
+</html>

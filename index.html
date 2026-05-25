@@ -22,7 +22,7 @@
         <li><a href="index.html">Projects</a></li>
         <li><a href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer">Blog</a></li>
         <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="resume/CAZV-RESUME.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+        <li><a href="resume.html">Resume</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -37,6 +37,7 @@
     </div>
   </header>
 
+  <!-- ── BIO ─────────────────────────────────────────── -->
   <section class="bio">
     <img class="profile-img" src="img/2.jpg" alt="Carlos Zabala">
     <div class="bio-text">
@@ -49,8 +50,37 @@
       </a>
     </div>
   </section>
-  
 
+  <!-- ── RESUME PREVIEW ───────────────────────────────── -->
+  <section class="resume-section reveal">
+  <div class="section-header">
+    <h2>Resume</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="resume-teaser">
+    <div class="resume-teaser-left">
+      <div class="resume-teaser-name">Carlos A. Zabala</div>
+      <div class="resume-teaser-title">Software Developer · Graduating Fall 2025</div>
+      <div class="resume-teaser-pills">
+        <span>C++ · Java · C#</span>
+        <span>Unity · Unreal Engine 5</span>
+        <span>GCP · SQL</span>
+        <span>Queens, NY</span>
+      </div>
+    </div>
+    <div class="resume-teaser-actions">
+      <a class="btn" href="resume/CAZV-RESUME.pdf" download>
+        <i class="fa-solid fa-download"></i> Download PDF
+      </a>
+      <a class="resume-btn-ghost" href="resume.html">
+        <i class="fa-solid fa-id-card"></i> View Full Resume
+      </a>
+    </div>
+  </div>
+</section>
+
+  <!-- ── RECENT WORK ───────────────────────────────────── -->
   <section class="recent-work">
     <div class="section-header">
       <h2>Recent Work</h2>
@@ -202,6 +232,7 @@
 
   </section>
 
+  <!-- ── IN PROGRESS ──────────────────────────────────── -->
   <section class="recent-work">
     <div class="section-header">
       <h2>In Progress</h2>
@@ -236,6 +267,7 @@
 
   </section>
 
+  <!-- ── LOADER ────────────────────────────────────────── -->
   <div class="loader loader--active">
     <div class="loader__icon">
       <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -252,12 +284,14 @@
     <div class="loader__tile"></div>
   </div>
 
+  <!-- ── TALKING CHARACTER ─────────────────────────────── -->
   <div id="talking-character">
     <img src="img/robot.png" alt="Talking Character">
     <div id="character-speech"></div>
     <button id="close-character">&times;</button>
   </div>
 
+  <!-- ── FOOTER ────────────────────────────────────────── -->
   <footer>
     <ul>
       <li><a href="https://www.linkedin.com/in/carloszabala98/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="link-icon"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></span></a></li>
@@ -281,8 +315,7 @@
       let i = 0;
       function type() {
         if (i < text.length) {
-          el.innerHTML += text.charAt(i);
-          i++;
+          el.innerHTML += text.charAt(i++);
           setTimeout(type, speed);
         } else {
           el.style.borderRight = 'none';

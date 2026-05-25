@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>404 — Page Not Found · Carlos Zabala</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/solid.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo chiquito.png" type="image/x-icon">
+  <style>
+    body { max-width: 100%; background: #0e0e0c; color: #c8c5bc; cursor: none; }
+    #cursor-dot, #cursor-ring { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="page-404">
+    <div class="error-screen">
+      <div class="error-scanline"></div>
+
+      <div class="error-code">404</div>
+      <div class="error-title">PAGE_NOT_FOUND.exe</div>
+
+      <div class="error-msg">
+        The page you're looking for doesn't exist,<br>
+        was moved, or got lost in the void.<br>
+        <span class="blink">█</span>
+      </div>
+
+      <div class="error-prompt">
+        <span class="cmd">$ cd /requested-page</span><br>
+        <span style="color:#ff5f57">bash: /requested-page: No such file or directory</span><br>
+        <span class="cmd">$ ls ../</span><br>
+        <span class="ok">index.html &nbsp; certificates.html &nbsp; contact.html &nbsp; blog.html</span><br>
+        <span class="cmd">$ _</span><span class="blink">█</span>
+      </div>
+
+      <div class="error-actions">
+        <a class="error-btn primary" href="index.html">
+          <i class="fa-solid fa-house"></i> Go Home
+        </a>
+        <a class="error-btn" href="contact.html">
+          <i class="fa-solid fa-envelope"></i> Contact
+        </a>
+        <a class="error-btn" href="javascript:history.back()">
+          <i class="fa-solid fa-arrow-left"></i> Go Back
+        </a>
+      </div>
+
+      <div class="error-robot">
+        carlos@portfolio ~ · est. 2025
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // custom cursor still works on 404
+    const dot  = document.createElement('div'); dot.id = 'cursor-dot';
+    const ring = document.createElement('div'); ring.id = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
