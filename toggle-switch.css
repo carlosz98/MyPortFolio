@@ -213,3 +213,12 @@ header .controls { padding-bottom: 1.6rem; }
   .toggle-switch .bulb-cord::before { display: none; }   /* cord comes straight from the ceiling */
   header .controls { padding: 0; }
 }
+
+/* ─── Phones: a smaller bulb hangs in the top-right corner, beside the name ─── */
+@media (max-width: 700px) {
+  header .controls { position: absolute; top: 0; right: 4px; padding: 0; z-index: 3; }
+  .toggle-switch .bulb { --cord: 8px; padding-top: 0; zoom: .78; }
+  .toggle-switch .bulb-cord::before { display: none; }
+  .toggle-switch .bulb-chain { height: 46px; }   /* ~14px shows below the glass */
+  .toggle-switch .bulb-glow { width: 70px; height: 70px; }   /* keeps the glow inside the page edge */
+}

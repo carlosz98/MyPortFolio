@@ -1387,3 +1387,38 @@ article[id] { scroll-margin-top: 90px; }
 
 .tt-cta { display:block; margin-top:.5rem; font-family:var(--font-mono); font-size:.68rem; color:var(--accent); letter-spacing:.03em; }
 .bio-link { color:var(--accent); border-bottom:1px solid currentColor; }
+
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE NAV — name on top, tabs as one segmented pill bar
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  header nav {
+    flex-direction: column; align-items: stretch; gap: .7rem;
+    padding: .9rem 0 .8rem;
+  }
+  header nav h1 { font-size: 1.3rem; line-height: 2.9rem; padding-right: 64px; }   /* tall enough for the bulb to hang beside it */
+  header nav ul {
+    flex-wrap: nowrap; gap: 2px; padding: 4px;
+    background: var(--bg-pill); border: 1px solid var(--border); border-radius: var(--radius-pill);
+    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  header nav ul::-webkit-scrollbar { display: none; }
+
+  header nav li { flex: 1 1 auto; }
+  header nav li a {
+    display: block; text-align: center; white-space: nowrap;
+    font-size: .76rem; padding: .5rem .45rem; border: none; letter-spacing: .01em;
+  }
+  header nav li a::after { display: none; }
+  header nav li a:hover { background: transparent; border-color: transparent; color: var(--ink); }
+  header nav li a.active,
+  header nav li a.active:hover {
+    background: var(--bg-card); color: var(--accent);
+    box-shadow: 0 1px 2px rgba(26,26,24,.08), 0 2px 8px rgba(26,26,24,.06);
+  }
+  body.dark header nav li a.active { box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+}
+@media (max-width: 374px) {
+  header nav li a { font-size: .7rem; padding: .45rem .3rem; letter-spacing: 0; }
+}
