@@ -322,15 +322,15 @@ function initConstellation() {
     { name: 'C++',           level: 95, group: 'lang',   projects: ['Employee Mgmt', 'GPA Calc'] },
     { name: 'Java',          level: 90, group: 'lang',   projects: ['Library System', 'DMV Project'] },
     { name: 'C#',            level: 80, group: 'lang',   projects: ['Flappy Bird', 'Gunbound'] },
-    { name: 'Kotlin',        level: 75, group: 'lang',   projects: ['Retro Hub Android'] },
+    { name: 'Kotlin',        level: 85, group: 'lang',   projects: ['Retro Hub (55k+ lines)'] },
     { name: 'SwiftUI',       level: 65, group: 'lang',   projects: ['iOS Retro App'] },
-    { name: 'HTML/CSS/JS',   level: 70, group: 'web',    projects: ['This Portfolio', 'Pet Adoption'] },
+    { name: 'HTML/CSS/JS',   level: 78, group: 'web',    projects: ['This Portfolio', 'Win98 Blog (React)', 'Pet Adoption'] },
     { name: 'SQL',           level: 72, group: 'data',   projects: ['Netflix DB', 'GCP Cloud'] },
     { name: 'Unity',         level: 78, group: 'engine', projects: ['Flappy Bird', 'Gunbound', 'Pixel City'] },
     { name: 'Unreal Engine', level: 60, group: 'engine', projects: ['Warm Rain of Summer'] },
-    { name: 'Android',       level: 74, group: 'mobile', projects: ['Retro Hub'] },
-    { name: 'GCP',           level: 65, group: 'data',   projects: ['Netflix DB', 'Retro Hub'] },
-    { name: 'Firebase',      level: 62, group: 'data',   projects: ['Retro Hub Android'] },
+    { name: 'Android',       level: 85, group: 'mobile', projects: ['Retro Hub — Compose, MVVM, FCM'] },
+    { name: 'GCP',           level: 70, group: 'data',   projects: ['Netflix DB (Cloud SQL)', 'Retro Hub (Cloud Functions)'] },
+    { name: 'Firebase',      level: 78, group: 'data',   projects: ['Retro Hub', 'Win98 Blog DevFeed'] },
     { name: 'OOP',           level: 95, group: 'cs',     projects: ['All Projects'] },
     { name: 'Data Structs',  level: 88, group: 'cs',     projects: ['Library System', 'DMV'] },
     { name: 'Algorithms',    level: 85, group: 'cs',     projects: ['GPA Calc', 'Employee Mgmt'] },
@@ -477,7 +477,7 @@ function initTerminal() {
     help:     () => `<span class="t-dim">Available commands:</span>\n<span class="t-acc">about</span>      — who is Carlos?\n<span class="t-acc">skills</span>     — tech stack\n<span class="t-acc">projects</span>   — list all projects\n<span class="t-acc">contact</span>    — get in touch\n<span class="t-acc">clear</span>      — clear terminal\n<span class="t-acc">github</span>     — open GitHub\n<span class="t-acc">linkedin</span>   — open LinkedIn\n<span class="t-acc">blog</span>       — open blog\n<span class="t-acc">resume</span>     — open resume\n<span class="t-dim">press / or Esc to toggle</span>`,
     about:    () => `<span class="t-acc">Carlos Zabala</span> — Programmer & Software Developer\nUndergraduate at LaGuardia Community College\nMajoring in Programming and Software Development\n\nStrengths: OOP · Data Structures · Algorithms\nInterests: Retro hardware · Game dev · Music`,
     skills:   () => `<span class="t-acc">Languages</span>   C++ · Java · C# · Kotlin · SwiftUI · HTML/CSS/JS\n<span class="t-acc">Engines</span>     Unity · Unreal Engine 5\n<span class="t-acc">Data</span>        SQL · Firebase · GCP · MySQL\n<span class="t-acc">Concepts</span>    OOP · Data Structures · Algorithms · Threading`,
-    projects: () => `<span class="t-acc">01</span> Android Dev — Retro Hub         Kotlin · Jetpack Compose\n<span class="t-acc">02</span> Library Management System        Java · OOP\n<span class="t-acc">03</span> Windows 98 Retro Blog            HTML · CSS · JS · Framer\n<span class="t-acc">04</span> Netflix Database & GCP           MySQL · GCP · Metabase\n<span class="t-acc">05</span> Pet Adoption Center              PHP · Project Mgmt\n<span class="t-acc">06</span> iOS Retro App                    SwiftUI\n<span class="t-acc">07</span> Flappy Bird Replica              Unity · C#\n<span class="t-acc">08</span> 2D Gunbound Replica              Unity · C#\n<span class="t-acc">09</span> College GPA Calculator           C++\n<span class="t-acc">10</span> DMV Project                      Java\n<span class="t-acc">11</span> Employee Management System       C++`,
+    projects: () => `<span class="t-acc">01</span> Retro Hub — Android            Kotlin · Compose · Firebase\n<span class="t-acc">02</span> Win98 Blog &amp; Portfolio        React · Vite · Firestore\n<span class="t-acc">03</span> iOS Win98 Retro App            SwiftUI · AVFoundation\n<span class="t-acc">04</span> Employee Management System     C++ · Threads · File I/O\n<span class="t-acc">05</span> 2D Gunbound Replica            Unity · C#\n<span class="t-acc">06</span> Flappy Bird Replica            Unity · C#\n<span class="t-acc">07</span> Library Management System      Java · OOP\n<span class="t-acc">08</span> DMV Project                    Java · Data Structures\n<span class="t-acc">09</span> College GPA Calculator         C++\n<span class="t-acc">10</span> Netflix Database &amp; GCP        MySQL · Cloud SQL · Metabase\n<span class="t-acc">11</span> Pet Adoption Center            PHP · SDLC\n<span class="t-dim">in progress:</span> Warm Rain of Summer (UE5) · 2D Pixel Art City (Unity)`,
     contact:  () => `<span class="t-acc">Email</span>     czabala1998@gmail.com\n<span class="t-acc">LinkedIn</span>  linkedin.com/in/carloszabala98\n<span class="t-acc">GitHub</span>    github.com/carlosz98`,
     clear:    () => { output.innerHTML = ''; return null; },
     github:   () => { window.open('https://github.com/carlosz98?tab=repositories','_blank'); return '<span class="t-dim">Opening GitHub...</span>'; },
@@ -532,7 +532,7 @@ function initFilterBar() {
   const workSection = document.querySelector('.recent-work');
   if (!workSection) return;
   const filters = ['All','Java','C++','C#','Kotlin','Unity','Web','Android','SwiftUI','SQL'];
-  const tagMap  = { 'Java':['java'],'C++':['c++'],'C#':['c#','unity'],'Kotlin':['kotlin'],'Unity':['unity'],'Web':['html','css','js','framer','php'],'Android':['android','kotlin'],'SwiftUI':['swiftui'],'SQL':['sql','mysql','gcp'] };
+  const tagMap  = { 'Java':['java'],'C++':['c++'],'C#':['c#','unity'],'Kotlin':['kotlin'],'Unity':['unity'],'Web':['html','css','js','react','php'],'Android':['android','kotlin'],'SwiftUI':['swiftui'],'SQL':['sql','mysql','gcp'] };
   const bar = document.createElement('div');
   bar.id = 'filter-bar';
   bar.innerHTML = filters.map((f,i) => `<button class="filter-btn${i===0?' active':''}" data-filter="${f}">${f}</button>`).join('');
@@ -651,17 +651,66 @@ function initCounters() {
    PROJECT DETAIL EXPAND
    ═══════════════════════════════════════════════════════ */
 const PROJECT_DETAILS = {
-  'Android Development — Retro Hub':    { problem:'Needed a single app hub for retro gaming content — news, soundtracks, magazines — that felt nostalgic yet modern on Android.', learned:'Deep-dived into Jetpack Compose, Firebase real-time sync, and GCP storage buckets for media hosting.', challenge:'Balancing a retro aesthetic with modern Android Material 3 components without it feeling inconsistent.' },
-  'Library Management System':          { problem:'Build a CLI system that tracks vinyl, books, and movies with rental, return, and donation workflows.', learned:'Reinforced Java generics and polymorphism — using a single abstract Item class for three media types.', challenge:'Handling edge cases like overdue rentals, duplicate entries, and concurrent state without a database.' },
-  'Windows 98 — Retro Blog':            { problem:'Create a blog that feels like booting a Win98 machine — immersive and nostalgic but actually functional.', learned:'Framer CMS workflows, custom component animations, and how to balance novelty with readability.', challenge:'Making the retro UI accessible on mobile without losing the desktop-era feel.' },
-  'Netflix Database & GCP':             { problem:'Model a full Netflix-scale database, deploy it to Google Cloud, and visualize insights in a dashboard.', learned:'CloudSQL provisioning, Kaggle CSV ingestion via GCS buckets, and Metabase chart building.', challenge:'Normalizing messy Kaggle data into clean relational tables with proper foreign key constraints.' },
-  'Pet Adoption Center':                { problem:'Apply full SDLC methodology — from WBS to Gantt chart — to a real project with a working website.', learned:'How project documentation (DFD, SWOT, WBS) directly shapes technical decisions downstream.', challenge:'Keeping the PHP site scope-aligned with the project plan under a strict academic deadline.' },
-  'iOS Development — Retro App':        { problem:'Build an iOS app that recreates a Win98 desktop experience with a music player and marketplace.', learned:'SwiftUI NavigationView patterns, AVFoundation for custom media playback, and state management.', challenge:'Recreating bitmap-style UI elements in SwiftUI without native pixel-art rendering support.' },
-  'Flappy Bird — Replica':              { problem:'Recreate Flappy Bird in Unity as an introduction to 2D physics and game loop architecture.', learned:'Unity Rigidbody2D, collider triggers, score persistence with PlayerPrefs, and UI Canvas layout.', challenge:'Getting the pipe spawning rhythm to feel exactly like the original — timing is everything.' },
-  '2D Gunbound Replica — Unity':        { problem:'Recreate a turn-based 2D artillery game in 3 days for a final class project.', learned:'Rapid prototyping under pressure, trajectory arc physics, and 2D sprite animation state machines.', challenge:'Implementing angle-based projectile physics from scratch in under 72 hours.' },
-  'College GPA Calculator':             { problem:'Build a C++ CLI tool that computes weighted GPA from user-entered courses and grades.', learned:'Applying OOP to a utility tool — encapsulating course data in classes rather than raw arrays.', challenge:'Handling invalid grade inputs gracefully while keeping the user flow smooth.' },
-  'DMV Project — Java':                 { problem:'Simulate a full DMV system with vehicle registration, license management, and queue handling.', learned:'LinkedList and PriorityQueue implementations for realistic DMV queue simulation.', challenge:'Modeling real-world state transitions (registered → expired → renewed) cleanly in OOP.' },
-  'Employee Management System — C++':   { problem:'Build a full CRUD employee records system with file persistence and multi-threaded operations.', learned:'C++ threading with std::thread and mutex, binary file I/O, and STL algorithm usage at scale.', challenge:'Preventing race conditions when multiple threads read/write the employee file simultaneously.' },
+  'Android Development — Retro Hub': {
+    problem:   'Retro gaming fans have their news, music, magazines, streams and trading spread across a dozen sites. RetroHub puts all of it — plus a real community with profiles, chat and a marketplace — into one native Android app.',
+    learned:   'How to structure a large Compose app: MVVM with ViewModels and Flow, a shared design system, Firestore data models across many collections and subcollections, Security Rules for every collection, and Cloud Functions for push notifications. Also wiring several third-party APIs (IGDB, YouTube, Twitch, Internet Archive) through OkHttp on background threads.',
+    challenge: 'Debugging production-style failures: YouTube 403s from API-key restrictions, Twitch token errors, Storage uploads blocked by misplaced rules, and an IGDB secret mismatch between two classes. As the codebase passed 50k lines, keeping each composable owned by a single file was what stopped duplicate-declaration build errors.',
+  },
+  'Windows 98 — Retro Blog & Portfolio': {
+    problem:   'A standard portfolio is easy to forget. This one boots like a 1998 PC, so visitors explore my projects, blog posts and music the way they would a real desktop.',
+    learned:   'Building a windowing system in React from scratch — dragging, focus and z-order, minimize/maximize, taskbar state and context menus — and backing the DevFeed with Firestore plus Google sign-in so only the admin account can post.',
+    challenge: 'Keeping many live apps — Webamp, WebSocket chat, the in-app browser and API-driven widgets — inside one React state tree without slowdowns, and deploying to GitHub Pages after trimming large assets and resetting git history.',
+  },
+  'iOS Development — Win98 Retro App': {
+    problem:   'Bring the Win98 look to iPhone: a retro desktop-style app with a working media player, marketplace and account flow.',
+    learned:   'SwiftUI navigation patterns, AVFoundation playback for MP3 and MP4, state management across screens, and hand-building retro window chrome with shapes, overlays and custom modifiers.',
+    challenge: 'SwiftUI has no pixel-art or bitmap UI kit, so every bevelled border and title bar had to be recreated by hand while still behaving like native controls.',
+  },
+  'Employee Management System — C++': {
+    problem:   'Show the full advanced C++ toolset in one program: OOP hierarchies, file persistence, custom error handling and threading, all behind a simple menu.',
+    learned:   'Virtual functions for polymorphic display, writing InvalidInputException and FileIOException classes, saving and reloading records with fstream, and running work on std::thread.',
+    challenge: 'Threads sharing one std::vector of employees cause data races. Adding synchronization without freezing the menu loop was the hardest part.',
+  },
+  '2D Gunbound Replica — Unity': {
+    problem:   'Rebuild Gunbound\'s core loop — aim, charge, fire, take turns — as a complete two-player 2D game in a 72-hour deadline.',
+    learned:   'Splitting a game into small single-purpose scripts: separate player and shot scripts per side, a PowerBarScript for charge time, dual health systems, and a LogicManager that decides turns and the winner.',
+    challenge: 'Making angle plus power produce a believable arc with Rigidbody2D, then tuning it by feel in very little time.',
+  },
+  'Flappy Bird — Unity Replica': {
+    problem:   'Recreate Flappy Bird as a first full Unity 2D game covering physics, collisions and procedural spawning.',
+    learned:   'Keeping input, movement and spawning in separate scripts, using collider triggers for scoring and game over, and building a UI Canvas.',
+    challenge: 'Tuning pipe spacing and gap size so the game feels fair but still hard — pure trial and adjustment.',
+  },
+  'Library Management System — Java': {
+    problem:   'Handle three different media types — vinyl, books and movies — with one set of rent, return and donate workflows.',
+    learned:   'An abstract Item base class lets the same rental code work for every media type; polymorphism keeps the menu logic short.',
+    challenge: 'Edge cases without a database: renting an item that is already out, donating duplicates, and returning something that was never rented.',
+  },
+  'DMV Project — Java': {
+    problem:   'Simulate a DMV office — registrations, licenses, renewals and a waiting line — using only Java and in-memory data structures.',
+    learned:   'Modeling real-world status changes as classes and using queues to process customers in order.',
+    challenge: 'Keeping states consistent when they overlap, such as a valid registration paired with an expired license.',
+  },
+  'College GPA Calculator — C++': {
+    problem:   'Give students a quick way to compute a credit-weighted GPA from all their classes.',
+    learned:   'Wrapping course data in classes instead of loose arrays, and validating every user input.',
+    challenge: 'Rejecting bad grades and credit values without making the input flow annoying.',
+  },
+  'Netflix Database & GCP': {
+    problem:   'Design a Netflix-scale relational database, host it in the cloud and turn the data into visual insights.',
+    learned:   'Provisioning Cloud SQL, loading CSVs through Cloud Storage buckets and the GCloud Shell, and building Metabase dashboards.',
+    challenge: 'Cleaning messy Kaggle data into normalized tables with correct foreign keys before anything could be queried.',
+  },
+  'Pet Adoption Center — Project Management': {
+    problem:   'Run a project through the whole systems analysis and design lifecycle, from SWOT and WBS to a delivered PHP website.',
+    learned:   'How planning documents drive the build: the Decision Table defined the logic, the DFD set the page flow, and the Gantt chart kept the schedule honest.',
+    challenge: 'Holding scope — every website feature had to trace back to the WBS and fit the Gantt timeline.',
+  },
+  'Warm Rain of Summer — UE5': {
+    problem:   'Take a narrative adventure game from idea to a playable Unreal Engine 5 build, covering every production stage.',
+    learned:   'Writing a 50-page GDD, modeling in Blender, importing FAB assets, and building gameplay with Blueprints and C++.',
+    challenge: 'Turning a detailed design document into working mechanics while staying within a solo, course-paced scope.',
+  },
 };
 
 function initExpandButtons() {

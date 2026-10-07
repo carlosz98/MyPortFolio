@@ -1226,3 +1226,12 @@ hr { border:none; border-top:1px solid var(--border); margin:2rem 0; }
   0%   { opacity: 0; transform: translateX(-24px); }
   100% { opacity: 1; transform: translateX(0);     }
 }
+/* ─── INLINE CODE IN PROJECT TEXT ────────────────────── */
+article p code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+}
