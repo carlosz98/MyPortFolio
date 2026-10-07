@@ -327,20 +327,20 @@ function initConstellation() {
     { name: 'C#',            level: 80, group: 'lang',   projects: ['Flappy Bird', 'Gunbound'] },
     { name: 'Kotlin',        level: 85, group: 'lang',   projects: ['Retro Hub (55k+ lines)'] },
     { name: 'SwiftUI',       level: 65, group: 'lang',   projects: ['iOS Win98 App', 'SwiftUI Shop'] },
-    { name: 'HTML/CSS/JS',   level: 78, group: 'web',    projects: ['This Portfolio', 'Win98 Blog (React)', 'Pet Adoption'] },
-    { name: 'PHP',           level: 60, group: 'web',    projects: ['MAC 272 Final', 'Pet Adoption'] },
-    { name: 'Node.js',       level: 55, group: 'web',    projects: ['MAC 272 Final'] },
-    { name: 'SQL',           level: 72, group: 'data',   projects: ['Netflix DB', 'GCP Cloud'] },
+    { name: 'HTML/CSS/JS',   level: 78, group: 'web',    projects: ['This Portfolio', 'Win98 Blog (React)', 'MAC 272 Final', 'Pet Adoption'] },
+    { name: 'PHP',           level: 60, group: 'web',    projects: ['MAC 272 Final (in progress)', 'Pet Adoption Center'] },
+    { name: 'Node.js',       level: 55, group: 'web',    projects: ['MAC 272 Final (in progress)'] },
+    { name: 'SQL',           level: 72, group: 'data',   projects: ['Netflix DB', 'MAC 272 Final (MySQL)'] },
     { name: 'Unity',         level: 78, group: 'engine', projects: ['Flappy Bird', 'Gunbound', 'Pixel City'] },
     { name: 'Unreal Engine', level: 60, group: 'engine', projects: ['Warm Rain of Summer'] },
     { name: 'Android',       level: 85, group: 'mobile', projects: ['Retro Hub — Compose, MVVM, FCM'] },
-    { name: 'GCP',           level: 70, group: 'data',   projects: ['Netflix DB (Cloud SQL)', 'Retro Hub (Cloud Functions)'] },
+    { name: 'GCP',           level: 70, group: 'data',   projects: ['Netflix DB (Cloud SQL)', 'Retro Hub (Cloud Functions)', 'MAC 272 Final (Cloud SQL)'] },
     { name: 'Firebase',      level: 78, group: 'data',   projects: ['Retro Hub', 'Win98 Blog DevFeed'] },
     { name: 'OOP',           level: 95, group: 'cs',     projects: ['All Projects'] },
     { name: 'Data Structs',  level: 88, group: 'cs',     projects: ['Library System', 'DMV'] },
     { name: 'Algorithms',    level: 85, group: 'cs',     projects: ['GPA Calc', 'Employee Mgmt'] },
   ];
-  const connections = [[0,14],[0,16],[1,14],[1,15],[2,14],[3,11],[5,12],[8,12],[8,13],[9,10],[11,13],[14,15],[14,16],[15,16],[6,8],[6,5],[7,5],[7,12]];
+  const connections = [[0,14],[0,16],[1,14],[1,15],[2,14],[3,11],[5,12],[8,12],[8,13],[9,10],[11,13],[14,15],[14,16],[15,16],[6,8],[5,6],[5,7],[7,12],[6,7],[6,12],[7,8]];
   const groupColors = { lang:'#C84B2F', web:'#2D7A8A', data:'#7A4A8A', engine:'#4A8A2D', mobile:'#8A6A2D', cs:'#8A2D4A' };
 
   const section = document.createElement('section');
