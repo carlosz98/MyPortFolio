@@ -487,7 +487,7 @@ function initTerminal() {
     clear:    () => { output.innerHTML = ''; return null; },
     github:   () => { window.open('https://github.com/carlosz98?tab=repositories','_blank'); return '<span class="t-dim">Opening GitHub...</span>'; },
     linkedin: () => { window.open('https://www.linkedin.com/in/carloszabala98/','_blank'); return '<span class="t-dim">Opening LinkedIn...</span>'; },
-    blog:     () => { window.open('https://charlysblog.framer.website/','_blank'); return '<span class="t-dim">Opening blog...</span>'; },
+    blog:     () => { window.open('https://carlosz98.github.io/Win98Blog/','_blank'); return '<span class="t-dim">Opening blog...</span>'; },
     resume:   () => { window.open('resume/CAZV-RESUME.pdf','_blank'); return '<span class="t-dim">Opening resume...</span>'; },
   };
 
