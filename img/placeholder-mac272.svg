@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1A1A18" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="#F5F2EB"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect x="200" y="140" width="1200" height="620" rx="24" fill="#FEFCF7" stroke="#1A1A18" stroke-opacity="0.12" stroke-width="2"/>
+  <rect x="200" y="140" width="1200" height="64" rx="24" fill="#EDE9DF"/>
+  <rect x="200" y="180" width="1200" height="24" fill="#EDE9DF"/>
+  <circle cx="246" cy="172" r="9" fill="#C84B2F"/>
+  <circle cx="276" cy="172" r="9" fill="#C84B2F" fill-opacity="0.5"/>
+  <circle cx="306" cy="172" r="9" fill="#C84B2F" fill-opacity="0.25"/>
+  <text x="800" y="400" text-anchor="middle" font-family="Georgia, 'DM Serif Display', serif" font-size="72" fill="#1A1A18">MAC 272 Final Project</text>
+  <text x="800" y="460" text-anchor="middle" font-family="'Courier New', monospace" font-size="28" fill="#7A7A72" letter-spacing="2">Full-Stack Web App</text>
+  <rect x="560" y="520" width="480" height="54" rx="27" fill="#FAE8E4"/>
+  <text x="800" y="555" text-anchor="middle" font-family="'Courier New', monospace" font-size="22" fill="#C84B2F" letter-spacing="1">PHP · Node.js · MySQL · GCP</text>
+  <text x="800" y="700" text-anchor="middle" font-family="'Courier New', monospace" font-size="20" fill="#7A7A72" letter-spacing="4">IN DEVELOPMENT</text>
+</svg>

@@ -52,6 +52,9 @@ document.querySelectorAll('nav a').forEach(link => {
   }
 });
 
+/* ─── FOOTER YEAR ─────────────────────────────────── */
+document.querySelectorAll('.copywright .year').forEach(el => { el.textContent = new Date().getFullYear(); });
+
 /* ─── BACK TO TOP ────────────────────────────────────── */
 document.querySelectorAll('a[href="#"]').forEach(a => {
   a.addEventListener('click', e => {
@@ -325,6 +328,8 @@ function initConstellation() {
     { name: 'Kotlin',        level: 85, group: 'lang',   projects: ['Retro Hub (55k+ lines)'] },
     { name: 'SwiftUI',       level: 65, group: 'lang',   projects: ['iOS Win98 App', 'SwiftUI Shop'] },
     { name: 'HTML/CSS/JS',   level: 78, group: 'web',    projects: ['This Portfolio', 'Win98 Blog (React)', 'Pet Adoption'] },
+    { name: 'PHP',           level: 60, group: 'web',    projects: ['MAC 272 Final', 'Pet Adoption'] },
+    { name: 'Node.js',       level: 55, group: 'web',    projects: ['MAC 272 Final'] },
     { name: 'SQL',           level: 72, group: 'data',   projects: ['Netflix DB', 'GCP Cloud'] },
     { name: 'Unity',         level: 78, group: 'engine', projects: ['Flappy Bird', 'Gunbound', 'Pixel City'] },
     { name: 'Unreal Engine', level: 60, group: 'engine', projects: ['Warm Rain of Summer'] },
@@ -335,7 +340,7 @@ function initConstellation() {
     { name: 'Data Structs',  level: 88, group: 'cs',     projects: ['Library System', 'DMV'] },
     { name: 'Algorithms',    level: 85, group: 'cs',     projects: ['GPA Calc', 'Employee Mgmt'] },
   ];
-  const connections = [[0,12],[0,14],[1,12],[1,13],[2,12],[3,9],[5,10],[6,10],[6,11],[7,8],[9,11],[12,13],[12,14],[13,14]];
+  const connections = [[0,14],[0,16],[1,14],[1,15],[2,14],[3,11],[5,12],[8,12],[8,13],[9,10],[11,13],[14,15],[14,16],[15,16],[6,8],[6,5],[7,5],[7,12]];
   const groupColors = { lang:'#C84B2F', web:'#2D7A8A', data:'#7A4A8A', engine:'#4A8A2D', mobile:'#8A6A2D', cs:'#8A2D4A' };
 
   const section = document.createElement('section');
@@ -477,7 +482,7 @@ function initTerminal() {
     help:     () => `<span class="t-dim">Available commands:</span>\n<span class="t-acc">about</span>      — who is Carlos?\n<span class="t-acc">skills</span>     — tech stack\n<span class="t-acc">projects</span>   — list all projects\n<span class="t-acc">contact</span>    — get in touch\n<span class="t-acc">clear</span>      — clear terminal\n<span class="t-acc">github</span>     — open GitHub\n<span class="t-acc">linkedin</span>   — open LinkedIn\n<span class="t-acc">blog</span>       — open blog\n<span class="t-acc">resume</span>     — open resume\n<span class="t-dim">press / or Esc to toggle</span>`,
     about:    () => `<span class="t-acc">Carlos Zabala</span> — Programmer & Software Developer\nUndergraduate at LaGuardia Community College\nMajoring in Programming and Software Development\n\nStrengths: OOP · Data Structures · Algorithms\nInterests: Retro hardware · Game dev · Music`,
     skills:   () => `<span class="t-acc">Languages</span>   C++ · Java · C# · Kotlin · SwiftUI · HTML/CSS/JS\n<span class="t-acc">Engines</span>     Unity · Unreal Engine 5\n<span class="t-acc">Data</span>        SQL · Firebase · GCP · MySQL\n<span class="t-acc">Concepts</span>    OOP · Data Structures · Algorithms · Threading`,
-    projects: () => `<span class="t-acc">01</span> Retro Hub — Android            Kotlin · Compose · Firebase\n<span class="t-acc">02</span> Win98 Blog &amp; Portfolio        React · Vite · Firestore\n<span class="t-acc">03</span> Personal Portfolio             HTML · CSS · JS\n<span class="t-acc">04</span> iOS Win98 Retro App            SwiftUI · AVFoundation\n<span class="t-acc">05</span> SwiftUI Shop                   SwiftUI · ObservableObject\n<span class="t-acc">06</span> Employee Management System     C++ · Threads · File I/O\n<span class="t-acc">07</span> 2D Gunbound Replica            Unity · C#\n<span class="t-acc">08</span> Flappy Bird Replica            Unity · C#\n<span class="t-acc">09</span> Library Management System      Java · OOP\n<span class="t-acc">10</span> DMV Project                    Java · Data Structures\n<span class="t-acc">11</span> College GPA Calculator         C++\n<span class="t-acc">12</span> HangMan                        C++ · OOP\n<span class="t-acc">13</span> Netflix Database &amp; GCP        MySQL · Cloud SQL · Metabase\n<span class="t-acc">14</span> Pet Adoption Center            PHP · SDLC\n<span class="t-dim">in progress:</span> Warm Rain of Summer (UE5) · 2D Pixel Art City (Unity)`,
+    projects: () => `<span class="t-acc">01</span> Retro Hub — Android            Kotlin · Compose · Firebase\n<span class="t-acc">02</span> Win98 Blog &amp; Portfolio        React · Vite · Firestore\n<span class="t-acc">03</span> Personal Portfolio             HTML · CSS · JS\n<span class="t-acc">04</span> iOS Win98 Retro App            SwiftUI · AVFoundation\n<span class="t-acc">05</span> SwiftUI Shop                   SwiftUI · ObservableObject\n<span class="t-acc">06</span> Employee Management System     C++ · Threads · File I/O\n<span class="t-acc">07</span> 2D Gunbound Replica            Unity · C#\n<span class="t-acc">08</span> Flappy Bird Replica            Unity · C#\n<span class="t-acc">09</span> Library Management System      Java · OOP\n<span class="t-acc">10</span> DMV Project                    Java · Data Structures\n<span class="t-acc">11</span> College GPA Calculator         C++\n<span class="t-acc">12</span> HangMan                        C++ · OOP\n<span class="t-acc">13</span> Netflix Database &amp; GCP        MySQL · Cloud SQL · Metabase\n<span class="t-acc">14</span> Pet Adoption Center            PHP · SDLC\n<span class="t-dim">in progress:</span> MAC 272 Full-Stack Web App (PHP · Node.js · MySQL · GCP) · Warm Rain of Summer (UE5) · 2D Pixel Art City (Unity)`,
     contact:  () => `<span class="t-acc">Email</span>     czabala1998@gmail.com\n<span class="t-acc">LinkedIn</span>  linkedin.com/in/carloszabala98\n<span class="t-acc">GitHub</span>    github.com/carlosz98`,
     clear:    () => { output.innerHTML = ''; return null; },
     github:   () => { window.open('https://github.com/carlosz98?tab=repositories','_blank'); return '<span class="t-dim">Opening GitHub...</span>'; },
@@ -625,7 +630,7 @@ function initCounters() {
   const workHeader = document.querySelector('.recent-work .section-header');
   if (!workHeader) return;
   const stats = [
-    {label:'Projects',value:16,suffix:''},
+    {label:'Projects',value:17,suffix:''},
     {label:'Languages',value:5,suffix:'+'},
     {label:'Certificates',value:4,suffix:''},
     {label:'Commits',value:200,suffix:'+'},
@@ -720,6 +725,11 @@ const PROJECT_DETAILS = {
     problem:   'Build a complete, replayable game in pure C++ with clear structure instead of one long main function.',
     learned:   'Separating game state from presentation with two classes, validating character input, and picking random words with srand and rand.',
     challenge: 'Handling every bad input case — numbers, symbols and repeated letters — without counting it as a miss or breaking the game loop.',
+  },
+  'MAC 272 Final — Full-Stack Web Application': {
+    problem:   'Build a real, data-driven website end to end — client, server and cloud database — and plan it with the same System Analysis & Design reports a professional team would use.',
+    learned:   'Connecting the layers: JavaScript in the browser, PHP rendering pages and processing forms, Node.js for server logic, and MySQL queries running against a Cloud SQL database on GCP.',
+    challenge: 'Coordinating PHP and Node.js against one shared cloud database, keeping credentials secure, and making sure every feature traces back to the analysis and design reports.',
   },
   'Warm Rain of Summer — UE5': {
     problem:   'Take a narrative adventure game from idea to a playable Unreal Engine 5 build, covering every production stage.',
