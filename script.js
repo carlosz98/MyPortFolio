@@ -12,8 +12,22 @@ if (savedMode === 'dark') {
 if (toggle) {
   toggle.addEventListener('change', () => {
     const isDark = toggle.checked;
-    document.body.classList.toggle('dark', isDark);
-    localStorage.setItem('color-mode', isDark ? 'dark' : 'light');
+    const apply = () => {
+      document.body.classList.toggle('dark', isDark);
+      localStorage.setItem('color-mode', isDark ? 'dark' : 'light');
+    };
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!document.startViewTransition || reduce) { apply(); return; }
+    // the new theme grows out of the bulb (or the toggle on pages without one)
+    const origin = document.querySelector('.bulb-glass') || toggle.closest('label') || toggle;
+    const r = origin.getBoundingClientRect();
+    const x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const root = document.documentElement.style;
+    root.setProperty('--vt-x', x + 'px');
+    root.setProperty('--vt-y', y + 'px');
+    root.setProperty('--vt-r', radius + 'px');
+    document.startViewTransition(apply);
   });
 }
 
@@ -357,7 +371,7 @@ function initConstellation() {
   section.className = 'constellation-section';
   section.innerHTML = `
     <div class="section-header"><h2>Skills</h2><div class="section-line"></div></div>
-    <p class="constellation-hint">Hover a star to explore · connected skills share projects</p>
+    <p class="constellation-hint">Hover a star to explore · click it to see those projects · connected skills share projects</p>
     <div class="constellation-wrap">
       <canvas id="constellation-canvas"></canvas>
       <div id="constellation-tooltip"></div>
@@ -460,7 +474,7 @@ function initConstellation() {
     hoveredIdx = skills.findIndex(s => Math.hypot(s.x-mx,s.y-my) < 4+(s.level/100)*8+8);
     if (hoveredIdx >= 0) {
       const s = skills[hoveredIdx];
-      tooltip.innerHTML = `<strong>${s.name}</strong><div class="tt-bar"><div class="tt-fill" style="width:${s.level}%;background:${groupColors[s.group]}"></div></div><span class="tt-pct">${s.level}% proficiency</span><ul>${s.projects.map(p=>`<li>${p}</li>`).join('')}</ul>`;
+      tooltip.innerHTML = `<strong>${s.name}</strong><div class="tt-bar"><div class="tt-fill" style="width:${s.level}%;background:${groupColors[s.group]}"></div></div><span class="tt-pct">${s.level}% proficiency</span><ul>${s.projects.map(p=>`<li>${p}</li>`).join('')}</ul><span class="tt-cta">Click to see projects →</span>`;
       tooltip.style.opacity = '1';
       tooltip.style.left = Math.min(mx+16,W()-200)+'px';
       tooltip.style.top  = Math.max(my-60,8)+'px';
@@ -468,6 +482,10 @@ function initConstellation() {
     draw();
   });
   canvas.addEventListener('mouseleave', () => { hoveredIdx=-1; tooltip.style.opacity='0'; draw(); });
+  canvas.addEventListener('click', () => {
+    if (hoveredIdx < 0 || !window.filterProjectsBySkill) return;
+    window.filterProjectsBySkill(skills[hoveredIdx].name);
+  });
   layout(); draw();
   window.addEventListener('resize', () => { layout(); draw(); });
   section.querySelector('.section-header').classList.add('reveal');
@@ -501,11 +519,12 @@ function initTerminal() {
   let open = false, history = [], histIdx = -1;
 
   const COMMANDS = {
-    help:     () => `<span class="t-dim">Available commands:</span>\n<span class="t-acc">about</span>      — who is Carlos?\n<span class="t-acc">skills</span>     — tech stack\n<span class="t-acc">projects</span>   — list all projects\n<span class="t-acc">contact</span>    — get in touch\n<span class="t-acc">clear</span>      — clear terminal\n<span class="t-acc">github</span>     — open GitHub\n<span class="t-acc">linkedin</span>   — open LinkedIn\n<span class="t-acc">blog</span>       — open blog\n<span class="t-acc">resume</span>     — open resume\n<span class="t-dim">press / or Esc to toggle</span>`,
-    about:    () => `<span class="t-acc">Carlos Zabala</span> — Programmer & Software Developer\nUndergraduate at LaGuardia Community College\nMajoring in Programming and Software Development\n\nStrengths: OOP · Data Structures · Algorithms\nInterests: Retro hardware · Game dev · Music`,
+    help:     () => `<span class="t-dim">Available commands:</span>\n<span class="t-acc">about</span>      — who is Carlos?\n<span class="t-acc">skills</span>     — tech stack\n<span class="t-acc">projects</span>   — list all projects\n<span class="t-acc">contact</span>    — get in touch\n<span class="t-acc">clear</span>      — clear terminal\n<span class="t-acc">github</span>     — open GitHub\n<span class="t-acc">linkedin</span>   — open LinkedIn\n<span class="t-acc">blog</span>       — open blog\n<span class="t-acc">resume</span>     — open resume\n<span class="t-acc">courses</span>    — LaGuardia coursework\n<span class="t-dim">press / or Esc to toggle</span>`,
+    about:    () => `<span class="t-acc">Carlos Zabala</span> — Programmer & Software Developer\nProgramming &amp; Software Development — LaGuardia Community College\nGraduating December 2026 · capstone: MAC 272 (PHP · Node.js · MySQL · GCP)\n\nStrengths: OOP · Data Structures · Algorithms\nInterests: Retro hardware · Game dev · Music`,
     skills:   () => `<span class="t-acc">Languages</span>   C++ · Java · C# · Kotlin · SwiftUI · HTML/CSS/JS\n<span class="t-acc">Engines</span>     Unity · Unreal Engine 5\n<span class="t-acc">Data</span>        SQL · Firebase · GCP · MySQL\n<span class="t-acc">Concepts</span>    OOP · Data Structures · Algorithms · Threading`,
     projects: () => `<span class="t-acc">01</span> Retro Hub — Android            Kotlin · Compose · Firebase\n<span class="t-acc">02</span> Win98 Blog &amp; Portfolio        React · Vite · Firestore\n<span class="t-acc">03</span> Personal Portfolio             HTML · CSS · JS\n<span class="t-acc">04</span> iOS Win98 Retro App            SwiftUI · AVFoundation\n<span class="t-acc">05</span> SwiftUI Shop                   SwiftUI · ObservableObject\n<span class="t-acc">06</span> Employee Management System     C++ · Threads · File I/O\n<span class="t-acc">07</span> 2D Gunbound Replica            Unity · C#\n<span class="t-acc">08</span> Flappy Bird Replica            Unity · C#\n<span class="t-acc">09</span> Library Management System      Java · OOP\n<span class="t-acc">10</span> DMV Project                    Java · Data Structures\n<span class="t-acc">11</span> College GPA Calculator         C++\n<span class="t-acc">12</span> HangMan                        C++ · OOP\n<span class="t-acc">13</span> Netflix Database &amp; GCP        MySQL · Cloud SQL · Metabase\n<span class="t-acc">14</span> Pet Adoption Center            PHP · SDLC\n<span class="t-dim">in progress:</span> MAC 272 Full-Stack Web App (PHP · Node.js · MySQL · GCP) · Warm Rain of Summer (UE5) · 2D Pixel Art City (Unity)`,
     contact:  () => `<span class="t-acc">Email</span>     czabala1998@gmail.com\n<span class="t-acc">LinkedIn</span>  linkedin.com/in/carloszabala98\n<span class="t-acc">GitHub</span>    github.com/carlosz98`,
+    courses:  () => { document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' }); return `<span class="t-acc">Foundations</span>   MAC 101 Intro to CS · MAC 109 Visual C# · MAC 172 Web Dev I · MAC 125 Advanced C++\n<span class="t-acc">Core</span>          MAC 190 OOP · MAC 250 Databases · MAC 221 iOS · MAC 232 UNIX · MAC 280 Game Programming\n<span class="t-acc">Capstone</span>      MAC 110 Systems Analysis · MAC 220 Android · MAC 272 Web Dev II <span class="t-dim">(in progress)</span>`; },
     clear:    () => { output.innerHTML = ''; return null; },
     github:   () => { window.open('https://github.com/carlosz98?tab=repositories','_blank'); return '<span class="t-dim">Opening GitHub...</span>'; },
     linkedin: () => { window.open('https://www.linkedin.com/in/carloszabala98/','_blank'); return '<span class="t-dim">Opening LinkedIn...</span>'; },
@@ -559,22 +578,193 @@ function initFilterBar() {
   const workSection = document.querySelector('.recent-work');
   if (!workSection) return;
   const filters = ['All','Java','C++','C#','Kotlin','Unity','Web','Android','SwiftUI','SQL'];
-  const tagMap  = { 'Java':['java'],'C++':['c++'],'C#':['c#','unity'],'Kotlin':['kotlin'],'Unity':['unity'],'Web':['html','css','js','react','php'],'Android':['android','kotlin'],'SwiftUI':['swiftui'],'SQL':['sql','mysql','gcp'] };
+  const tagMap  = { 'Java':['java'],'C++':['c++'],'C#':['c#','unity'],'Kotlin':['kotlin'],'Unity':['unity'],'Web':['html','css','js','javascript','react','php'],'Android':['android','kotlin'],'SwiftUI':['swift'],'SQL':['sql','mysql','gcp'] };
+  // keywords for each star in the skills constellation
+  const skillMap = {
+    'C++':['c++'], 'Java':['java'], 'C#':['c#'], 'Kotlin':['kotlin'], 'SwiftUI':['swift'],
+    'HTML/CSS/JS':['html','css','js','javascript','react'], 'PHP':['php'], 'Node.js':['node'],
+    'SQL':['sql','mysql'], 'Unity':['unity'], 'Unreal Engine':['unreal'], 'Android':['android'],
+    'GCP':['gcp','google cloud','cloud functions'], 'Firebase':['firebase'],
+    'OOP':['oop','inheritance','polymorphism','abstract classes','class hierarchies','classes'],
+    'Data Structs':['data structures','stl','queues','std::vector','linked'],
+    'Algorithms':['algorithm','weighted averages','procedural','random word','physics','pathfinding'],
+  };
   const bar = document.createElement('div');
   bar.id = 'filter-bar';
   bar.innerHTML = filters.map((f,i) => `<button class="filter-btn${i===0?' active':''}" data-filter="${f}">${f}</button>`).join('');
   workSection.insertBefore(bar, workSection.firstChild);
-  const articles = [...workSection.querySelectorAll('article')];
+  const note = document.createElement('p');
+  note.className = 'skill-empty-note'; note.hidden = true;
+  bar.after(note);
+
+  const sections = [...document.querySelectorAll('.recent-work')];
+  const allArticles = sections.flatMap(sec => [...sec.querySelectorAll('article')]);
+  const mainArticles = [...workSection.querySelectorAll('article')];
+
+  // match whole words so "java" never matches "javascript"
+  const esc = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const hasKeyword = (texts, kws) => kws.some(kw => {
+    const re = new RegExp('(^|[^a-z0-9#+])' + esc(kw) + '($|[^a-z0-9#+])');
+    return texts.some(t => re.test(t));
+  });
+  const textsOf = art => [...art.querySelectorAll('li, h3')].map(el => (el.dataset.original || el.textContent).toLowerCase());
+
+  function clearSkill() {
+    bar.querySelector('.skill-chip')?.remove();
+    note.hidden = true;
+    sections.forEach(sec => sec.classList.remove('section-empty'));
+    allArticles.forEach(art => { if (!mainArticles.includes(art)) art.classList.remove('filtered-out'); });
+  }
+
+  function applyFilter(filter) {
+    clearSkill();
+    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+    mainArticles.forEach(art => {
+      if (filter === 'All') { art.classList.remove('filtered-out'); return; }
+      art.classList.toggle('filtered-out', !hasKeyword(textsOf(art), tagMap[filter] || [filter.toLowerCase()]));
+    });
+  }
+
   bar.addEventListener('click', e => {
     const btn = e.target.closest('.filter-btn'); if (!btn) return;
-    bar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    articles.forEach(art => {
-      if (filter==='All') { art.classList.remove('filtered-out'); return; }
-      const tags = [...art.querySelectorAll('li')].map(li=>li.textContent.toLowerCase());
-      const kws  = tagMap[filter]||[filter.toLowerCase()];
-      art.classList.toggle('filtered-out', !kws.some(kw=>tags.some(t=>t.includes(kw))));
+    if (btn.classList.contains('skill-chip')) { applyFilter('All'); return; }
+    applyFilter(btn.dataset.filter);
+  });
+
+  // called by the constellation when a star is clicked
+  window.filterProjectsBySkill = name => {
+    const kws = skillMap[name] || [name.toLowerCase()];
+    clearSkill();
+    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    const chip = document.createElement('button');
+    chip.className = 'filter-btn active skill-chip';
+    chip.setAttribute('aria-label', `Clear ${name} filter`);
+    chip.innerHTML = `★ ${name} <span class="chip-x" aria-hidden="true">✕</span>`;
+    bar.appendChild(chip);
+    let shown = 0;
+    allArticles.forEach(art => {
+      const match = hasKeyword(textsOf(art), kws);
+      art.classList.toggle('filtered-out', !match);
+      if (match) shown++;
+    });
+    sections.forEach((sec, i) => {
+      if (i === 0) return;   // keep the main section (it holds the filter bar)
+      sec.classList.toggle('section-empty', !sec.querySelector('article:not(.filtered-out)'));
+    });
+    note.hidden = false;
+    note.textContent = shown ? `${shown} project${shown > 1 ? 's' : ''} using ${name}` : `No projects tagged ${name} yet`;
+    bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // jumping to a project (e.g. from the timeline) clears any filter that hides it
+  window.revealProject = id => {
+    const art = document.getElementById(id);
+    if (!art) return;
+    if (art.classList.contains('filtered-out')) applyFilter('All');
+    art.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    art.classList.remove('is-flash'); void art.offsetWidth; art.classList.add('is-flash');
+    setTimeout(() => art.classList.remove('is-flash'), 1700);
+  };
+}
+
+/* ═══════════════════════════════════════════════════════
+   HOVER VIDEO PREVIEWS — project videos play muted on hover
+   ═══════════════════════════════════════════════════════ */
+function initHoverPreviews() {
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!canHover || reduce) return;
+
+  const yt = (frame, func, args = []) => {
+    try { frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args }), '*'); } catch (e) {}
+  };
+
+  document.querySelectorAll('.recent-work article').forEach(art => {
+    const media = art.querySelector('.article-media');
+    const frame = media && media.querySelector('iframe[src*="youtube.com/embed"]');
+    const video = media && media.querySelector('video');
+    if (!frame && !video) return;
+
+    const chip = document.createElement('span');
+    chip.className = 'preview-chip';
+    chip.textContent = 'Preview · muted';
+    media.appendChild(chip);
+
+    let timer = null, previewing = false, engaged = false;
+
+    const start = () => {
+      if (engaged) return;
+      previewing = true; media.classList.add('is-previewing');
+      if (video) { video.muted = true; video.play().catch(() => {}); }
+      else { yt(frame, 'mute'); yt(frame, 'playVideo'); }
+    };
+    const stop = () => {
+      clearTimeout(timer);
+      if (!previewing || engaged) return;
+      previewing = false; media.classList.remove('is-previewing');
+      if (video) video.pause(); else yt(frame, 'pauseVideo');
+    };
+
+    art.addEventListener('mouseenter', () => { clearTimeout(timer); timer = setTimeout(start, 450); });
+    art.addEventListener('mouseleave', stop);
+
+    // once someone actually clicks into the player, hand control back to them
+    const engage = () => {
+      if (engaged) return;
+      engaged = true; clearTimeout(timer); media.classList.remove('is-previewing');
+      if (video) video.muted = false;
+      else if (previewing) { yt(frame, 'unMute'); setTimeout(() => yt(frame, 'playVideo'), 120); }
+      previewing = false;
+    };
+    if (video) {
+      video.addEventListener('click', engage);
+      video.addEventListener('volumechange', () => { if (!video.muted) engage(); });
+    } else {
+      window.addEventListener('blur', () => setTimeout(() => { if (document.activeElement === frame) engage(); }, 0));
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   EDUCATION TIMELINE
+   ═══════════════════════════════════════════════════════ */
+function initTimeline() {
+  const section = document.querySelector('.timeline-section');
+  if (!section) return;
+  const timeline = section.querySelector('.timeline');
+  const fill = section.querySelector('.timeline-line');
+
+  const header = section.querySelector('.section-header');
+  if (header) { header.classList.add('reveal'); revealObserver.observe(header); }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.25, rootMargin: '0px 0px -8% 0px' });
+  section.querySelectorAll('.timeline-item, .timeline-stage').forEach(el => io.observe(el));
+
+  // the line fills as you scroll through the timeline
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const r = timeline.getBoundingClientRect();
+    const focus = innerHeight * 0.6;
+    const p = Math.min(1, Math.max(0, (focus - r.top) / r.height));
+    fill.style.setProperty('--tl-progress', p.toFixed(4));
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+
+  // related-project links scroll to (and highlight) the project
+  section.querySelectorAll('.timeline-projects a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      if (window.revealProject) window.revealProject(id);
+      else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     });
   });
 }
@@ -875,6 +1065,7 @@ function initBulbToggle() {
   bulb.innerHTML = `
     <span class="bulb-cord"></span>
     <span class="bulb-body">
+      <span class="bulb-room"></span>
       <span class="bulb-glow"></span>
       <svg viewBox="0 0 30 46">
         <rect class="bulb-socket" x="9" y="0" width="12" height="13" rx="2"/>
@@ -918,4 +1109,6 @@ window.addEventListener('DOMContentLoaded', () => {
   initExpandButtons();
   initViewToggle();
   initBulbToggle();
+  initHoverPreviews();
+  initTimeline();
 });
