@@ -154,21 +154,31 @@ if (heroH2) {
 
 /* ─── SCRAMBLE TEXT ──────────────────────────────────── */
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
-function scramble(el) {
+function scramble(el, onDone) {
   const original = el.getAttribute('data-original') || el.textContent;
   if (!el.getAttribute('data-original')) el.setAttribute('data-original', original);
+  clearInterval(el._scrambleIv);
   let frame = 0; const totalFrames = 18;
-  const iv = setInterval(() => {
+  el._scrambleIv = setInterval(() => {
     el.textContent = original.split('').map((ch, i) => {
       if (ch === ' ') return ' ';
       if (frame / totalFrames > i / original.length) return ch;
       return CHARS[Math.floor(Math.random() * CHARS.length)];
     }).join('');
-    if (++frame > totalFrames) { el.textContent = original; clearInterval(iv); }
+    if (++frame > totalFrames) {
+      el.textContent = original; clearInterval(el._scrambleIv);
+      if (onDone) onDone();
+    }
   }, 35);
 }
 document.querySelectorAll('article h3').forEach(h3 => {
-  h3.closest('article').addEventListener('mouseenter', () => scramble(h3));
+  const article = h3.closest('article');
+  // once the letters settle, the title lights up (glow is dark-mode only, see style.css)
+  article.addEventListener('mouseenter', () => {
+    h3.classList.remove('is-lit');
+    scramble(h3, () => { if (article.matches(':hover')) h3.classList.add('is-lit'); });
+  });
+  article.addEventListener('mouseleave', () => h3.classList.remove('is-lit'));
 });
 
 /* ─── TAG PARTICLE BURST ─────────────────────────────── */
@@ -392,8 +402,10 @@ function initConstellation() {
         ? 'rgba(232,103,74,0.25)'
         : 'rgba(26,26,24,0.15)';
     ctx.lineWidth = isH ? 1.5 : 0.8;
+    // dark mode: lines give off a soft ember glow
     ctx.stroke();
   });
+  ctx.shadowBlur = 0;
 
   // draw stars
   skills.forEach((s, i) => {
@@ -416,7 +428,10 @@ function initConstellation() {
     ctx.beginPath();
     ctx.arc(s.x, s.y, isHov ? r * 1.35 : r, 0, Math.PI * 2);
     ctx.fillStyle = isHov ? col : col + 'DD';
+    ctx.shadowColor = col;
+    ctx.shadowBlur  = isDark && isHov ? 24 : 0;
     ctx.fill();
+    ctx.shadowBlur = 0;
 
     // label
     ctx.font = isHov
@@ -428,9 +443,16 @@ function initConstellation() {
         ? 'rgba(240,237,228,0.80)'
         : 'rgba(26,26,24,0.70)';
     ctx.textAlign = 'center';
+    ctx.shadowColor = col;
+    ctx.shadowBlur  = isDark && isHov ? 12 : 0;
     ctx.fillText(s.name, s.x, s.y + r + 14);
+    ctx.shadowBlur = 0;
   });
 }
+
+  // redraw when the theme changes so the glow turns on/off immediately
+  const themeToggle = document.getElementById('dark-mode-toggle');
+  if (themeToggle) themeToggle.addEventListener('change', () => requestAnimationFrame(draw));
 
   canvas.addEventListener('mousemove', e => {
     const rect = canvas.getBoundingClientRect();
@@ -838,6 +860,49 @@ function initViewToggle() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   PULL-CHAIN LIGHT BULB (dark / light toggle)
+   ═══════════════════════════════════════════════════════ */
+function initBulbToggle() {
+  const label = document.querySelector('.toggle-switch');
+  const input = document.getElementById('dark-mode-toggle');
+  if (!label || !input || label.querySelector('.bulb')) return;
+
+  input.setAttribute('aria-label', 'Toggle light and dark mode');
+
+  const bulb = document.createElement('span');
+  bulb.className = 'bulb';
+  bulb.setAttribute('aria-hidden', 'true');
+  bulb.innerHTML = `
+    <span class="bulb-cord"></span>
+    <span class="bulb-body">
+      <span class="bulb-glow"></span>
+      <svg viewBox="0 0 30 46">
+        <rect class="bulb-socket" x="9" y="0" width="12" height="13" rx="2"/>
+        <line class="bulb-thread" x1="9.5" y1="4.5" x2="20.5" y2="4.5"/>
+        <line class="bulb-thread" x1="9.5" y1="8.5" x2="20.5" y2="8.5"/>
+        <path class="bulb-glass" d="M10 13 C10 17 2 20 2 29 A13 13 0 0 0 28 29 C28 20 20 17 20 13 Z"/>
+        <path class="bulb-filament" d="M12 14 L12 26 L13.5 23.5 L15 26 L16.5 23.5 L18 26 L18 14"/>
+        <ellipse class="bulb-shine" cx="8.5" cy="27" rx="2" ry="5" transform="rotate(18 8.5 27)"/>
+      </svg>
+    </span>
+    <span class="bulb-chain"><span class="bulb-bead"></span></span>`;
+  label.appendChild(bulb);
+
+  const restart = (cls, ms) => {
+    bulb.classList.remove(cls);
+    void bulb.offsetWidth;          // restart the animation
+    bulb.classList.add(cls);
+    setTimeout(() => bulb.classList.remove(cls), ms);
+  };
+
+  input.addEventListener('change', () => {
+    restart('is-pulled', 450);
+    restart('is-swinging', 1100);
+    if (!input.checked) restart('is-flicker', 450);   // turning the light ON
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
    SINGLE DOMContentLoaded — ALL INITS HERE
    ═══════════════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
@@ -852,4 +917,5 @@ window.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initExpandButtons();
   initViewToggle();
+  initBulbToggle();
 });

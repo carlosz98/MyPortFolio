@@ -1,36 +1,204 @@
+/* ═══════════════════════════════════════════════════════
+   PULL-CHAIN LIGHT BULB — dark / light mode switch
+   Bulb ON  = light mode   ·   Bulb OFF = dark mode
+   Sits where the old toggle was. Markup is injected by
+   initBulbToggle() in script.js; the checkbox stays the
+   source of truth.
+   ═══════════════════════════════════════════════════════ */
+
 .toggle-switch {
+  position: relative;
   display: inline-flex;
-  align-items: center;
-  font-family: 'Sora', sans-serif;
-  font-weight: 700;
-  font-size: .875rem;
-  cursor: pointer;
+  align-items: flex-start;
+  font-size: 0;               /* hides the "Dark" text node */
+  color: transparent;
+  cursor: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.toggle-switch-border {
-  display: inline-flex;
-  align-items: center;
-  width: 60px;
-  height: 36px;
-  border: 1px solid var(--primary); 
-  border-radius: 20px;
-  box-sizing: border-box;
-  margin-inline-start: 8px;
-}
-
+/* checkbox stays focusable for keyboard users */
 .toggle-switch input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
 }
 
-.toggle-switch-dot {
-  width: 28px;
-  height: 28px;
+/* old track/knob are replaced by the bulb */
+.toggle-switch .toggle-switch-border { display: none; }
+
+/* ── bulb rig ─────────────────────────────────────────── */
+.bulb {
+  --cord: 22px;
+  --glass-on:  #FFD27A;
+  --glass-off: #CFCBC2;
+  --glow:      rgba(255, 196, 92, .55);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 44px;
+  padding-top: 3px;
+  transform-origin: 50% 0;
+  animation: bulb-idle 5s ease-in-out infinite;   /* gentle sway at rest */
+}
+body.dark .bulb { --glass-off: #4A4842; }
+
+.bulb-cord {
+  position: relative;
+  width: 2px;
+  height: var(--cord);
+  background: var(--ink-2);
+  border-radius: 1px;
+}
+
+/* small ceiling mount the cord hangs from */
+.bulb-cord::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ink-2);
+  transform: translateX(-50%);
+}
+
+.bulb-body {
+  position: relative;
+  width: 30px;
+  height: 46px;
+}
+.bulb-body svg { position: relative; z-index: 2; display: block; width: 100%; height: 100%; overflow: visible; }
+
+.bulb-socket  { fill: var(--ink-2); }
+.bulb-thread  { stroke: var(--bg); stroke-width: 1.2; opacity: .55; }
+.bulb-glass   {
+  fill: var(--glass-off);
+  stroke: var(--ink-3);
+  stroke-width: 1;
+  transition: fill .35s ease, stroke .35s ease;
+}
+.bulb-filament {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke .25s ease, filter .25s ease;
+}
+.bulb-shine { fill: #fff; opacity: .35; transition: opacity .35s ease; }
+
+/* warm halo */
+.bulb-glow {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: var(--primary);
-  transform: translate3d(3px, 0, 0);
-  transition: transform .1s ease-in-out;
+  background: radial-gradient(circle, var(--glow) 0%, rgba(255,196,92,.18) 35%, transparent 70%);
+  transform: translate(-50%, -50%) scale(.4);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity .35s ease, transform .5s cubic-bezier(.34,1.56,.64,1);
 }
 
-.toggle-switch input:checked + * .toggle-switch-dot {
-  transform: translate3d(26px, 0, 0);
+/* pull chain — centered on the bulb, running behind the glass
+   and hanging out below it */
+.bulb-chain {
+  position: absolute;
+  top: calc(var(--cord) + 14px);
+  left: 50%;
+  width: 0;
+  height: 50px;
+  margin-left: -1px;
+  border-left: 2px dotted var(--ink-3);
+  transform-origin: 50% 0;
+  z-index: 1;                 /* above the glow, below the bulb */
+}
+.bulb-bead {
+  position: absolute;
+  bottom: -7px;
+  left: -5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 1px 2px rgba(0,0,0,.25);
+  transition: transform .2s ease;
+}
+.toggle-switch:hover .bulb-bead { transform: scale(1.2); }
+
+/* ── ON state (light mode = checkbox NOT checked) ─────── */
+.toggle-switch input:not(:checked) ~ .bulb .bulb-glass    { fill: var(--glass-on); stroke: #E0A33A; }
+.toggle-switch input:not(:checked) ~ .bulb .bulb-filament { stroke: #B85A1A; filter: drop-shadow(0 0 2px #FFB347); }
+.toggle-switch input:not(:checked) ~ .bulb .bulb-shine    { opacity: .6; }
+.toggle-switch input:not(:checked) ~ .bulb .bulb-glow     { opacity: 1; transform: translate(-50%, -50%) scale(1); animation: bulb-hum 3.2s ease-in-out infinite; }
+
+@keyframes bulb-hum {
+  0%, 100% { opacity: 1;   }
+  50%      { opacity: .82; }
+}
+
+/* ── motion ───────────────────────────────────────────── */
+@keyframes bulb-idle {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(1.5deg); }
+  75%      { transform: rotate(-1.5deg); }
+}
+
+/* pull: chain stretches down and snaps back */
+.bulb.is-pulled .bulb-chain { animation: bulb-pull .45s cubic-bezier(.34,1.56,.64,1); }
+@keyframes bulb-pull {
+  0%   { transform: scaleY(1); }
+  35%  { transform: scaleY(1.25); }
+  65%  { transform: scaleY(.95); }
+  100% { transform: scaleY(1); }
+}
+
+/* swing: the whole bulb sways on its cord, then settles */
+.bulb.is-swinging { animation: bulb-swing 1.1s cubic-bezier(.36,.07,.19,.97); }
+@keyframes bulb-swing {
+  0%   { transform: rotate(0deg); }
+  18%  { transform: rotate(9deg); }
+  38%  { transform: rotate(-6deg); }
+  56%  { transform: rotate(3.5deg); }
+  74%  { transform: rotate(-1.5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* flicker when switching on, like an old filament */
+.bulb.is-flicker .bulb-glow,
+.bulb.is-flicker .bulb-glass { animation: bulb-flicker .45s steps(1, end); }
+@keyframes bulb-flicker {
+  0%   { opacity: 1; }
+  15%  { opacity: .35; }
+  30%  { opacity: 1; }
+  45%  { opacity: .55; }
+  60%, 100% { opacity: 1; }
+}
+
+/* keyboard focus */
+.toggle-switch input:focus-visible ~ .bulb .bulb-glass { stroke: var(--accent); stroke-width: 2.5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bulb, .bulb *, .bulb.is-swinging, .bulb.is-pulled .bulb-chain { animation: none !important; transition: none !important; }
+}
+
+/* a little extra room under the header so the pull chain clears the divider */
+header .controls { padding-bottom: 1.6rem; }
+
+
+/* ─── Wide screens: the bulb hangs from the top of the page in the left margin ─── */
+@media (min-width: 1280px) {
+  .toggle-switch { position: absolute; top: 0; left: -128px; z-index: 5; }
+  .toggle-switch .bulb { --cord: 52px; padding-top: 0; }
+  .toggle-switch .bulb-cord::before { display: none; }   /* cord comes straight from the ceiling */
+  header .controls { padding: 0; }
 }

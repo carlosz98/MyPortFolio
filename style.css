@@ -206,40 +206,7 @@ header nav li a:hover::after, header nav li a.active::after { width:calc(100% - 
 header nav li a:hover, header nav li a.active { color:var(--ink); background-color:var(--bg-pill); border-color:var(--border); }
 header .controls { display:flex; align-items:center; gap:.75rem; padding:.75rem 0; flex-shrink:0; }
 
-/* ─── TOGGLE ─────────────────────────────────────────── */
-.toggle-switch { display:inline-flex; align-items:center; gap:.5rem; font-family:var(--font-sans); font-size:.75rem; font-weight:500; color:var(--ink-3); cursor:none; letter-spacing:.03em; text-transform:uppercase; }
-.toggle-switch-border {
-  position: relative; width: 44px; height: 24px;
-  border: 2px solid #1A1A18; border-radius: var(--radius-pill);
-  background: var(--bg-pill);
-  transition: background var(--t-fast), border-color var(--t-fast);
-  flex-shrink: 0;
-}
-.toggle-switch input { display: none; }
-.toggle-switch-dot {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #333 !important;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
-  transition: transform var(--t-med), background var(--t-fast);
-}
-body.dark .toggle-switch-dot {
-  background: #F0EDE4 !important;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.2);
-}
-.toggle-switch input:checked ~ .toggle-switch-border .toggle-switch-dot {
-  transform: translateX(20px);
-  background: #fff !important;
-  box-shadow: none;
-}
-body.dark .toggle-switch-dot { background: #F0EDE4; }
-body.dark .toggle-switch-border { border-color: #F0EDE4; }
-.toggle-switch input:checked ~ .toggle-switch-border { background: var(--accent); border-color: var(--accent); }
-.toggle-switch input:checked ~ .toggle-switch-border .toggle-switch-dot { transform: translateX(20px); background: #fff; }
+/* ─── TOGGLE ─── styles live in toggle-switch.css ──── */
 /* ─── BIO ────────────────────────────────────────────── */
 .bio { display:flex; align-items:center; gap:4rem; padding:5rem 0 4rem; border-bottom:1px solid var(--border); }
 .bio .profile-img { width:260px; min-width:260px; height:260px; object-fit:cover; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); flex-shrink:0; animation:float 6s ease-in-out infinite; will-change:transform; }
@@ -1245,4 +1212,11 @@ article p code {
   object-fit: cover;
   background: #000;
   border: none;
+}
+
+
+/* ─── DARK MODE GLOW — project titles light up once the scramble settles ─── */
+body.dark article h3 { transition: color var(--t-fast), text-shadow .7s ease; }
+body.dark article h3.is-lit {
+  text-shadow: 0 0 10px rgba(232,103,74,.6), 0 0 26px rgba(232,103,74,.35), 0 0 48px rgba(232,103,74,.15);
 }
