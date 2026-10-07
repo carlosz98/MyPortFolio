@@ -1235,3 +1235,14 @@ article p code {
   padding: 0.05rem 0.35rem;
   border-radius: 4px;
 }
+
+/* ─── VIDEO MEDIA ────────────────────────────────────── */
+.article-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  background: #000;
+  border: none;
+}

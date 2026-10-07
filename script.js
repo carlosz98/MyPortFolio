@@ -319,11 +319,11 @@ function initConstellation() {
   const host = document.querySelector('.recent-work');
   if (!host) return;
   const skills = [
-    { name: 'C++',           level: 95, group: 'lang',   projects: ['Employee Mgmt', 'GPA Calc'] },
+    { name: 'C++',           level: 95, group: 'lang',   projects: ['Employee Mgmt', 'GPA Calc', 'HangMan'] },
     { name: 'Java',          level: 90, group: 'lang',   projects: ['Library System', 'DMV Project'] },
     { name: 'C#',            level: 80, group: 'lang',   projects: ['Flappy Bird', 'Gunbound'] },
     { name: 'Kotlin',        level: 85, group: 'lang',   projects: ['Retro Hub (55k+ lines)'] },
-    { name: 'SwiftUI',       level: 65, group: 'lang',   projects: ['iOS Retro App'] },
+    { name: 'SwiftUI',       level: 65, group: 'lang',   projects: ['iOS Win98 App', 'SwiftUI Shop'] },
     { name: 'HTML/CSS/JS',   level: 78, group: 'web',    projects: ['This Portfolio', 'Win98 Blog (React)', 'Pet Adoption'] },
     { name: 'SQL',           level: 72, group: 'data',   projects: ['Netflix DB', 'GCP Cloud'] },
     { name: 'Unity',         level: 78, group: 'engine', projects: ['Flappy Bird', 'Gunbound', 'Pixel City'] },
@@ -477,7 +477,7 @@ function initTerminal() {
     help:     () => `<span class="t-dim">Available commands:</span>\n<span class="t-acc">about</span>      — who is Carlos?\n<span class="t-acc">skills</span>     — tech stack\n<span class="t-acc">projects</span>   — list all projects\n<span class="t-acc">contact</span>    — get in touch\n<span class="t-acc">clear</span>      — clear terminal\n<span class="t-acc">github</span>     — open GitHub\n<span class="t-acc">linkedin</span>   — open LinkedIn\n<span class="t-acc">blog</span>       — open blog\n<span class="t-acc">resume</span>     — open resume\n<span class="t-dim">press / or Esc to toggle</span>`,
     about:    () => `<span class="t-acc">Carlos Zabala</span> — Programmer & Software Developer\nUndergraduate at LaGuardia Community College\nMajoring in Programming and Software Development\n\nStrengths: OOP · Data Structures · Algorithms\nInterests: Retro hardware · Game dev · Music`,
     skills:   () => `<span class="t-acc">Languages</span>   C++ · Java · C# · Kotlin · SwiftUI · HTML/CSS/JS\n<span class="t-acc">Engines</span>     Unity · Unreal Engine 5\n<span class="t-acc">Data</span>        SQL · Firebase · GCP · MySQL\n<span class="t-acc">Concepts</span>    OOP · Data Structures · Algorithms · Threading`,
-    projects: () => `<span class="t-acc">01</span> Retro Hub — Android            Kotlin · Compose · Firebase\n<span class="t-acc">02</span> Win98 Blog &amp; Portfolio        React · Vite · Firestore\n<span class="t-acc">03</span> iOS Win98 Retro App            SwiftUI · AVFoundation\n<span class="t-acc">04</span> Employee Management System     C++ · Threads · File I/O\n<span class="t-acc">05</span> 2D Gunbound Replica            Unity · C#\n<span class="t-acc">06</span> Flappy Bird Replica            Unity · C#\n<span class="t-acc">07</span> Library Management System      Java · OOP\n<span class="t-acc">08</span> DMV Project                    Java · Data Structures\n<span class="t-acc">09</span> College GPA Calculator         C++\n<span class="t-acc">10</span> Netflix Database &amp; GCP        MySQL · Cloud SQL · Metabase\n<span class="t-acc">11</span> Pet Adoption Center            PHP · SDLC\n<span class="t-dim">in progress:</span> Warm Rain of Summer (UE5) · 2D Pixel Art City (Unity)`,
+    projects: () => `<span class="t-acc">01</span> Retro Hub — Android            Kotlin · Compose · Firebase\n<span class="t-acc">02</span> Win98 Blog &amp; Portfolio        React · Vite · Firestore\n<span class="t-acc">03</span> Personal Portfolio             HTML · CSS · JS\n<span class="t-acc">04</span> iOS Win98 Retro App            SwiftUI · AVFoundation\n<span class="t-acc">05</span> SwiftUI Shop                   SwiftUI · ObservableObject\n<span class="t-acc">06</span> Employee Management System     C++ · Threads · File I/O\n<span class="t-acc">07</span> 2D Gunbound Replica            Unity · C#\n<span class="t-acc">08</span> Flappy Bird Replica            Unity · C#\n<span class="t-acc">09</span> Library Management System      Java · OOP\n<span class="t-acc">10</span> DMV Project                    Java · Data Structures\n<span class="t-acc">11</span> College GPA Calculator         C++\n<span class="t-acc">12</span> HangMan                        C++ · OOP\n<span class="t-acc">13</span> Netflix Database &amp; GCP        MySQL · Cloud SQL · Metabase\n<span class="t-acc">14</span> Pet Adoption Center            PHP · SDLC\n<span class="t-dim">in progress:</span> Warm Rain of Summer (UE5) · 2D Pixel Art City (Unity)`,
     contact:  () => `<span class="t-acc">Email</span>     czabala1998@gmail.com\n<span class="t-acc">LinkedIn</span>  linkedin.com/in/carloszabala98\n<span class="t-acc">GitHub</span>    github.com/carlosz98`,
     clear:    () => { output.innerHTML = ''; return null; },
     github:   () => { window.open('https://github.com/carlosz98?tab=repositories','_blank'); return '<span class="t-dim">Opening GitHub...</span>'; },
@@ -625,7 +625,7 @@ function initCounters() {
   const workHeader = document.querySelector('.recent-work .section-header');
   if (!workHeader) return;
   const stats = [
-    {label:'Projects',value:11,suffix:''},
+    {label:'Projects',value:16,suffix:''},
     {label:'Languages',value:5,suffix:'+'},
     {label:'Certificates',value:4,suffix:''},
     {label:'Commits',value:200,suffix:'+'},
@@ -706,10 +706,30 @@ const PROJECT_DETAILS = {
     learned:   'How planning documents drive the build: the Decision Table defined the logic, the DFD set the page flow, and the Gantt chart kept the schedule honest.',
     challenge: 'Holding scope — every website feature had to trace back to the WBS and fit the Gantt timeline.',
   },
+  'Personal Portfolio — This Website': {
+    problem:   'Most student portfolios look like the same template. I wanted a site that felt designed and personal, and that proved I can build rich interactions without leaning on a framework.',
+    learned:   'How far vanilla JavaScript goes: canvas drawing for the constellation and particles, IntersectionObserver for scroll effects, CSS custom properties for theming, localStorage for preferences, and fetching live data from the GitHub API.',
+    challenge: 'Layering many effects — cursor, grain, particles, tilt, transitions, terminal — without them fighting over z-index or slowing the page, and keeping light and dark mode readable everywhere.',
+  },
+  'SwiftUI Shop — E-Commerce App': {
+    problem:   'Practice the core loop of every shopping app — browse, add to cart, review, pay — in SwiftUI.',
+    learned:   'Sharing one source of truth across screens with an ObservableObject and @Published properties, and breaking the UI into small reusable components.',
+    challenge: 'Keeping the cart total and item list in sync on add, remove and after checkout, and updating the UI cleanly when the async payment completes.',
+  },
+  'HangMan — C++ Console Game': {
+    problem:   'Build a complete, replayable game in pure C++ with clear structure instead of one long main function.',
+    learned:   'Separating game state from presentation with two classes, validating character input, and picking random words with srand and rand.',
+    challenge: 'Handling every bad input case — numbers, symbols and repeated letters — without counting it as a miss or breaking the game loop.',
+  },
   'Warm Rain of Summer — UE5': {
     problem:   'Take a narrative adventure game from idea to a playable Unreal Engine 5 build, covering every production stage.',
     learned:   'Writing a 50-page GDD, modeling in Blender, importing FAB assets, and building gameplay with Blueprints and C++.',
     challenge: 'Turning a detailed design document into working mechanics while staying within a solo, course-paced scope.',
+  },
+  '2D Pixel Art City — Unity': {
+    problem:   'Create a 2D city that feels alive rather than a static backdrop, entirely from custom pixel art.',
+    learned:   'Slicing and animating sprite sheets in Unity, building environments from tiles, and composing a scene that reads well at pixel scale.',
+    challenge: 'Keeping the pixel art crisp — correct import settings, consistent pixels-per-unit and no blurry scaling — while many animated sprites run at once.',
   },
 };
 
