@@ -351,20 +351,21 @@ function initConstellation() {
     { name: 'C#',            level: 80, group: 'lang',   projects: ['Flappy Bird', 'Gunbound'] },
     { name: 'Kotlin',        level: 85, group: 'lang',   projects: ['Retro Hub (55k+ lines)'] },
     { name: 'SwiftUI',       level: 65, group: 'lang',   projects: ['iOS Win98 App', 'SwiftUI Shop'] },
-    { name: 'HTML/CSS/JS',   level: 78, group: 'web',    projects: ['This Portfolio', 'Win98 Blog (React)', 'MAC 272 Final', 'Pet Adoption'] },
-    { name: 'PHP',           level: 60, group: 'web',    projects: ['MAC 272 Final (in progress)', 'Pet Adoption Center'] },
-    { name: 'Node.js',       level: 55, group: 'web',    projects: ['MAC 272 Final (in progress)'] },
-    { name: 'SQL',           level: 72, group: 'data',   projects: ['Netflix DB', 'MAC 272 Final (MySQL)'] },
+    { name: 'HTML/CSS/JS',   level: 78, group: 'web',    projects: ['This Portfolio', 'Win98 Blog (React)', 'PetHome Vet (MAC 272)', 'Pet Adoption'] },
+    { name: 'PHP',           level: 60, group: 'web',    projects: ['PetHome Vet (PHP step, in progress)', 'Pet Adoption Center'] },
+    { name: 'Node.js',       level: 55, group: 'web',    projects: ['MAC 272 coursework (Web Dev II)'] },
+    { name: 'SQL',           level: 72, group: 'data',   projects: ['Netflix DB', 'PetHome Vet (MySQL, next step)'] },
     { name: 'Unity',         level: 78, group: 'engine', projects: ['Flappy Bird', 'Gunbound', 'Pixel City'] },
     { name: 'Unreal Engine', level: 60, group: 'engine', projects: ['Warm Rain of Summer'] },
     { name: 'Android',       level: 85, group: 'mobile', projects: ['Retro Hub — Compose, MVVM, FCM'] },
-    { name: 'GCP',           level: 70, group: 'data',   projects: ['Netflix DB (Cloud SQL)', 'Retro Hub (Cloud Functions)', 'MAC 272 Final (Cloud SQL)'] },
+    { name: 'GCP',           level: 70, group: 'data',   projects: ['Netflix DB (Cloud SQL)', 'Retro Hub (Cloud Functions)'] },
     { name: 'Firebase',      level: 78, group: 'data',   projects: ['Retro Hub', 'Win98 Blog DevFeed'] },
     { name: 'OOP',           level: 95, group: 'cs',     projects: ['All Projects'] },
     { name: 'Data Structs',  level: 88, group: 'cs',     projects: ['Library System', 'DMV'] },
     { name: 'Algorithms',    level: 85, group: 'cs',     projects: ['GPA Calc', 'Employee Mgmt'] },
+    { name: 'Python',        level: 70, group: 'lang',   projects: ['The MP3 Wizard (PyQt6 desktop app)'] },
   ];
-  const connections = [[0,14],[0,16],[1,14],[1,15],[2,14],[3,11],[5,12],[8,12],[8,13],[9,10],[11,13],[14,15],[14,16],[15,16],[6,8],[5,6],[5,7],[7,12],[6,7],[6,12],[7,8]];
+  const connections = [[0,14],[0,16],[1,14],[1,15],[2,14],[3,11],[5,12],[8,12],[8,13],[9,10],[11,13],[14,15],[14,16],[15,16],[6,8],[5,6],[5,7],[7,12],[6,7],[6,12],[7,8],[17,14],[17,16]];
   const groupColors = { lang:'#C84B2F', web:'#2D7A8A', data:'#7A4A8A', engine:'#4A8A2D', mobile:'#8A6A2D', cs:'#8A2D4A' };
 
   const section = document.createElement('section');
@@ -521,8 +522,8 @@ function initTerminal() {
   const COMMANDS = {
     help:     () => `<span class="t-dim">Available commands:</span>\n<span class="t-acc">about</span>      — who is Carlos?\n<span class="t-acc">skills</span>     — tech stack\n<span class="t-acc">projects</span>   — list all projects\n<span class="t-acc">contact</span>    — get in touch\n<span class="t-acc">clear</span>      — clear terminal\n<span class="t-acc">github</span>     — open GitHub\n<span class="t-acc">linkedin</span>   — open LinkedIn\n<span class="t-acc">blog</span>       — open blog\n<span class="t-acc">resume</span>     — open resume\n<span class="t-acc">courses</span>    — LaGuardia coursework\n<span class="t-dim">press / or Esc to toggle</span>`,
     about:    () => `<span class="t-acc">Carlos Zabala</span> — Programmer & Software Developer\nProgramming &amp; Software Development — LaGuardia Community College\nGraduating December 2026 · capstone: MAC 272 (PHP · Node.js · MySQL · GCP)\n\nStrengths: OOP · Data Structures · Algorithms\nInterests: Retro hardware · Game dev · Music`,
-    skills:   () => `<span class="t-acc">Languages</span>   C++ · Java · C# · Kotlin · SwiftUI · HTML/CSS/JS\n<span class="t-acc">Engines</span>     Unity · Unreal Engine 5\n<span class="t-acc">Data</span>        SQL · Firebase · GCP · MySQL\n<span class="t-acc">Concepts</span>    OOP · Data Structures · Algorithms · Threading`,
-    projects: () => `<span class="t-acc">01</span> Retro Hub — Android            Kotlin · Compose · Firebase\n<span class="t-acc">02</span> Win98 Blog &amp; Portfolio        React · Vite · Firestore\n<span class="t-acc">03</span> Personal Portfolio             HTML · CSS · JS\n<span class="t-acc">04</span> iOS Win98 Retro App            SwiftUI · AVFoundation\n<span class="t-acc">05</span> SwiftUI Shop                   SwiftUI · ObservableObject\n<span class="t-acc">06</span> Employee Management System     C++ · Threads · File I/O\n<span class="t-acc">07</span> 2D Gunbound Replica            Unity · C#\n<span class="t-acc">08</span> Flappy Bird Replica            Unity · C#\n<span class="t-acc">09</span> Library Management System      Java · OOP\n<span class="t-acc">10</span> DMV Project                    Java · Data Structures\n<span class="t-acc">11</span> College GPA Calculator         C++\n<span class="t-acc">12</span> HangMan                        C++ · OOP\n<span class="t-acc">13</span> Netflix Database &amp; GCP        MySQL · Cloud SQL · Metabase\n<span class="t-acc">14</span> Pet Adoption Center            PHP · SDLC\n<span class="t-dim">in progress:</span> MAC 272 Full-Stack Web App (PHP · Node.js · MySQL · GCP) · Warm Rain of Summer (UE5) · 2D Pixel Art City (Unity)`,
+    skills:   () => `<span class="t-acc">Languages</span>   C++ · Java · C# · Kotlin · Python · SwiftUI · HTML/CSS/JS\n<span class="t-acc">Engines</span>     Unity · Unreal Engine 5\n<span class="t-acc">Data</span>        SQL · Firebase · GCP · MySQL\n<span class="t-acc">Concepts</span>    OOP · Data Structures · Algorithms · Threading`,
+    projects: () => `<span class="t-acc">01</span> Retro Hub — Android            Kotlin · Compose · Firebase\n<span class="t-acc">02</span> The MP3 Wizard                 Python · PyQt6 · yt-dlp\n<span class="t-acc">03</span> Win98 Blog &amp; Portfolio         React · Vite · Firestore\n<span class="t-acc">04</span> Personal Portfolio             HTML · CSS · JS\n<span class="t-acc">05</span> iOS Win98 Retro App            SwiftUI · AVFoundation\n<span class="t-acc">06</span> SwiftUI Shop                   SwiftUI · ObservableObject\n<span class="t-acc">07</span> Employee Management System     C++ · Threads · File I/O\n<span class="t-acc">08</span> 2D Gunbound Replica            Unity · C#\n<span class="t-acc">09</span> Flappy Bird Replica            Unity · C#\n<span class="t-acc">10</span> Library Management System      Java · OOP\n<span class="t-acc">11</span> DMV Project                    Java · Data Structures\n<span class="t-acc">12</span> College GPA Calculator         C++\n<span class="t-acc">13</span> HangMan                        C++ · OOP\n<span class="t-acc">14</span> Netflix Database &amp; GCP         MySQL · Cloud SQL · Metabase\n<span class="t-acc">15</span> Pet Adoption Center            PHP · SDLC\n<span class="t-dim">in progress:</span> PetHome Veterinary Clinic (HTML · CSS · JS → PHP · MySQL) · Warm Rain of Summer (UE5) · 2D Pixel Art City (Unity)`,
     contact:  () => `<span class="t-acc">Email</span>     czabala1998@gmail.com\n<span class="t-acc">LinkedIn</span>  linkedin.com/in/carloszabala98\n<span class="t-acc">GitHub</span>    github.com/carlosz98`,
     courses:  () => { document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' }); return `<span class="t-acc">Foundations</span>   MAC 101 Intro to CS · MAC 109 Visual C# · MAC 172 Web Dev I · MAC 125 Advanced C++\n<span class="t-acc">Core</span>          MAC 190 OOP · MAC 250 Databases · MAC 221 iOS · MAC 232 UNIX · MAC 280 Game Programming\n<span class="t-acc">Capstone</span>      MAC 110 Systems Analysis · MAC 220 Android · MAC 272 Web Dev II <span class="t-dim">(in progress)</span>`; },
     clear:    () => { output.innerHTML = ''; return null; },
@@ -577,8 +578,8 @@ function initTerminal() {
 function initFilterBar() {
   const workSection = document.querySelector('.recent-work');
   if (!workSection) return;
-  const filters = ['All','Java','C++','C#','Kotlin','Unity','Web','Android','SwiftUI','SQL'];
-  const tagMap  = { 'Java':['java'],'C++':['c++'],'C#':['c#','unity'],'Kotlin':['kotlin'],'Unity':['unity'],'Web':['html','css','js','javascript','react','php'],'Android':['android','kotlin'],'SwiftUI':['swift'],'SQL':['sql','mysql','gcp'] };
+  const filters = ['All','Java','C++','C#','Kotlin','Python','Unity','Web','Android','SwiftUI','SQL'];
+  const tagMap  = { 'Java':['java'],'C++':['c++'],'C#':['c#','unity'],'Kotlin':['kotlin'],'Python':['python'],'Unity':['unity'],'Web':['html','css','js','javascript','react','php'],'Android':['android','kotlin'],'SwiftUI':['swift'],'SQL':['sql','mysql','gcp'] };
   // keywords for each star in the skills constellation
   const skillMap = {
     'C++':['c++'], 'Java':['java'], 'C#':['c#'], 'Kotlin':['kotlin'], 'SwiftUI':['swift'],
@@ -587,7 +588,8 @@ function initFilterBar() {
     'GCP':['gcp','google cloud','cloud functions'], 'Firebase':['firebase'],
     'OOP':['oop','inheritance','polymorphism','abstract classes','class hierarchies','classes'],
     'Data Structs':['data structures','stl','queues','std::vector','linked'],
-    'Algorithms':['algorithm','weighted averages','procedural','random word','physics','pathfinding'],
+    'Algorithms':['algorithm','weighted averages','procedural','random word','physics','pathfinding','song-matching'],
+    'Python':['python'],
   };
   const bar = document.createElement('div');
   bar.id = 'filter-bar';
@@ -842,7 +844,7 @@ function initCounters() {
   const workHeader = document.querySelector('.recent-work .section-header');
   if (!workHeader) return;
   const stats = [
-    {label:'Projects',value:17,suffix:''},
+    {label:'Projects',value:18,suffix:''},
     {label:'Languages',value:5,suffix:'+'},
     {label:'Certificates',value:4,suffix:''},
     {label:'Commits',value:200,suffix:'+'},
@@ -938,10 +940,15 @@ const PROJECT_DETAILS = {
     learned:   'Separating game state from presentation with two classes, validating character input, and picking random words with srand and rand.',
     challenge: 'Handling every bad input case — numbers, symbols and repeated letters — without counting it as a miss or breaking the game loop.',
   },
-  'MAC 272 Final — Full-Stack Web Application': {
-    problem:   'Build a real, data-driven website end to end — client, server and cloud database — and plan it with the same System Analysis & Design reports a professional team would use.',
-    learned:   'Connecting the layers: JavaScript in the browser, PHP rendering pages and processing forms, Node.js for server logic, and MySQL queries running against a Cloud SQL database on GCP.',
-    challenge: 'Coordinating PHP and Node.js against one shared cloud database, keeping credentials secure, and making sure every feature traces back to the analysis and design reports.',
+  'PetHome Veterinary Clinic — MAC 272': {
+    problem:   'Turn my old Pet Adoption Center class site into a real-feeling veterinary clinic app that a pet owner could actually use: book a visit, check vaccines and pay bills in one place.',
+    learned:   'Designing the front end around the future database: every list in the demo data (services, vets, hours, owners, pets, appointments, vaccinations, invoices) already maps to a MySQL table, so the PHP step can swap it in without redesigning pages.',
+    challenge: 'Building a 4-step booking flow that only shows open slots for the chosen vet and day, keeps the summary in sync at every step, and validates everything before the review screen.',
+  },
+  'The MP3 Wizard — Python Desktop App': {
+    problem:   'Getting playlists onto my Zune 30GB was painful: downloaders grabbed the wrong versions, skipped album art, or wrote tags the Zune could not read, so songs showed up blank or lumped under one cover.',
+    learned:   'Building a full PyQt6 desktop app with a threaded download engine, scoring search results to find the right song, writing ID3v2.3 tags and covers the Zune software actually reads, and packaging it all with PyInstaller and Inno Setup.',
+    challenge: 'Guaranteeing every song is correct before it is saved: matching length to Spotify, rejecting remixes and 30-second previews, and re-reading the cover from the finished file, while several downloads run at once.',
   },
   'Warm Rain of Summer — UE5': {
     problem:   'Take a narrative adventure game from idea to a playable Unreal Engine 5 build, covering every production stage.',

@@ -131,6 +131,30 @@
       </div>
     </article>
 
+    <article id="project-mp3-wizard">
+      <div class="article-meta">
+        <h3>The MP3 Wizard — Python Desktop App</h3>
+        <strong>Oct 2026 · v1.0.0</strong>
+        <p>A Windows desktop app that turns a Spotify playlist, album or song link into fully tagged MP3s for my Zune 30GB. Built to look like the old-school P2P apps of the mid-2000s, with Library, Transfer, Zune Check and Control Panel tabs, a built-in player, and a little wizard who pops up to comment on your downloads.</p>
+        <p>Under the hood it reads public Spotify metadata without an account or API key, then finds each song by scoring search results on length, title and artist, skipping remixes, live versions and covers. SoundCloud is the backup source. A song only lands in your folder after it passes every check: 320 kbps MP3, length matched to Spotify, Zune-safe ID3v2.3 tags, and a 500×500 cover read back from the file. It also repairs older libraries, writes Zune playlist files, detects a plugged-in Zune, and ships as a one-click installer.</p>
+        <ul>
+          <li>Python 3</li>
+          <li>PyQt6 Desktop UI</li>
+          <li>yt-dlp · FFmpeg</li>
+          <li>Mutagen · ID3v2.3 Tags</li>
+          <li>Song-matching Algorithm</li>
+          <li>Multithreaded Downloads</li>
+          <li>Command-line Mode</li>
+          <li>PyInstaller · Inno Setup</li>
+          <li>Unit Tests</li>
+        </ul>
+        <a href="contact.html">Private repo · ask me for a demo →</a>
+      </div>
+      <div class="article-media">
+        <video src="video/mp3-wizard.mp4" poster="img/mp3-wizard.png" controls muted loop playsinline preload="metadata" aria-label="The MP3 Wizard downloading a playlist: songs are matched, downloaded, tagged and given covers while the wizard comments"></video>
+      </div>
+    </article>
+
     <article id="project-win98blog">
       <div class="article-meta">
         <h3>Windows 98 — Retro Blog &amp; Portfolio</h3>
@@ -386,7 +410,7 @@
       <div class="article-meta">
         <h3>Pet Adoption Center — Project Management</h3>
         <strong>Dec 2024</strong>
-        <p>A full systems analysis and design project for MAC 110: a pet adoption center website delivered with the complete planning paper trail — Work Breakdown Structure, SWOT analysis, Context and Data Flow Diagrams, a Decision Table and a Gantt chart managed in ProjectLibre.</p>
+        <p>A full systems analysis and design project for MAC 110: a pet adoption center website delivered with the complete planning paper trail — Work Breakdown Structure, SWOT analysis, Context and Data Flow Diagrams, a Decision Table and a Gantt chart managed in ProjectLibre. It has since been rebuilt as <a href="#project-pethome" class="bio-link">PetHome Veterinary Clinic</a> for MAC 272.</p>
         <ul>
           <li>HTML · CSS · PHP</li>
           <li>SDLC</li>
@@ -411,26 +435,28 @@
       <div class="section-line"></div>
     </div>
 
-    <article id="project-mac272-final">
+    <article id="project-pethome">
       <div class="article-meta">
-        <h3>MAC 272 Final — Full-Stack Web Application</h3>
+        <h3>PetHome Veterinary Clinic — MAC 272</h3>
         <strong>Fall 2026 · In Progress</strong>
-        <p>The final project for MAC 272 (Advanced Web Development): a complete, database-driven website built from start to finish. It is planned the professional way, using the reports from my System Analysis &amp; Design class as the blueprint — the requirements, diagrams and schedule decide what gets built and in what order.</p>
-        <p>The site combines three languages across the stack: JavaScript for the interactive front end, PHP for server-side pages and form handling, and SQL against a MySQL database. A Node.js layer handles additional server-side logic and APIs, and the database is hosted in the cloud on Google Cloud Platform, so the app reads and writes to a live Cloud SQL instance instead of a local one.</p>
+        <p>My MAC 272 (Web Development II) project: a veterinary clinic web app rebuilt from my System Analysis &amp; Design final, the Pet Adoption Center. The front end is live: services and prices, the clinic's vets, an about page, a validated contact form and a sign-in page, in light and dark mode.</p>
+        <p>The core is a 4-step booking flow (pet &amp; owner → service &amp; vet → date &amp; time → review) with live open slots, plus a "My Pets" client portal showing upcoming and past visits, vaccine status, weight history and invoices. All the motion is drawn in code with no image files: walking paw prints, a peeking cat, paw-and-bone confetti and a scroll-progress dog. Next step is the PHP + MySQL back end for accounts, saved bookings and real records; every data list already maps to a planned MySQL table.</p>
         <ul>
-          <li>HTML · CSS · JavaScript</li>
-          <li>PHP</li>
-          <li>Node.js</li>
-          <li>MySQL</li>
-          <li>Google Cloud SQL · GCP</li>
-          <li>Server-side Web Development</li>
-          <li>CRUD &amp; Forms</li>
-          <li>System Analysis &amp; Design Reports</li>
+          <li>HTML · CSS · Vanilla JS</li>
+          <li>Multi-step Booking Flow</li>
+          <li>Client Portal (demo data)</li>
+          <li>Form Validation</li>
+          <li>Light / Dark Mode</li>
+          <li>Code-drawn Animations</li>
+          <li>PHP · MySQL (next step)</li>
+          <li>ERD · Database Planning</li>
+          <li>GitHub Pages</li>
         </ul>
-        <a href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">Coming Soon</a>
+        <a href="https://carlosz98.github.io/PetHome-Vet-Project/" target="_blank" rel="noopener noreferrer">Live Site →</a>
+        <a href="https://github.com/carlosz98/PetHome-Vet-Project" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
       </div>
       <div class="article-media">
-        <img class="article-img" src="img/placeholder-mac272.svg" alt="MAC 272 final project preview">
+        <video src="video/pethome-vet.mp4" poster="img/pethome-vet.jpg" controls muted loop playsinline preload="metadata" aria-label="PetHome walkthrough: home page, services, booking a visit and the My Pets portal"></video>
       </div>
     </article>
 
@@ -592,7 +618,7 @@
           <div class="timeline-label">Skills learned</div>
           <ul class="timeline-skills"><li>SDLC</li><li>Requirements</li><li>Data Flow Diagrams</li><li>WBS · SWOT</li><li>Gantt · Project Mgmt</li><li>System Architecture</li></ul>
           <div class="timeline-label">Related projects</div>
-          <div class="timeline-projects"><a href="#project-pet-adoption">Pet Adoption Center →</a><a href="#project-mac272-final">MAC 272 Final →</a></div>
+          <div class="timeline-projects"><a href="#project-pet-adoption">Pet Adoption Center →</a><a href="#project-pethome">PetHome Vet →</a></div>
         </div>
       </div>
       <div class="timeline-item is-left">
@@ -616,7 +642,7 @@
           <div class="timeline-label">Skills learned</div>
           <ul class="timeline-skills"><li>PHP</li><li>Node.js</li><li>MySQL</li><li>Server-side Programming</li><li>Frameworks · CMS</li></ul>
           <div class="timeline-label">Related projects</div>
-          <div class="timeline-projects"><a href="#project-mac272-final">MAC 272 Final →</a></div>
+          <div class="timeline-projects"><a href="#project-pethome">PetHome Vet →</a></div>
         </div>
       </div>
       <div class="timeline-stage timeline-end"><span class="timeline-stage-num">→</span>Next: AAS degree · December 2026</div>
