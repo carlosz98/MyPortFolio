@@ -267,19 +267,22 @@
 
     <article id="project-gunbound">
       <div class="article-meta">
-        <h3>2D Gunbound Replica — Unity</h3>
-        <strong>Feb 2025</strong>
-        <p>A turn-based 2D artillery game, finished in three days as a Game Programming final. Two players take turns aiming and charging shots; eleven C# scripts split the work between player controllers, shot physics, a power bar, health systems, a game controller and a logic manager that runs turns and win conditions.</p>
+        <h3>GunBound Replica — Unity 6</h3>
+        <strong>Feb 2025 · Rebuilt Oct 2026</strong>
+        <p>A replica of the classic artillery games GunBound and DragonBound, rebuilt from my three-day Game Programming prototype into a full Unity 6 (2D URP) project. Knight vs Dragon on the Adium map, two players on one keyboard, with a main menu, looping soundtrack, win screen and restart.</p>
+        <p>The map is fully destructible: every explosion carves a crater with a scorched rim, and mobiles tilt to the slope, fall into holes or get knocked off the map. Weapons and turn rules follow data from the DragonBound reverse-engineering project: sword drops and fireball volleys for Shot 1, Shot 2 and SS; turn order by delay (shot delay + mobile delay + time used); and wind that shifts every few turns and pushes shells. A GunBound-style HUD has the angle readout, power bar with last-shot marker, minimap, turn timer, wind gauge and damage numbers. An AutoPilot test bot plays full matches and logs every turn.</p>
         <ul>
-          <li>Unity 2D / C#</li>
-          <li>Two-Player Turn System</li>
-          <li>Projectile Physics · Rigidbody2D</li>
-          <li>Power Bar Charging</li>
-          <li>Health Systems</li>
-          <li>GameController · LogicManager</li>
-          <li>2D Sprite Animation</li>
+          <li>Unity 6 · 2D URP</li>
+          <li>C# · ~3,000 lines</li>
+          <li>Destructible Terrain</li>
+          <li>Projectile Physics · Wind</li>
+          <li>Delay-based Turn System</li>
+          <li>Sprite-sheet Animation</li>
+          <li>Custom HUD · Minimap</li>
+          <li>Camera Follow</li>
+          <li>Editor Tooling · Test Bot</li>
         </ul>
-        <a href="https://github.com/carlosz98/Gunboun---Replica-in-Unity" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+        <a href="https://github.com/carlosz98/Gunboun---Replica-in-Unity/tree/unity-project-rebuild" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
       </div>
       <div class="article-media">
         <iframe src="https://www.youtube.com/embed/75j3qdD0zp4?si=za7XspSCHdoVw61F&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Gunbound Replica demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
