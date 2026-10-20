@@ -1434,3 +1434,9 @@ article[id] { scroll-margin-top: 90px; }
 .project-update-media figcaption { font-family:var(--font-mono); font-size:.7rem; color:var(--ink-3); margin-top:.35rem; text-align:center; }
 @media (max-width:520px) { .project-update-media { grid-template-columns:1fr; } }
 .recent-work.grid-view .project-update { display:none; }
+
+/* ─── WIN98 BLOG CARD: live screenshot link ── */
+.article-media.w98-live { display:block; text-decoration:none; }
+.article-media.w98-live img { aspect-ratio:auto; object-fit:contain; background:#008080; }
+.w98-live-cta { position:absolute; right:.75rem; bottom:.75rem; z-index:3; font-family:var(--font-sans); font-size:.8rem; font-weight:600; color:#fff; background:var(--accent); padding:.4rem .9rem; border-radius:var(--radius-pill); box-shadow:var(--shadow-sm); transition:background var(--t-fast); }
+.article-media.w98-live:hover .w98-live-cta { background:var(--accent-hover); }
