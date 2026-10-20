@@ -330,7 +330,7 @@ initContactStatus();
 
 /* ─── POST-LOAD INIT ─────────────────────────────────── */
 function initAfterLoad() {
-  document.querySelectorAll('.article-media img, article .article-img, .project-update img').forEach(img => {
+  document.querySelectorAll('.article-media:not(.w98-live) img, article .article-img, .project-update img').forEach(img => {
     if (!img.dataset.modalAttached) {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => openModal(img.src, img.alt));
@@ -875,7 +875,7 @@ const PROJECT_DETAILS = {
     learned:   'How to structure a large Compose app: MVVM with ViewModels and Flow, a shared design system, Firestore data models across many collections and subcollections, Security Rules for every collection, and Cloud Functions for push notifications. Also wiring several third-party APIs (IGDB, YouTube, Twitch, Internet Archive) through OkHttp on background threads.',
     challenge: 'Debugging production-style failures: YouTube 403s from API-key restrictions, Twitch token errors, Storage uploads blocked by misplaced rules, and an IGDB secret mismatch between two classes. As the codebase passed 50k lines, keeping each composable owned by a single file was what stopped duplicate-declaration build errors.',
   },
-  'Windows 98 — Retro Blog & Portfolio': {
+  'Win98 Blog — My Blog as a Windows 98 Desktop': {
     problem:   'A standard portfolio is easy to forget. This one boots like a 1998 PC, so visitors explore my projects, blog posts and music the way they would a real desktop.',
     learned:   'Building a windowing system in React from scratch — dragging, focus and z-order, minimize/maximize, taskbar state and context menus — and backing the DevFeed with Firestore plus Google sign-in so only the admin account can post.',
     challenge: 'Keeping many live apps — Webamp, WebSocket chat, the in-app browser and API-driven widgets — inside one React state tree without slowdowns, and deploying to GitHub Pages after trimming large assets and resetting git history.',
