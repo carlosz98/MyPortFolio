@@ -108,6 +108,21 @@
         <h3>Android Development — Retro Hub</h3>
         <strong>2025 – Present · Active</strong>
         <p>RetroHub is a full social platform for retro gaming fans, built natively for Android with Kotlin and Jetpack Compose on a Firebase backend. What began as a class final project grew into a ~55,000-line app across 70+ Kotlin files: a community feed, real-time chat, a game database, magazines, soundtrack albums, live streams, events and a marketplace — all wrapped in a custom comic/scrapbook design system.</p>
+        <div class="project-update">
+          <span class="project-update-label">Latest update · Oct 2026</span>
+          <p><span class="project-update-head">A new launch intro, all in ASCII.</span> A little campfire in an isometric forest clearing, lit only by the fire, with my "by doncarlis" credit decoding underneath. Then a boot screen, and the RETRO HUB logo glitches in, hits with a shockwave and lands on a scrapbook card: WELCOME, PLAYER, PRESS START. Every frame is a grid of monospace characters drawn on one Compose Canvas.</p>
+          <p><span class="project-update-head">The Albums page, redesigned.</span> It now matches the rest of the app: white cards with ink borders, hard offset shadows and the green palette. Every album is a record sleeve with the vinyl peeking out, the music comes first, and the extras fold into one "More to explore" button. I also fixed a crash when opening articles.</p>
+          <div class="project-update-media">
+            <figure>
+              <img src="img/retrohub-intro.gif" alt="RetroHub ASCII launch intro: campfire sting and title screen" loading="lazy">
+              <figcaption>ASCII launch intro</figcaption>
+            </figure>
+            <figure>
+              <img src="img/retrohub-albums.gif" alt="RetroHub Albums page redesign with record sleeve covers" loading="lazy">
+              <figcaption>Albums page redesign</figcaption>
+            </figure>
+          </div>
+        </div>
         <p>Highlights: real-time DMs and group chats with reactions and image sharing; IGDB-powered game database with YouTube trailers; Twitch and YouTube live streams; a magazine reader with progress sync, shelves, reviews and reading challenges; an albums player with a persistent Now Playing bar and era filters; user profiles with XP levels, an activity heatmap and a gaming-personality radar chart; and push notifications through Firebase Cloud Functions.</p>
         <ul>
           <li>Kotlin</li>
@@ -128,30 +143,6 @@
       </div>
       <div class="article-media">
         <iframe src="https://www.youtube.com/embed/AdAOmZPQE8Q?si=7KmAcII9x9iIqd-Y&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Retro Hub demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </article>
-
-    <article id="project-mp3-wizard">
-      <div class="article-meta">
-        <h3>The MP3 Wizard — Python Desktop App</h3>
-        <strong>Oct 2026 · v1.0.0</strong>
-        <p>A Windows desktop app that turns a Spotify playlist, album or song link into fully tagged MP3s for my Zune 30GB. Built to look like the old-school P2P apps of the mid-2000s, with Library, Transfer, Zune Check and Control Panel tabs, a built-in player, and a little wizard who pops up to comment on your downloads.</p>
-        <p>Under the hood it reads public Spotify metadata without an account or API key, then finds each song by scoring search results on length, title and artist, skipping remixes, live versions and covers. SoundCloud is the backup source. A song only lands in your folder after it passes every check: 320 kbps MP3, length matched to Spotify, Zune-safe ID3v2.3 tags, and a 500×500 cover read back from the file. It also repairs older libraries, writes Zune playlist files, detects a plugged-in Zune, and ships as a one-click installer.</p>
-        <ul>
-          <li>Python 3</li>
-          <li>PyQt6 Desktop UI</li>
-          <li>yt-dlp · FFmpeg</li>
-          <li>Mutagen · ID3v2.3 Tags</li>
-          <li>Song-matching Algorithm</li>
-          <li>Multithreaded Downloads</li>
-          <li>Command-line Mode</li>
-          <li>PyInstaller · Inno Setup</li>
-          <li>Unit Tests</li>
-        </ul>
-        <a href="contact.html">Private repo · ask me for a demo →</a>
-      </div>
-      <div class="article-media">
-        <video src="video/mp3-wizard.mp4" poster="img/mp3-wizard.png" controls muted loop playsinline preload="metadata" aria-label="The MP3 Wizard downloading a playlist: songs are matched, downloaded, tagged and given covers while the wizard comments"></video>
       </div>
     </article>
 
@@ -176,6 +167,54 @@
       </div>
       <div class="article-media">
         <iframe src="https://www.youtube.com/embed/ZP-KHYRXtqI?si=4JiVd5iko3g8H2x9&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Windows 98 Blog demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </article>
+
+    <article id="project-gunbound">
+      <div class="article-meta">
+        <h3>GunBound Replica — Unity 6</h3>
+        <strong>Feb 2025 · Rebuilt Oct 2026</strong>
+        <p>A replica of the classic artillery games GunBound and DragonBound, rebuilt from my three-day Game Programming prototype into a full Unity 6 (2D URP) project. Knight vs Dragon on the Adium map, two players on one keyboard, with a main menu, looping soundtrack, win screen and restart.</p>
+        <p>The map is fully destructible: every explosion carves a crater with a scorched rim, and mobiles tilt to the slope, fall into holes or get knocked off the map. Weapons and turn rules follow data from the DragonBound reverse-engineering project: sword drops and fireball volleys for Shot 1, Shot 2 and SS; turn order by delay (shot delay + mobile delay + time used); and wind that shifts every few turns and pushes shells. A GunBound-style HUD has the angle readout, power bar with last-shot marker, minimap, turn timer, wind gauge and damage numbers. An AutoPilot test bot plays full matches and logs every turn.</p>
+        <ul>
+          <li>Unity 6 · 2D URP</li>
+          <li>C# · ~3,000 lines</li>
+          <li>Destructible Terrain</li>
+          <li>Projectile Physics · Wind</li>
+          <li>Delay-based Turn System</li>
+          <li>Sprite-sheet Animation</li>
+          <li>Custom HUD · Minimap</li>
+          <li>Camera Follow</li>
+          <li>Editor Tooling · Test Bot</li>
+        </ul>
+        <a href="https://github.com/carlosz98/Gunboun---Replica-in-Unity/tree/unity-project-rebuild" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+      </div>
+      <div class="article-media">
+        <iframe src="https://www.youtube.com/embed/75j3qdD0zp4?si=za7XspSCHdoVw61F&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Gunbound Replica demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </article>
+
+    <article id="project-mp3-wizard">
+      <div class="article-meta">
+        <h3>The MP3 Wizard — Python Desktop App</h3>
+        <strong>Oct 2026 · v1.0.0</strong>
+        <p>A Windows desktop app that turns a Spotify playlist, album or song link into fully tagged MP3s for my Zune 30GB. Built to look like the old-school P2P apps of the mid-2000s, with Library, Transfer, Zune Check and Control Panel tabs, a built-in player, and a little wizard who pops up to comment on your downloads.</p>
+        <p>Under the hood it reads public Spotify metadata without an account or API key, then finds each song by scoring search results on length, title and artist, skipping remixes, live versions and covers. SoundCloud is the backup source. A song only lands in your folder after it passes every check: 320 kbps MP3, length matched to Spotify, Zune-safe ID3v2.3 tags, and a 500×500 cover read back from the file. It also repairs older libraries, writes Zune playlist files, detects a plugged-in Zune, and ships as a one-click installer.</p>
+        <ul>
+          <li>Python 3</li>
+          <li>PyQt6 Desktop UI</li>
+          <li>yt-dlp · FFmpeg</li>
+          <li>Mutagen · ID3v2.3 Tags</li>
+          <li>Song-matching Algorithm</li>
+          <li>Multithreaded Downloads</li>
+          <li>Command-line Mode</li>
+          <li>PyInstaller · Inno Setup</li>
+          <li>Unit Tests</li>
+        </ul>
+        <a href="contact.html">Private repo · ask me for a demo →</a>
+      </div>
+      <div class="article-media">
+        <video src="video/mp3-wizard.mp4" poster="img/mp3-wizard.png" controls muted loop playsinline preload="metadata" aria-label="The MP3 Wizard downloading a playlist: songs are matched, downloaded, tagged and given covers while the wizard comments"></video>
       </div>
     </article>
 
@@ -262,30 +301,6 @@
       </div>
       <div class="article-media">
         <iframe src="https://www.youtube.com/embed/kEqftDn_TNY?si=U8ZmVa-vjceiF4Kg&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Employee Management System demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </article>
-
-    <article id="project-gunbound">
-      <div class="article-meta">
-        <h3>GunBound Replica — Unity 6</h3>
-        <strong>Feb 2025 · Rebuilt Oct 2026</strong>
-        <p>A replica of the classic artillery games GunBound and DragonBound, rebuilt from my three-day Game Programming prototype into a full Unity 6 (2D URP) project. Knight vs Dragon on the Adium map, two players on one keyboard, with a main menu, looping soundtrack, win screen and restart.</p>
-        <p>The map is fully destructible: every explosion carves a crater with a scorched rim, and mobiles tilt to the slope, fall into holes or get knocked off the map. Weapons and turn rules follow data from the DragonBound reverse-engineering project: sword drops and fireball volleys for Shot 1, Shot 2 and SS; turn order by delay (shot delay + mobile delay + time used); and wind that shifts every few turns and pushes shells. A GunBound-style HUD has the angle readout, power bar with last-shot marker, minimap, turn timer, wind gauge and damage numbers. An AutoPilot test bot plays full matches and logs every turn.</p>
-        <ul>
-          <li>Unity 6 · 2D URP</li>
-          <li>C# · ~3,000 lines</li>
-          <li>Destructible Terrain</li>
-          <li>Projectile Physics · Wind</li>
-          <li>Delay-based Turn System</li>
-          <li>Sprite-sheet Animation</li>
-          <li>Custom HUD · Minimap</li>
-          <li>Camera Follow</li>
-          <li>Editor Tooling · Test Bot</li>
-        </ul>
-        <a href="https://github.com/carlosz98/Gunboun---Replica-in-Unity/tree/unity-project-rebuild" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
-      </div>
-      <div class="article-media">
-        <iframe src="https://www.youtube.com/embed/75j3qdD0zp4?si=za7XspSCHdoVw61F&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Gunbound Replica demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
     </article>
 
