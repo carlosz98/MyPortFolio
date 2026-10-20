@@ -1422,3 +1422,15 @@ article[id] { scroll-margin-top: 90px; }
 @media (max-width: 374px) {
   header nav li a { font-size: .7rem; padding: .45rem .3rem; letter-spacing: 0; }
 }
+
+/* ─── PROJECT UPDATE (latest changes on a project card) ── */
+.project-update { border:1px solid var(--border-med); border-left:3px solid var(--accent); border-radius:var(--radius-md); background:var(--bg-card); padding:.9rem 1rem; display:flex; flex-direction:column; gap:.6rem; }
+.project-update-label { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); }
+.project-update p { font-size:.875rem; margin:0; }
+.project-update-head { font-weight:600; color:var(--ink); }
+.project-update-media { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+.project-update-media figure { margin:0; }
+.project-update-media img { display:block; width:100%; height:auto; border-radius:var(--radius-sm); box-shadow:var(--shadow-sm); background:var(--bg-pill); }
+.project-update-media figcaption { font-family:var(--font-mono); font-size:.7rem; color:var(--ink-3); margin-top:.35rem; text-align:center; }
+@media (max-width:520px) { .project-update-media { grid-template-columns:1fr; } }
+.recent-work.grid-view .project-update { display:none; }

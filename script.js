@@ -330,7 +330,7 @@ initContactStatus();
 
 /* ─── POST-LOAD INIT ─────────────────────────────────── */
 function initAfterLoad() {
-  document.querySelectorAll('.article-media img, article .article-img').forEach(img => {
+  document.querySelectorAll('.article-media img, article .article-img, .project-update img').forEach(img => {
     if (!img.dataset.modalAttached) {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => openModal(img.src, img.alt));
