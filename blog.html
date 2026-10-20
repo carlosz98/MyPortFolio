@@ -53,6 +53,35 @@
     }
     .blog-btn-ghost:hover { background: var(--accent); color: #fff; }
 
+    /* ── Win98Blog (React) live site ── */
+    .blog-site + .blog-site { margin-top: 3.5rem; }
+    .blog-kicker {
+      font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; display: block;
+    }
+    .blog-features { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; padding: 0; list-style: none; }
+    .blog-features li {
+      font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2);
+      background: var(--bg-pill); border: 1px solid var(--border); border-radius: var(--radius-pill);
+      padding: 0.2rem 0.6rem;
+    }
+    .w98-shot {
+      display: block; position: relative; border-radius: var(--radius-md); overflow: hidden;
+      box-shadow: var(--shadow-lg); border: 1px solid var(--border-med); background: #008080;
+    }
+    .w98-shot img { display: block; width: 100%; height: auto; transition: transform var(--t-slow); }
+    .w98-shot:hover img { transform: scale(1.015); }
+    .w98-shot-cta {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(0, 0, 0, 0.35); opacity: 0; transition: opacity var(--t-med);
+    }
+    .w98-shot:hover .w98-shot-cta, .w98-shot:focus-visible .w98-shot-cta { opacity: 1; }
+    .w98-shot-cta span {
+      font-family: var(--font-sans); font-weight: 600; font-size: 0.9rem; color: #fff;
+      background: var(--accent); padding: 0.6rem 1.25rem; border-radius: var(--radius-pill);
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+
     /* ── Win98 desktop mockup ── */
     .win98-showcase {
       margin: 2.5rem 0 0;
@@ -696,9 +725,42 @@
 
   <div class="blog-page">
 
+    <!-- ── WIN98 BLOG (React / Vite) — main blog, newest ── -->
+    <section class="blog-site">
+      <div class="blog-intro reveal">
+        <div class="blog-intro-text">
+          <span class="blog-kicker">Main blog · live</span>
+          <h2>Win98 Blog</h2>
+          <p>My main blog, built from scratch in React and Vite as a full Windows 98 desktop. It boots with a BIOS screen, and every post, project and update lives in its own window: DevFeed for progress posts, a Scrapbook, class notes, a guestbook, a 3D magazine, Winamp and more.</p>
+          <ul class="blog-features">
+            <li>DevFeed</li><li>Scrapbook</li><li>Guestbook</li><li>Class Notes</li><li>3D Magazine</li><li>Winamp</li><li>Visitor Map</li><li>Clippy</li>
+          </ul>
+        </div>
+        <div class="blog-intro-actions">
+          <a class="btn" href="https://carlosz98.github.io/Win98Blog/" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Blog
+          </a>
+          <a class="blog-btn-ghost" href="https://github.com/carlosz98/Win98Blog" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github"></i> Code
+          </a>
+        </div>
+      </div>
+
+      <div class="win98-showcase reveal">
+        <div class="win98-label">The desktop today, click to boot it up</div>
+        <a class="w98-shot" href="https://carlosz98.github.io/Win98Blog/" target="_blank" rel="noopener noreferrer">
+          <img src="img/win98blog-desktop.jpg" alt="Carlos's Win98 Blog desktop with DevFeed, Scrapbook, Guestbook and more" loading="lazy" width="1280" height="760">
+          <span class="w98-shot-cta"><span><i class="fa-brands fa-windows"></i> Launch Win98 Blog</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── FRAMER BLOG — the first version ── -->
+    <section class="blog-site">
     <div class="blog-intro reveal">
       <div class="blog-intro-text">
-        <h2>Blog</h2>
+        <span class="blog-kicker">First version · Framer</span>
+        <h2>Framer Blog</h2>
         <p>A Windows 98-inspired blog covering project updates, game dev progress, programming discoveries, and retro tech. Built entirely in Framer with a Win98 aesthetic.</p>
       </div>
       <div class="blog-intro-actions">
@@ -996,6 +1058,7 @@
       <div class="slide-caption" id="slide-caption">Boot screen — the intro loading sequence</div>
 
     </div><!-- end win98-showcase -->
+    </section>
   </div><!-- end blog-page -->
 
   <!-- loader + robot -->
