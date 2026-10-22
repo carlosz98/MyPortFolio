@@ -221,3 +221,39 @@ body.dark .bulb-socket { fill: #3A3833; }
   .toggle-switch .bulb-cord::before { top: -4px; width: 34px; height: 14px; border-radius: 0 0 12px 12px; }
 }
 .resume-page-contact { border-radius: 18px !important; }
+
+/* ═══════════════════════════════════════════════════════
+   FLOATING HEADER — no strip behind the nav. Only the name,
+   the page tabs and the bulb stay on screen while scrolling.
+   ═══════════════════════════════════════════════════════ */
+header {
+  background: transparent !important;
+  backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+  pointer-events: none;                 /* clicks pass through the empty space… */
+}
+header nav h1, header nav ul, header .controls { pointer-events: auto; }   /* …but not the controls */
+header::after { display: none; }
+header nav { padding: .85rem 0; }
+header nav h1 {
+  background: var(--bg); padding: .45rem 1rem; border-radius: var(--radius-pill);
+  box-shadow: var(--nm-out-sm);
+}
+header nav h1:hover { opacity: 1; box-shadow: var(--nm-in-sm); }
+header nav ul { gap: .1rem; }
+
+/* tablets and small laptops: the bulb hangs beside the name instead of taking a row */
+@media (min-width: 701px) and (max-width: 1279px) {
+  header .controls { position: absolute; top: 0; left: 11.5rem; padding: 0; z-index: 3; }
+  .toggle-switch .bulb { --cord: 10px; padding-top: 0; zoom: .82; }
+  .toggle-switch .bulb-chain { height: 46px; }
+  .toggle-switch .bulb-glow { width: 80px; height: 80px; }
+}
+
+/* phones: name pill + bulb on one row, tab track below */
+@media (max-width: 700px) {
+  header nav { padding: .7rem 0 .6rem; gap: .55rem; }
+  header nav h1 { align-self: flex-start; font-size: 1.15rem; line-height: 1.4rem; padding: .5rem 1rem; margin: .35rem 0 .45rem; }
+  header nav ul { box-shadow: var(--nm-in-sm), var(--nm-out-xs); }
+  header .controls { right: 6px; }
+}
+
