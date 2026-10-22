@@ -222,3 +222,98 @@ header .controls { padding-bottom: 1.6rem; }
   .toggle-switch .bulb-chain { height: 46px; }   /* ~14px shows below the glass */
   .toggle-switch .bulb-glow { width: 70px; height: 70px; }   /* keeps the glow inside the page edge */
 }
+
+/* ═══════════════════════════════════════════════════════
+   SUN & MOON SWITCH (neumorphic) — built by initSunMoonToggle()
+   Moon on the left = dark · Sun on the right = light
+   ═══════════════════════════════════════════════════════ */
+.nav-brand { display: flex; align-items: center; gap: .9rem; }
+.nav-brand .controls { position: static !important; padding: 0 !important; margin: 0 !important; }
+.toggle-switch.is-sun-moon { position: relative !important; top: auto !important; left: auto !important; display: inline-flex; align-items: center; }
+
+.sm-toggle {
+  --sm-in:  var(--nm-in-sm, inset 3px 3px 6px rgba(0,0,0,.14), inset -3px -3px 6px rgba(255,255,255,.7));
+  --sm-out: var(--nm-out-sm, 3px 3px 7px rgba(0,0,0,.16), -3px -3px 7px rgba(255,255,255,.7));
+  --sm-sun: #F2A23A;
+  --sm-moon: #E9E3D6;
+  display: inline-block;
+}
+.sm-track {
+  position: relative; display: block; width: 78px; height: 38px; border-radius: 999px;
+  background: var(--bg); box-shadow: var(--sm-in);
+  transition: background .45s ease;
+}
+/* faint icons pressed into the track at each end */
+.sm-slot { position: absolute; top: 50%; width: 18px; height: 18px; margin-top: -9px; opacity: .38; transition: opacity .35s ease; }
+.sm-slot-moon { left: 10px; }
+.sm-slot-sun  { right: 10px; }
+.sm-slot svg, .sm-knob-icon svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.sm-slot .sm-moon-body, .sm-slot .sm-sun-core { fill: var(--ink-3); }
+.sm-slot .sm-crater { fill: var(--bg); }
+.sm-slot .sm-rays line { stroke: var(--ink-3); stroke-width: 2; stroke-linecap: round; }
+
+/* the raised knob — sits on the sun in light mode, slides to the moon in dark mode */
+.sm-knob {
+  position: absolute; top: 4px; left: 4px; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--bg); box-shadow: var(--sm-out), 0 0 14px rgba(255,176,72,.45);
+  transform: translateX(40px);
+  transition: transform .55s cubic-bezier(.34,1.45,.64,1), box-shadow .45s ease;
+}
+.toggle-switch input:checked ~ .sm-toggle .sm-knob {
+  transform: translateX(0);
+  box-shadow: var(--sm-out), 0 0 14px rgba(200,212,255,.22);
+}
+.sm-knob-icon {
+  position: absolute; inset: 5px;
+  transition: opacity .35s ease, transform .55s cubic-bezier(.34,1.45,.64,1);
+}
+.sm-knob-sun .sm-sun-core { fill: var(--sm-sun); }
+.sm-knob-sun .sm-rays line { stroke: var(--sm-sun); stroke-width: 2.2; stroke-linecap: round; }
+.sm-knob-sun .sm-rays { transform-origin: 12px 12px; animation: sm-spin 14s linear infinite; }
+.sm-knob-moon .sm-moon-body { fill: var(--sm-moon); }
+.sm-knob-moon .sm-crater { fill: #C9C0AE; }
+/* light: sun showing, moon tucked away */
+.sm-knob-moon { opacity: 0; transform: rotate(-90deg) scale(.4); }
+.toggle-switch input:checked ~ .sm-toggle .sm-knob-sun  { opacity: 0; transform: rotate(90deg) scale(.4); }
+.toggle-switch input:checked ~ .sm-toggle .sm-knob-moon { opacity: 1; transform: rotate(0) scale(1); }
+/* the end the knob is covering fades out */
+.toggle-switch input:not(:checked) ~ .sm-toggle .sm-slot-sun  { opacity: 0; }
+.toggle-switch input:checked ~ .sm-toggle .sm-slot-moon       { opacity: 0; }
+
+/* little stars twinkle in the track at night */
+.sm-stars { position: absolute; inset: 0; pointer-events: none; }
+.sm-stars i {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--sm-moon);
+  opacity: 0; transform: scale(.3); transition: opacity .4s ease, transform .4s ease;
+}
+.sm-stars i:nth-child(1) { left: 44px; top: 9px; }
+.sm-stars i:nth-child(2) { left: 58px; top: 22px; width: 2px; height: 2px; }
+.sm-stars i:nth-child(3) { left: 66px; top: 11px; width: 2px; height: 2px; }
+.sm-stars i:nth-child(4) { left: 50px; top: 27px; width: 2px; height: 2px; }
+.toggle-switch input:checked ~ .sm-toggle .sm-stars i { opacity: .9; transform: scale(1); animation: sm-twinkle 2.6s ease-in-out infinite; }
+.toggle-switch input:checked ~ .sm-toggle .sm-stars i:nth-child(2) { animation-delay: .6s; }
+.toggle-switch input:checked ~ .sm-toggle .sm-stars i:nth-child(3) { animation-delay: 1.2s; }
+.toggle-switch input:checked ~ .sm-toggle .sm-stars i:nth-child(4) { animation-delay: 1.8s; }
+.toggle-switch input:checked ~ .sm-toggle .sm-slot-sun { opacity: .38; }
+
+/* hover / press / focus */
+.toggle-switch.is-sun-moon:hover .sm-knob { box-shadow: var(--sm-out), 0 0 18px rgba(255,176,72,.6); }
+.toggle-switch.is-sun-moon:hover input:checked ~ .sm-toggle .sm-knob { box-shadow: var(--sm-out), 0 0 18px rgba(200,212,255,.35); }
+.sm-toggle.is-switching .sm-knob { animation: sm-squish .55s ease; }
+.toggle-switch input:focus-visible ~ .sm-toggle .sm-track { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@keyframes sm-spin    { to { transform: rotate(360deg); } }
+@keyframes sm-twinkle { 0%, 100% { opacity: .9; } 50% { opacity: .25; } }
+@keyframes sm-squish  { 0% { scale: 1; } 35% { scale: 1.18 .86; } 70% { scale: .95 1.05; } 100% { scale: 1; } }
+
+@media (max-width: 700px) {
+  .nav-brand { align-self: stretch; justify-content: space-between; }
+  .sm-track { width: 70px; height: 34px; }
+  .sm-knob { width: 26px; height: 26px; transform: translateX(36px); }
+  .sm-stars i:nth-child(1) { left: 40px; } .sm-stars i:nth-child(2) { left: 52px; top: 20px; }
+  .sm-stars i:nth-child(3) { left: 58px; } .sm-stars i:nth-child(4) { left: 45px; top: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sm-knob, .sm-knob-icon, .sm-stars i, .sm-slot { transition: none !important; animation: none !important; }
+  .sm-knob-sun .sm-rays { animation: none !important; }
+}

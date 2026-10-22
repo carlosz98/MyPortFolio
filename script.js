@@ -19,7 +19,7 @@ if (toggle) {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!document.startViewTransition || reduce) { apply(); return; }
     // the new theme grows out of the bulb (or the toggle on pages without one)
-    const origin = document.querySelector('.bulb-glass') || toggle.closest('label') || toggle;
+    const origin = document.querySelector('.sm-knob') || document.querySelector('.bulb-glass') || toggle.closest('label') || toggle;
     const r = origin.getBoundingClientRect();
     const x = r.left + r.width / 2, y = r.top + r.height / 2;
     const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
@@ -1169,6 +1169,56 @@ function initBulbToggle() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   SUN & MOON SWITCH — soft neumorphic toggle beside the name
+   Moon on the left (dark), sun on the right (light); the raised
+   knob slides to whichever is on. Replaces the hanging bulb.
+   ═══════════════════════════════════════════════════════ */
+function initSunMoonToggle() {
+  const label = document.querySelector('.toggle-switch');
+  const input = document.getElementById('dark-mode-toggle');
+  if (!label || !input || label.querySelector('.sm-toggle')) return;
+
+  input.setAttribute('aria-label', 'Switch between light and dark mode');
+  label.classList.add('is-sun-moon');
+
+  const MOON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="sm-moon-body" d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/><circle class="sm-crater" cx="10.2" cy="14.8" r="1.25"/><circle class="sm-crater" cx="14.6" cy="17.6" r=".85"/><circle class="sm-crater" cx="7.6" cy="10.6" r=".7"/></svg>`;
+  const SUN = `<svg viewBox="0 0 24 24" aria-hidden="true"><g class="sm-rays">${
+    Array.from({ length: 8 }, (_, i) => `<line x1="12" y1="1.8" x2="12" y2="4.4" transform="rotate(${i * 45} 12 12)"/>`).join('')
+  }</g><circle class="sm-sun-core" cx="12" cy="12" r="5.2"/></svg>`;
+
+  const sm = document.createElement('span');
+  sm.className = 'sm-toggle';
+  sm.setAttribute('aria-hidden', 'true');
+  sm.innerHTML = `
+    <span class="sm-track">
+      <span class="sm-stars"><i></i><i></i><i></i><i></i></span>
+      <span class="sm-slot sm-slot-moon">${MOON}</span>
+      <span class="sm-slot sm-slot-sun">${SUN}</span>
+      <span class="sm-knob">
+        <span class="sm-knob-icon sm-knob-sun">${SUN}</span>
+        <span class="sm-knob-icon sm-knob-moon">${MOON}</span>
+      </span>
+    </span>`;
+  label.appendChild(sm);
+
+  // keep the switch on the same line as the name
+  const nav = document.querySelector('header nav');
+  const h1 = nav && nav.querySelector('h1');
+  const controls = label.closest('.controls');
+  if (h1 && controls && !nav.querySelector('.nav-brand')) {
+    const brand = document.createElement('div');
+    brand.className = 'nav-brand';
+    h1.before(brand);
+    brand.append(h1, controls);
+  }
+
+  input.addEventListener('change', () => {
+    sm.classList.remove('is-switching'); void sm.offsetWidth; sm.classList.add('is-switching');
+    setTimeout(() => sm.classList.remove('is-switching'), 700);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
    SINGLE DOMContentLoaded — ALL INITS HERE
    ═══════════════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
@@ -1183,7 +1233,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initExpandButtons();
   initViewToggle();
-  initBulbToggle();
+  initSunMoonToggle();   // (initBulbToggle() is the old hanging bulb)
   initHoverPreviews();
   initTimeline();
 });
