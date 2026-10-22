@@ -392,22 +392,52 @@ function initConstellation() {
       if (!s.x || canvas._lastW !== w) {
         const col = i % cols, row = Math.floor(i / cols);
         s.x = (col + 0.5 + (Math.random()-0.5)*0.7) / cols * w;
-        s.y = (row + 0.5 + (Math.random()-0.5)*0.7) / Math.ceil(skills.length/cols) * H;
+        // keep a margin so the bottom row's labels never get cut off
+        s.y = 26 + (row + 0.5 + (Math.random()-0.5)*0.7) / Math.ceil(skills.length/cols) * (H - 70);
       }
     });
     canvas._lastW = w;
   }
 
   let hoveredIdx = -1;
+
+  // mix a #rrggbb color toward white (amt > 0) or black (amt < 0)
+  function shade(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    const mix = c => Math.round(amt >= 0 ? c + (255 - c) * amt : c * (1 + amt));
+    return `rgb(${mix(n >> 16)},${mix((n >> 8) & 255)},${mix(n & 255)})`;
+  }
+
+  // the neumorphism theme exposes its light/dark shadow colors as CSS variables
+  function neuTheme() {
+    const cs = getComputedStyle(document.body);
+    const light = cs.getPropertyValue('--nm-light').trim();
+    const dark  = cs.getPropertyValue('--nm-dark').trim();
+    const bg    = cs.getPropertyValue('--bg').trim();
+    return light && dark ? { light, dark, bg } : null;
+  }
+
   function draw() {
   const w = W();
   const isDark = document.body.classList.contains('dark');
+  const neu = neuTheme();
   ctx.clearRect(0, 0, w, H);
 
   // draw connections
   connections.forEach(([a, b]) => {
     const sa = skills[a], sb = skills[b];
     const isH = hoveredIdx === a || hoveredIdx === b;
+    if (neu && !isH) {
+      // soft groove carved into the panel: dark edge on top, light edge below
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 2.2;
+      ctx.strokeStyle = neu.light;
+      ctx.beginPath(); ctx.moveTo(sa.x + 0.9, sa.y + 0.9); ctx.lineTo(sb.x + 0.9, sb.y + 0.9); ctx.stroke();
+      ctx.lineWidth = 1.4;
+      ctx.strokeStyle = neu.dark;
+      ctx.beginPath(); ctx.moveTo(sa.x, sa.y); ctx.lineTo(sb.x, sb.y); ctx.stroke();
+      return;
+    }
     ctx.beginPath();
     ctx.moveTo(sa.x, sa.y);
     ctx.lineTo(sb.x, sb.y);
@@ -416,9 +446,12 @@ function initConstellation() {
       : isDark
         ? 'rgba(232,103,74,0.25)'
         : 'rgba(26,26,24,0.15)';
-    ctx.lineWidth = isH ? 1.5 : 0.8;
-    // dark mode: lines give off a soft ember glow
+    ctx.lineWidth = isH ? (neu ? 2.2 : 1.5) : 0.8;
+    // hovered strings light up (and glow in dark mode)
+    ctx.shadowColor = 'rgba(232,103,74,0.9)';
+    ctx.shadowBlur  = isH && (isDark || neu) ? (isDark ? 10 : 6) : 0;
     ctx.stroke();
+    ctx.shadowBlur = 0;
   });
   ctx.shadowBlur = 0;
 
@@ -439,28 +472,63 @@ function initConstellation() {
       ctx.fill();
     }
 
-    // star body
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, isHov ? r * 1.35 : r, 0, Math.PI * 2);
-    ctx.fillStyle = isHov ? col : col + 'DD';
-    ctx.shadowColor = col;
-    ctx.shadowBlur  = isDark && isHov ? 24 : 0;
-    ctx.fill();
-    ctx.shadowBlur = 0;
+    if (neu) {
+      // raised soft button the star sits in (pressed in while hovered)
+      const R = r + 6;
+      ctx.beginPath(); ctx.arc(s.x, s.y, R, 0, Math.PI * 2);
+      if (isHov) {
+        const g = ctx.createLinearGradient(s.x - R, s.y - R, s.x + R, s.y + R);
+        g.addColorStop(0, neu.dark); g.addColorStop(0.5, neu.bg); g.addColorStop(1, neu.light);
+        ctx.fillStyle = neu.bg; ctx.fill();
+        ctx.fillStyle = g; ctx.globalAlpha = 0.55; ctx.fill(); ctx.globalAlpha = 1;
+      } else {
+        ctx.fillStyle = neu.bg;
+        ctx.shadowColor = neu.dark;  ctx.shadowBlur = 8; ctx.shadowOffsetX = 3;  ctx.shadowOffsetY = 3;  ctx.fill();
+        ctx.shadowColor = neu.light; ctx.shadowBlur = 8; ctx.shadowOffsetX = -3; ctx.shadowOffsetY = -3; ctx.fill();
+        ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
+      }
+      // glossy colored gem in the middle
+      const cr = isHov ? r * 1.05 : r * 0.82;
+      const gem = ctx.createRadialGradient(s.x - cr * 0.35, s.y - cr * 0.4, cr * 0.1, s.x, s.y, cr);
+      gem.addColorStop(0, shade(col, 0.45));
+      gem.addColorStop(0.7, col);
+      gem.addColorStop(1, shade(col, -0.25));
+      ctx.beginPath(); ctx.arc(s.x, s.y, cr, 0, Math.PI * 2);
+      ctx.fillStyle = gem;
+      ctx.shadowColor = col;
+      ctx.shadowBlur  = isHov ? (isDark ? 24 : 12) : 0;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    } else {
+      // star body
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, isHov ? r * 1.35 : r, 0, Math.PI * 2);
+      ctx.fillStyle = isHov ? col : col + 'DD';
+      ctx.shadowColor = col;
+      ctx.shadowBlur  = isDark && isHov ? 24 : 0;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
 
     // label
+    const ly = s.y + r + (neu ? 20 : 14);
     ctx.font = isHov
       ? '600 12px DM Sans, sans-serif'
       : '500 11px DM Sans, sans-serif';
+    ctx.textAlign = 'center';
+    if (neu && !isHov) {
+      // letterpress: a light edge under the text
+      ctx.fillStyle = neu.light;
+      ctx.fillText(s.name, s.x + 0.8, ly + 0.8);
+    }
     ctx.fillStyle = isHov
       ? col
       : isDark
         ? 'rgba(240,237,228,0.80)'
         : 'rgba(26,26,24,0.70)';
-    ctx.textAlign = 'center';
     ctx.shadowColor = col;
     ctx.shadowBlur  = isDark && isHov ? 12 : 0;
-    ctx.fillText(s.name, s.x, s.y + r + 14);
+    ctx.fillText(s.name, s.x, ly);
     ctx.shadowBlur = 0;
   });
 }
