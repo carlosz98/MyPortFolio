@@ -1,0 +1,223 @@
+/* ═══════════════════════════════════════════════════════
+   NEUMORPHISM THEME
+   Soft "extruded" surfaces: everything shares the page color and
+   reads as raised (outer shadows) or pressed in (inner shadows).
+   Loaded after style.css and toggle-switch.css on every page.
+   Only colors, borders and shadows change here — every animation,
+   transform and interaction from style.css keeps working.
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── Theme tokens ─────────────────────────────────────── */
+:root {
+  --bg:       #ECE7DE;
+  --bg-card:  #ECE7DE;
+  --bg-pill:  #ECE7DE;
+  --border:     transparent;
+  --border-med: transparent;
+  --nm-light: rgba(255,255,255,.85);
+  --nm-dark:  rgba(163,150,128,.45);
+}
+body.dark {
+  --bg:       #24231F;
+  --bg-card:  #24231F;
+  --bg-pill:  #24231F;
+  --nm-light: rgba(255,255,255,.045);
+  --nm-dark:  rgba(0,0,0,.5);
+}
+/* the shadow recipes live on <body> so dark mode's light/dark values feed them */
+body {
+  --nm-out:    8px 8px 18px var(--nm-dark), -8px -8px 18px var(--nm-light);
+  --nm-out-sm: 4px 4px 9px var(--nm-dark), -4px -4px 9px var(--nm-light);
+  --nm-out-xs: 2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  --nm-in:     inset 5px 5px 10px var(--nm-dark), inset -5px -5px 10px var(--nm-light);
+  --nm-in-sm:  inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light);
+  --shadow-sm: var(--nm-out-sm);
+  --shadow-md: var(--nm-out);
+  --shadow-lg: var(--nm-out);
+  background: var(--bg);
+}
+
+/* ─── Header & nav ─────────────────────────────────────── */
+header { background: var(--bg); }
+header::after { height: 14px; background: transparent; box-shadow: 0 10px 14px -12px var(--nm-dark); }
+header nav li a { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); margin: 0 .15rem; }
+header nav li a:hover,
+header nav li a.active { box-shadow: var(--nm-in-sm) !important; color: var(--accent) !important; }
+header nav li a::after { display: none; }
+@media (max-width: 700px) {
+  /* phone tab bar: one pressed-in track, current tab raised */
+  header nav ul { background: var(--bg); border: none; box-shadow: var(--nm-in-sm); }
+  header nav li a { box-shadow: none; margin: 0; }
+  header nav li a:hover { box-shadow: none !important; }
+  header nav li a.active,
+  header nav li a.active:hover { box-shadow: var(--nm-out-xs) !important; }
+}
+
+/* ─── Hero ─────────────────────────────────────────────── */
+.bio { border-bottom: none; }
+.bio .profile-img { border: 10px solid var(--bg); box-shadow: var(--nm-out); }
+.bio .profile-img:hover { box-shadow: var(--nm-out), 0 0 0 4px var(--accent-light); }
+.status-badge,
+#last-commit-badge { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+.bio-link { border-bottom-color: transparent; }
+
+/* ─── Buttons ──────────────────────────────────────────── */
+a.btn,
+button.btn,
+.error-btn {
+  background: var(--bg) !important; color: var(--accent) !important;
+  border: none !important; box-shadow: var(--nm-out) !important;
+}
+a.btn:hover,
+button.btn:hover,
+.error-btn:hover { box-shadow: var(--nm-in) !important; transform: none !important; }
+.resume-btn-ghost { background: var(--bg) !important; color: var(--ink) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+.resume-btn-ghost:hover { box-shadow: var(--nm-in-sm) !important; color: var(--accent) !important; }
+
+/* ─── Section headers ──────────────────────────────────── */
+.section-header .section-line { height: 6px; border-radius: 6px; background: var(--bg); box-shadow: var(--nm-in-sm); }
+
+/* ─── Resume teaser (home) ─────────────────────────────── */
+.resume-teaser { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out) !important; }
+.resume-teaser::before { display: none; }
+.resume-teaser-pills span { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-in-sm); }
+
+/* ─── Skills constellation ─────────────────────────────── */
+.constellation-wrap { border-radius: var(--radius-lg); box-shadow: var(--nm-in); padding: 10px; }
+#constellation-canvas { background: transparent; border: none; }
+#constellation-tooltip { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out) !important; }
+.tt-bar { background: var(--bg) !important; box-shadow: var(--nm-in-sm); }
+
+/* ─── Stats, view toggle, filters ──────────────────────── */
+#stat-strip { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out) !important; }
+.stat-item { border: none !important; }
+#view-toggle { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-in-sm); }
+.view-btn.active { background: var(--bg) !important; box-shadow: var(--nm-out-xs) !important; }
+#filter-bar { border-top: none; }
+.filter-btn { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+.filter-btn:hover { box-shadow: var(--nm-out-xs); }
+.filter-btn.active { background: var(--bg) !important; color: var(--accent) !important; box-shadow: var(--nm-in-sm) !important; }
+
+/* ─── Project cards ────────────────────────────────────── */
+.recent-work article {
+  background: var(--bg); border: none !important; border-radius: 28px;
+  box-shadow: var(--nm-out); padding: 2.25rem !important; margin-bottom: 2.5rem;
+}
+.recent-work article li { background: var(--bg) !important; color: var(--accent); box-shadow: var(--nm-in-sm); }
+.recent-work article li:hover { background: var(--bg) !important; color: var(--accent) !important; box-shadow: var(--nm-out-sm); }
+.recent-work article a { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+.recent-work article a:hover { background: var(--bg) !important; color: var(--accent) !important; box-shadow: var(--nm-in-sm) !important; }
+.recent-work article a.bio-link,
+.recent-work article a.bio-link:hover { box-shadow: none !important; }
+.article-expand-btn { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+.article-expand-btn:hover { box-shadow: var(--nm-in-sm) !important; }
+.recent-work iframe,
+.article-media video,
+.article-img { border-radius: 18px !important; border: 8px solid var(--bg) !important; box-shadow: var(--nm-in) !important; }
+article p code { background: var(--bg) !important; box-shadow: var(--nm-in-sm); }
+.detail-block { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-in-sm) !important; }
+.project-update { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-in-sm); }
+.preview-chip { box-shadow: var(--nm-out-xs); }
+.skill-empty-note { color: var(--ink-3); }
+@media (max-width: 768px) {
+  .recent-work article { padding: 1.4rem !important; border-radius: 22px; }
+}
+
+/* ─── Education timeline ───────────────────────────────── */
+.timeline-card { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out) !important; }
+.timeline-card::before { display: none; }
+.timeline-skills li { background: var(--bg) !important; box-shadow: var(--nm-in-sm); }
+.timeline-projects a { background: var(--bg); border: none !important; box-shadow: var(--nm-out-xs); }
+.timeline-projects a:hover { background: var(--bg) !important; color: var(--accent) !important; box-shadow: var(--nm-in-sm); }
+.timeline-line { width: 8px; margin-left: -4px; background: var(--bg); box-shadow: var(--nm-in-sm); }
+.timeline-stage { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+.timeline-dot { border: none !important; box-shadow: var(--nm-out-xs); }
+@media (max-width: 768px) { .timeline-line { left: 3px; margin-left: 0; } }
+
+/* ─── Certificates ─────────────────────────────────────── */
+.cert-card { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out) !important; }
+.cert-card:hover { box-shadow: var(--nm-out), 0 0 0 2px var(--accent) !important; }
+.cert-card .cert-img { box-shadow: var(--nm-in-sm); }
+.cert-card .cert-skills span { background: var(--bg) !important; box-shadow: var(--nm-in-sm); }
+.cert-card .cert-skills span:hover { box-shadow: var(--nm-out-xs); color: var(--accent) !important; }
+
+/* ─── Contact ──────────────────────────────────────────── */
+.contact-form-wrap { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out) !important; }
+.contact-form-wrap iframe { box-shadow: var(--nm-in-sm); }
+.contact-links a { background: var(--bg); border-radius: var(--radius-pill); }
+input:not([type="checkbox"]):not([type="radio"]):not(#terminal-input),
+textarea,
+select { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-in-sm) !important; }
+
+/* ─── Resume page ──────────────────────────────────────── */
+.resume-page-header { border-bottom: none !important; }
+.resume-page-contact { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+.resume-page-contact:hover { box-shadow: var(--nm-in-sm); }
+.cv-main { border-left: none !important; }
+.cv-section-title::after { height: 6px !important; border-radius: 6px; background: var(--bg) !important; box-shadow: var(--nm-in-sm); }
+.cv-summary { background: var(--bg) !important; border: none !important; border-radius: var(--radius-md) !important; box-shadow: var(--nm-out) !important; }
+.cv-entry { border-bottom: none !important; padding: 1.1rem 1.25rem !important; border-radius: var(--radius-md); box-shadow: var(--nm-out-sm); margin-bottom: 1rem; }
+.cv-tag { background: var(--bg) !important; box-shadow: var(--nm-in-sm); }
+.cv-tag:hover { box-shadow: var(--nm-out-xs); color: var(--accent) !important; }
+.cv-entry-bullets li { box-shadow: none !important; }
+
+/* ─── Footer ───────────────────────────────────────────── */
+footer { border-top: none !important; }
+footer .link-icon { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+footer ul li a:hover .link-icon { background: var(--bg) !important; color: var(--accent) !important; box-shadow: var(--nm-in-sm); }
+
+/* ─── Small floating pieces ────────────────────────────── */
+#terminal-hint { background: var(--bg) !important; border: none !important; box-shadow: var(--nm-out-sm); }
+#terminal-hint:hover { box-shadow: var(--nm-in-sm); }
+#img-modal-close { box-shadow: var(--nm-out-sm); }
+
+/* ─── Talking robot ────────────────────────────────────── */
+#talking-character img {
+  width: 58px; padding: 6px; border-radius: 50%;
+  background: var(--bg); box-shadow: var(--nm-out-sm);
+}
+#character-speech {
+  background: var(--bg) !important; color: var(--ink) !important;
+  border: none !important; border-radius: 16px !important;
+  padding: 12px 14px !important; box-shadow: var(--nm-out) !important;
+  border-right-color: var(--accent) !important;   /* typewriter caret */
+}
+#character-speech::before {
+  /* tail: a small raised square tucked under the bubble */
+  border: none !important; width: 14px; height: 14px; bottom: -6px; right: 22px;
+  background: var(--bg); transform: rotate(45deg);
+  box-shadow: 4px 4px 7px var(--nm-dark);
+}
+#close-character {
+  width: 22px; height: 22px; border-radius: 50%; top: -8px !important; right: -8px !important;
+  display: grid; place-items: center; font-size: 13px !important; line-height: 1;
+  background: var(--bg) !important; color: var(--ink-2) !important; box-shadow: var(--nm-out-xs);
+}
+#close-character:hover { color: var(--accent) !important; box-shadow: var(--nm-in-sm); }
+@keyframes blink-caret { from, to { border-right-color: transparent; } 50% { border-right-color: var(--accent); } }
+
+/* ─── Light bulb ───────────────────────────────────────── */
+/* soft ceiling mount where the cord hangs from */
+.toggle-switch .bulb-cord::before {
+  display: block !important; width: 30px; height: 12px; top: -6px; border-radius: 10px;
+  background: var(--bg); box-shadow: var(--nm-out-xs);
+}
+.toggle-switch .bulb-cord { background: var(--ink-3); }
+/* socket and glass pick up the soft shadows */
+.bulb-socket { fill: #D8D1C4; }
+body.dark .bulb-socket { fill: #3A3833; }
+.bulb-thread { stroke: var(--nm-dark); opacity: .7; }
+.bulb-body svg { filter: drop-shadow(4px 5px 5px var(--nm-dark)) drop-shadow(-2px -2px 3px var(--nm-light)); }
+/* pull bead: a little raised knob with an orange center */
+.bulb-bead {
+  width: 13px; height: 13px; left: -7px; bottom: -11px;
+  background: radial-gradient(circle, var(--accent) 0 32%, var(--bg) 36%);
+  box-shadow: var(--nm-out-xs);
+}
+.toggle-switch:hover .bulb-bead { box-shadow: var(--nm-in-sm); }
+.bulb-chain { border-left-color: var(--ink-3); }
+@media (min-width: 1280px) {
+  /* wide layout: the mount is flush with the top edge of the page */
+  .toggle-switch .bulb-cord::before { top: -4px; width: 34px; height: 14px; border-radius: 0 0 12px 12px; }
+}
+.resume-page-contact { border-radius: 18px !important; }
