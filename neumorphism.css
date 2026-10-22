@@ -257,3 +257,5 @@ header nav ul { gap: .1rem; }
   header .controls { right: 6px; }
 }
 
+/* resume card on the home page: the skill pills take the free width and wrap beside the buttons */
+.resume-teaser-left { flex: 1 1 420px; min-width: 0; }
