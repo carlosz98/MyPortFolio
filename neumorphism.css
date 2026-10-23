@@ -259,3 +259,37 @@ header nav ul { gap: .1rem; }
 
 /* resume card on the home page: the skill pills take the free width and wrap beside the buttons */
 .resume-teaser-left { flex: 1 1 420px; min-width: 0; }
+
+/* ─── Terminal ( / ) — soft panel that follows light & dark mode ─── */
+#terminal {
+  background: var(--bg); color: var(--ink-2);
+  border: none; border-radius: 26px 26px 0 0;
+  box-shadow: 0 -10px 30px var(--nm-dark), -8px -8px 18px var(--nm-light);
+  padding: 0 .9rem .9rem;
+}
+#terminal-bar { border-bottom: none; padding: .85rem .3rem .7rem; }
+.term-dot { box-shadow: var(--nm-out-xs), inset -1px -1px 2px rgba(0,0,0,.18); }
+#terminal-title { color: var(--ink-3); }
+#terminal-close {
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--bg); color: var(--ink-3); box-shadow: var(--nm-out-xs);
+}
+#terminal-close:hover { color: #ff5f57; box-shadow: var(--nm-in-sm); }
+/* the "screen": pressed into the panel */
+#terminal-output {
+  border-radius: 18px; padding: .9rem 1.1rem; box-shadow: var(--nm-in);
+  color: var(--ink-2);
+}
+#terminal-output::-webkit-scrollbar-thumb { background: var(--ink-3); opacity: .4; }
+.t-prompt-echo, .t-dim { color: var(--ink-3); }
+.t-acc { color: var(--accent); }
+/* command line: a pressed-in pill */
+#terminal-input-line {
+  border-top: none; margin-top: .8rem; padding: .55rem 1rem;
+  border-radius: var(--radius-pill); box-shadow: var(--nm-in-sm);
+}
+.term-prompt { color: var(--accent); }
+#terminal-input { color: var(--ink); caret-color: var(--accent); }
+#terminal-input::placeholder { color: var(--ink-3); opacity: .7; }
+#terminal-hint kbd { background: var(--bg); border: none; box-shadow: var(--nm-in-sm); }
+
