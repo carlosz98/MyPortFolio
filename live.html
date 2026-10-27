@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Sites — Carlos Zabala</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="toggle-switch.css">
+  <link rel="stylesheet" href="neumorphism.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/brands.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/solid.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta name="description" content="Every project of mine that is live on the web right now, with a live status check.">
+  <link rel="icon" href="img/logo%20chiquito.png" type="image/png">
+  <meta name="theme-color" content="#F5F2EB" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141412" media="(prefers-color-scheme: dark)">
+  <!-- link preview card (LinkedIn, Discord, iMessage, X…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Carlos Zabala">
+  <meta property="og:title" content="Live Sites — Carlos Zabala">
+  <meta property="og:description" content="Every project of mine that is live on the web right now, with a live status check.">
+  <meta property="og:url" content="https://carlosz98.github.io/MyPortFolio/live.html">
+  <meta property="og:image" content="https://carlosz98.github.io/MyPortFolio/img/og-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Carlos Zabala — Programmer &amp; Software Developer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Live Sites — Carlos Zabala">
+  <meta name="twitter:description" content="Every project of mine that is live on the web right now, with a live status check.">
+  <meta name="twitter:image" content="https://carlosz98.github.io/MyPortFolio/img/og-card.jpg">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <h1>Carlos Zabala</h1>
+      <ul>
+        <li><a href="index.html">Projects</a></li>
+        <li><a href="live.html">Live Sites</a></li>
+        <li><a href="https://carlosz98.github.io/Win98Blog/" target="_blank" rel="noopener noreferrer">Blog</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="resume.html" target="_blank" rel="noopener noreferrer">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="controls">
+      <label class="toggle-switch">
+        Dark
+        <input type="checkbox" id="dark-mode-toggle">
+        <div class="toggle-switch-border">
+          <div class="toggle-switch-dot"></div>
+        </div>
+      </label>
+    </div>
+  </header>
+
+  <section class="bio">
+    <div class="bio-text">
+      <span class="status-badge"><span class="dot"></span><span id="live-count">5 sites</span></span>
+      <h2>Live Sites</h2>
+      <p>Everything I've built that's online right now, newest first. Click a screenshot to open the real thing. Each card checks its site when this page loads, so the status is live.</p>
+      <a class="btn" href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-github"></i> All Repos
+      </a>
+    </div>
+  </section>
+
+  <section class="recent-work-live">
+    <div class="section-header">
+      <h2>On the Web</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cert-grid live-grid">
+
+      <div class="cert-card live-card" id="live-library-of-tomorrow">
+        <a class="live-shot" href="https://carlosz98.github.io/NewLibraryManagementSite/" target="_blank" rel="noopener noreferrer" aria-label="Open Library of Tomorrow">
+          <img class="cert-img" src="img/library-of-tomorrow.jpg" alt="Library of Tomorrow home page" loading="lazy" width="1280" height="800">
+          <span class="live-shot-cta">Open the library →</span>
+        </a>
+        <span class="cert-status live-status" data-check="https://carlosz98.github.io/NewLibraryManagementSite/"><span class="live-dot"></span>Checking…</span>
+        <h3>Library of Tomorrow</h3>
+        <span class="live-host">carlosz98.github.io/NewLibraryManagementSite</span>
+        <p>My Java console library rebuilt as a full website: borrow books, vinyl, films, manga and comics, check out from a bag, and manage loans from a member profile. Every click runs real SQL.</p>
+        <span class="cert-date">Oct 2026</span>
+        <div class="cert-skills"><span>React</span><span>Tailwind</span><span>SQL</span><span>PHP</span><span>Framer Motion</span></div>
+        <div class="live-links">
+          <a href="https://carlosz98.github.io/NewLibraryManagementSite/" target="_blank" rel="noopener noreferrer">Visit Site →</a>
+          <a class="live-code" href="https://github.com/carlosz98/NewLibraryManagementSite" target="_blank" rel="noopener noreferrer">Code →</a>
+        </div>
+      </div>
+
+      <div class="cert-card live-card" id="live-win98blog">
+        <a class="live-shot" href="https://carlosz98.github.io/Win98Blog/" target="_blank" rel="noopener noreferrer" aria-label="Open Win98 Blog">
+          <img class="cert-img" src="img/win98blog-desktop.jpg" alt="Win98 Blog home page" loading="lazy" width="1280" height="760">
+          <span class="live-shot-cta">Boot it up →</span>
+        </a>
+        <span class="cert-status live-status" data-check="https://carlosz98.github.io/Win98Blog/"><span class="live-dot"></span>Checking…</span>
+        <h3>Win98 Blog</h3>
+        <span class="live-host">carlosz98.github.io/Win98Blog</span>
+        <p>My main blog as a working Windows 98 desktop: BIOS boot, draggable windows, a DevFeed, Guestbook, Class Notes, Winamp and live chat.</p>
+        <span class="cert-date">2025 – Present</span>
+        <div class="cert-skills"><span>React</span><span>Vite</span><span>Firebase</span><span>WebSockets</span></div>
+        <div class="live-links">
+          <a href="https://carlosz98.github.io/Win98Blog/" target="_blank" rel="noopener noreferrer">Visit Site →</a>
+          <a class="live-code" href="https://github.com/carlosz98/Win98Blog" target="_blank" rel="noopener noreferrer">Code →</a>
+        </div>
+      </div>
+
+      <div class="cert-card live-card" id="live-pethome">
+        <a class="live-shot" href="https://carlosz98.github.io/PetHome-Vet-Project/" target="_blank" rel="noopener noreferrer" aria-label="Open PetHome Veterinary Clinic">
+          <img class="cert-img" src="img/pethome-vet.jpg" alt="PetHome Veterinary Clinic home page" loading="lazy" width="1440" height="810">
+          <span class="live-shot-cta">Book a visit →</span>
+        </a>
+        <span class="cert-status live-status" data-check="https://carlosz98.github.io/PetHome-Vet-Project/"><span class="live-dot"></span>Checking…</span>
+        <h3>PetHome Veterinary Clinic</h3>
+        <span class="live-host">carlosz98.github.io/PetHome-Vet-Project</span>
+        <p>A vet clinic web app for MAC 272: services, vets, a 4-step booking flow with live open slots, and a My Pets client portal.</p>
+        <span class="cert-date">Fall 2026</span>
+        <div class="cert-skills"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP · MySQL next</span></div>
+        <div class="live-links">
+          <a href="https://carlosz98.github.io/PetHome-Vet-Project/" target="_blank" rel="noopener noreferrer">Visit Site →</a>
+          <a class="live-code" href="https://github.com/carlosz98/PetHome-Vet-Project" target="_blank" rel="noopener noreferrer">Code →</a>
+        </div>
+      </div>
+
+      <div class="cert-card live-card" id="live-portfolio">
+        <a class="live-shot" href="https://carlosz98.github.io/MyPortFolio/" target="_blank" rel="noopener noreferrer" aria-label="Open Personal Portfolio">
+          <img class="cert-img" src="img/portfolio-live.jpg" alt="Personal Portfolio home page" loading="lazy" width="1280" height="800">
+          <span class="live-shot-cta">You are here →</span>
+        </a>
+        <span class="cert-status live-status" data-check="https://carlosz98.github.io/MyPortFolio/"><span class="live-dot"></span>Checking…</span>
+        <h3>Personal Portfolio</h3>
+        <span class="live-host">carlosz98.github.io/MyPortFolio</span>
+        <p>This site. Hand-built in plain HTML, CSS and JavaScript with no framework: dark mode, a skills constellation, a retro terminal and a robot guide.</p>
+        <span class="cert-date">2025 – Present</span>
+        <div class="cert-skills"><span>HTML</span><span>CSS</span><span>Vanilla JS</span><span>Canvas</span></div>
+        <div class="live-links">
+          <a href="https://carlosz98.github.io/MyPortFolio/" target="_blank" rel="noopener noreferrer">Visit Site →</a>
+          <a class="live-code" href="https://github.com/carlosz98/MyPortFolio" target="_blank" rel="noopener noreferrer">Code →</a>
+        </div>
+      </div>
+
+      <div class="cert-card live-card" id="live-framer-blog">
+        <a class="live-shot" href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer" aria-label="Open Framer Blog">
+          <img class="cert-img" src="img/framer-blog.jpg" alt="Framer Blog home page" loading="lazy" width="1016" height="573">
+          <span class="live-shot-cta">Boot it up →</span>
+        </a>
+        <span class="cert-status live-status" data-check="https://charlysblog.framer.website/"><span class="live-dot"></span>Checking…</span>
+        <h3>Framer Blog</h3>
+        <span class="live-host">charlysblog.framer.website</span>
+        <p>The first version of my Windows 98 blog, prototyped in Framer before I rebuilt it from scratch in React.</p>
+        <span class="cert-date">2025</span>
+        <div class="cert-skills"><span>Framer</span><span>UI Design</span></div>
+        <div class="live-links">
+          <a href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer">Visit Site →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="loader loader--active">
+    <div class="loader__icon">
+      <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path opacity="0.25" fill="currentColor" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"></path>
+        <path fill="currentColor" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.6s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+    <div class="loader__tile"></div>
+  </div>
+
+  <div id="talking-character">
+    <img src="img/robot.png" alt="Talking Character">
+    <div id="character-speech"></div>
+    <button id="close-character">&times;</button>
+  </div>
+
+  <footer>
+    <ul>
+      <li><a href="https://www.linkedin.com/in/carloszabala98/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="link-icon"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></span></a></li>
+      <li><a href="#">Back to Top<span class="link-icon"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></span></a></li>
+      <li><a href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub<span class="link-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span></a></li>
+    </ul>
+    <p class="copywright">© 2025 Carlos Zabala</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Live status: ping each site when the page loads
+    (function () {
+      const badges = document.querySelectorAll('.live-status');
+      let up = 0, done = 0;
+      const count = document.getElementById('live-count');
+      function finish() {
+        done++;
+        if (done === badges.length && count) count.textContent = up + ' of ' + badges.length + ' sites online';
+      }
+      badges.forEach(function (badge) {
+        const url = badge.dataset.check;
+        const sameOrigin = new URL(url).origin === location.origin;
+        const ctrl = new AbortController();
+        const timer = setTimeout(function () { ctrl.abort(); }, 8000);
+        fetch(url, sameOrigin ? { method: 'HEAD', cache: 'no-store', signal: ctrl.signal }
+                              : { mode: 'no-cors', cache: 'no-store', signal: ctrl.signal })
+          .then(function (r) {
+            const ok = sameOrigin ? r.ok : true;
+            badge.classList.add(ok ? 'is-up' : 'is-down');
+            badge.lastChild.textContent = ok ? 'Online' : 'Offline';
+            if (ok) up++;
+          })
+          .catch(function () {
+            badge.classList.add('is-unknown');
+            badge.lastChild.textContent = 'Live';
+            up++;
+          })
+          .finally(function () { clearTimeout(timer); finish(); });
+      });
+    })();
+
+    const scripts = [
+      "Every site on this page is live. Click a screenshot to try one!",
+      "Library of Tomorrow runs real SQL right in your browser.",
+      "Want to boot up Windows 98? Try my Win98 Blog.",
+      "Book a pretend vet visit on PetHome!"
+    ];
+    function typeWriter(text, el, speed) {
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          el.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          el.style.borderRight = 'none';
+        }
+      }
+      type();
+    }
+    function showCharacter() {
+      const randomScript = scripts[Math.floor(Math.random() * scripts.length)];
+      const speechElement = document.getElementById('character-speech');
+      const talkingCharacter = document.getElementById('talking-character');
+      speechElement.innerHTML = '';
+      speechElement.style.borderRight = '2px solid black';
+      typeWriter(randomScript, speechElement, 30);
+      talkingCharacter.classList.add('show');
+      setTimeout(() => talkingCharacter.classList.remove('show'), 6000);
+    }
+    document.getElementById('close-character').addEventListener('click', function() {
+      document.getElementById('talking-character').classList.remove('show');
+    });
+    setTimeout(showCharacter, 3000);
+    setInterval(showCharacter, 14000);
+  </script>
+</body>
+</html>
