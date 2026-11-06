@@ -1,0 +1,68 @@
+/* ═══════════════════════════════════════════════════════
+   QUEENS SKYLINE FOOTER (see skyline-footer.js)
+   ═══════════════════════════════════════════════════════ */
+.sk-footer { position: relative; margin-top: 4rem; padding: 0; border: none !important; text-align: left; overflow: hidden;
+  border-radius: 32px 32px 0 0; box-shadow: var(--nm-out); background: var(--bg); }
+.sk-content { position: relative; z-index: 3; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 1.5rem 2rem; padding: 2.6rem 2.6rem 0; }
+.sk-name { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); line-height: 1; color: var(--ink); margin: 0; }
+.sk-tag { font-family: var(--font-mono); font-size: .78rem; color: var(--ink-3); margin: .6rem 0 0; letter-spacing: .02em; }
+.sk-links { display: flex; flex-wrap: wrap; gap: .7rem; list-style: none; margin: 0; padding: 0; }
+.sk-links a { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.05rem; border-radius: 999px;
+  background: var(--bg); box-shadow: var(--nm-out-sm); color: var(--ink-2); font-size: .85rem; font-weight: 500;
+  transition: box-shadow .25s ease, color .25s ease, transform .25s ease; }
+.sk-links a:hover { box-shadow: var(--nm-in-sm); color: var(--accent); }
+.sk-links i { font-size: .95rem; }
+
+.sk-scene { position: relative; height: clamp(250px, 30vw, 380px); margin-top: 1.2rem; }
+.sk-sky { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(244,206,160,.38) 70%, rgba(240,182,120,.5) 100%); transition: background 1s ease; }
+body.dark .sk-sky { background: linear-gradient(to bottom, transparent 0%, rgba(58,52,88,.45) 75%, rgba(80,58,90,.55) 100%); }
+.sk-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* sun & moon trade places with the theme */
+.sk-sun, .sk-moon { position: absolute; width: 74px; height: 74px; border-radius: 50%; left: 13%; transition: transform 1.2s cubic-bezier(.65,0,.35,1), opacity 1s ease; }
+.sk-sun { top: 14%; background: radial-gradient(circle at 38% 35%, #FFE3A8, #F2A23A 70%); box-shadow: 0 0 60px 18px rgba(242,162,58,.35), var(--nm-out-sm); }
+.sk-moon { top: 10%; background: radial-gradient(circle at 35% 35%, #F4EFE4, #CFC6B4 75%); box-shadow: 0 0 40px 8px rgba(220,225,255,.18); opacity: 0; transform: translateY(160px); }
+.sk-moon::after { content: ''; position: absolute; width: 14px; height: 14px; border-radius: 50%; left: 40%; top: 46%; background: rgba(0,0,0,.08); box-shadow: -18px -14px 0 -3px rgba(0,0,0,.07), 14px -18px 0 -4px rgba(0,0,0,.06); }
+body.dark .sk-sun  { transform: translateY(190px); opacity: 0; }
+body.dark .sk-moon { transform: none; opacity: 1; }
+
+/* buildings: soft raised silhouettes made from the page color */
+.sk-back rect, .sk-back path { fill: var(--bg); opacity: .55; }
+body.dark .sk-back rect, body.dark .sk-back path { opacity: .85; fill: #2C2A33; }
+.sk-back { filter: drop-shadow(3px 3px 5px var(--nm-dark)); }
+.sk-front rect, .sk-front path, .sk-track rect, .sk-ground { fill: var(--bg); }
+.sk-front, .sk-track { filter: drop-shadow(-3px -3px 5px var(--nm-light)) drop-shadow(5px 5px 9px var(--nm-dark)); }
+.sk-globe { fill: none; stroke: var(--ink-3); stroke-width: 2.2; filter: drop-shadow(2px 2px 3px var(--nm-dark)); opacity: .8; }
+.sk-globe-stand path, .sk-globe-stand rect { fill: var(--bg); }
+
+/* windows: dark by day, warm and flickering at night */
+.sk-win { fill: var(--nm-dark); opacity: .35; transition: fill .8s ease, opacity .8s ease; }
+body.dark .sk-win.on { fill: #F2C46B; opacity: .9; filter: drop-shadow(0 0 3px rgba(242,196,107,.8)); animation: sk-flicker 6s ease-in-out infinite; }
+@keyframes sk-flicker { 0%, 92%, 100% { opacity: .9; } 95% { opacity: .3; } }
+
+/* stars */
+.sk-star { fill: #F3EEE4; opacity: 0; transition: opacity 1s ease; }
+body.dark .sk-star { opacity: .8; animation: sk-twinkle 3s ease-in-out infinite; }
+@keyframes sk-twinkle { 0%, 100% { opacity: .85; } 50% { opacity: .2; } }
+
+/* the 7 train glides across the elevated track */
+.sk-train { animation: sk-ride 16s linear infinite; }
+.sk-train-body rect:not(.sk-train-win) { fill: #B9B4AC; }
+body.dark .sk-train-body rect:not(.sk-train-win) { fill: #4A4842; }
+.sk-train-win { fill: #EDE7DC; }
+body.dark .sk-train-win { fill: #F2C46B; filter: drop-shadow(0 0 3px rgba(242,196,107,.9)); }
+.sk-seven-dot { fill: #B933AD; }
+.sk-seven { fill: #fff; font: 700 14px var(--font-sans, sans-serif); text-anchor: middle; transform: translateX(4px); }
+@keyframes sk-ride { from { transform: translate(-360px, 260px); } to { transform: translate(1500px, 260px); } }
+
+.sk-copy { position: absolute; left: 0; right: 0; bottom: 4px; z-index: 3; margin: 0; text-align: center; font-family: var(--font-mono); font-size: .72rem; color: var(--ink-3); }
+
+@media (max-width: 700px) {
+  .sk-content { padding: 2rem 1.4rem 0; }
+  .sk-links a { padding: .55rem .85rem; font-size: .8rem; }
+  .sk-sun, .sk-moon { width: 52px; height: 52px; left: 12%; }
+}
+@media (prefers-reduced-motion: reduce) { .sk-train, .sk-star, .sk-win { animation: none !important; } }
+.sk-footer ul li a { flex-direction: row; }
+.sk-footer ul li a:hover { transform: none; }
+@media (max-width: 700px) { .sk-links { gap: .55rem; } .sk-copy { bottom: 2px; font-size: .62rem; padding: 0 1rem; } }
