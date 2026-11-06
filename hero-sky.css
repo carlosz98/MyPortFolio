@@ -1,0 +1,72 @@
+/* ═══════════════════════════════════════════════════════
+   HERO SKY + GLASS HEADER (see hero-sky.js)
+   ═══════════════════════════════════════════════════════ */
+
+/* ── glass header: a frosted strip that fades in once you scroll ── */
+header::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
+  z-index: -1; pointer-events: none;
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15); backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow: 0 10px 24px -14px var(--nm-dark), inset 0 -1px 0 color-mix(in srgb, var(--nm-light) 60%, transparent);
+  opacity: 0; transition: opacity .35s ease;
+}
+header { isolation: isolate; }
+header.is-scrolled::before { opacity: 1; }
+
+/* ── hero sky behind the intro ── */
+.bio.has-sky { position: relative; isolation: isolate; }
+.hs-scene {
+  position: absolute; z-index: -1; pointer-events: none; overflow: hidden;
+  left: 50%; width: 100vw; transform: translateX(-50%);
+  top: -7rem; bottom: -1rem;
+}
+.hs-sky { position: absolute; inset: 0;
+  background:
+    radial-gradient(60% 70% at 80% 30%, rgba(255,214,150,.55), transparent 70%),
+    linear-gradient(to bottom, rgba(250,226,190,.25), rgba(244,206,160,.38) 75%, transparent);
+  transition: background 1s ease; }
+body.dark .hs-sky {
+  background:
+    radial-gradient(55% 65% at 80% 25%, rgba(120,120,190,.20), transparent 70%),
+    linear-gradient(to bottom, rgba(32,30,46,.55), rgba(58,50,82,.45) 75%, transparent); }
+.hs-svg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 52%; }
+.hs-stars-layer { position: absolute; inset: 0 0 40% 0; width: 100%; height: 60%; }
+
+.hs-sun, .hs-moon { position: absolute; top: 20%; right: 14%; width: 96px; height: 96px; border-radius: 50%;
+  transition: transform 1.2s cubic-bezier(.65,0,.35,1), opacity 1s ease; }
+.hs-sun { background: radial-gradient(circle at 38% 35%, #FFE6B0, #F2A23A 72%);
+  box-shadow: 0 0 80px 26px rgba(242,162,58,.30), var(--nm-out-sm); animation: hs-float 9s ease-in-out infinite; }
+.hs-moon { background: radial-gradient(circle at 35% 35%, #F4EFE4, #CFC6B4 75%); box-shadow: 0 0 50px 10px rgba(220,225,255,.16);
+  opacity: 0; transform: translateY(200px); }
+.hs-moon::after { content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%; left: 42%; top: 48%;
+  background: rgba(0,0,0,.08); box-shadow: -24px -18px 0 -4px rgba(0,0,0,.07), 18px -24px 0 -5px rgba(0,0,0,.06); }
+body.dark .hs-sun  { transform: translateY(240px); opacity: 0; }
+body.dark .hs-moon { transform: none; opacity: 1; }
+@keyframes hs-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+
+.hs-far rect, .hs-far path { fill: var(--bg); opacity: .6; }
+.hs-far { filter: drop-shadow(-2px -2px 4px var(--nm-light)) drop-shadow(4px 4px 7px var(--nm-dark)); }
+body.dark .hs-far rect, body.dark .hs-far path { fill: #2B2933; opacity: .9; }
+.hs-near rect { fill: var(--bg); }
+.hs-near { filter: drop-shadow(-3px -3px 5px var(--nm-light)) drop-shadow(5px 5px 9px var(--nm-dark)); }
+
+.hs-win { fill: transparent; }
+body.dark .hs-win { fill: #F2C46B; opacity: .55; animation: hs-flicker 7s ease-in-out infinite; }
+@keyframes hs-flicker { 0%, 90%, 100% { opacity: .55; } 94% { opacity: .15; } }
+.hs-star { fill: #F3EEE4; opacity: 0; transition: opacity 1s ease; }
+body.dark .hs-star { opacity: .8; animation: hs-twinkle 3.4s ease-in-out infinite; }
+@keyframes hs-twinkle { 0%, 100% { opacity: .85; } 50% { opacity: .2; } }
+
+/* melt the bottom of the scene into the page */
+.hs-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(to bottom, transparent, var(--bg)); }
+
+/* the photo frame and text stay crisp over the sky */
+.bio.has-sky .bio-text p { text-shadow: 0 1px 0 color-mix(in srgb, var(--bg) 70%, transparent); }
+
+@media (max-width: 768px) {
+  .hs-scene { top: -9rem; }
+  .hs-sun, .hs-moon { top: 26%; right: 6%; width: 54px; height: 54px; }
+  .hs-svg { opacity: .75; height: 40%; }
+}
+@media (prefers-reduced-motion: reduce) { .hs-sun, .hs-star, .hs-win { animation: none !important; } }
