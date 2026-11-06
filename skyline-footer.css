@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════
    QUEENS SKYLINE FOOTER (see skyline-footer.js)
    ═══════════════════════════════════════════════════════ */
-.sk-footer { position: relative; margin-top: 4rem; padding: 0; border: none !important; text-align: left; overflow: hidden;
+.sk-footer { position: relative; z-index: 0; isolation: isolate; margin-top: 4rem; padding: 0; border: none !important; text-align: left; overflow: hidden;
   border-radius: 32px 32px 0 0; box-shadow: var(--nm-out); background: var(--bg); }
 .sk-content { position: relative; z-index: 3; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 1.5rem 2rem; padding: 2.6rem 2.6rem 0; }
 .sk-name { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); line-height: 1; color: var(--ink); margin: 0; }
@@ -66,3 +66,16 @@ body.dark .sk-train-win { fill: #F2C46B; filter: drop-shadow(0 0 3px rgba(242,19
 .sk-footer ul li a { flex-direction: row; }
 .sk-footer ul li a:hover { transform: none; }
 @media (max-width: 700px) { .sk-links { gap: .55rem; } .sk-copy { bottom: 2px; font-size: .62rem; padding: 0 1rem; } }
+
+/* keep the floating helpers above the footer's layers */
+#talking-character { z-index: 900; }
+#terminal-hint { z-index: 900; }
+
+/* phones: closer, taller skyline; copyright sits below it, clear of the terminal button */
+@media (max-width: 700px) {
+  .sk-content { justify-content: flex-start; }
+  .sk-links { justify-content: flex-start; }
+  .sk-scene { height: 260px; margin-top: .4rem; }
+  .sk-sun, .sk-moon { top: 12%; left: 8%; }
+  .sk-copy { position: static; padding: .9rem 1rem 4.6rem; line-height: 1.6; }
+}

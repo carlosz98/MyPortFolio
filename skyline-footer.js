@@ -108,10 +108,15 @@
   old.replaceWith(footer);
   // phones see the Queens side (Unisphere + the 7), wide screens see all the way to Manhattan
   const svg = footer.querySelector('.sk-svg'), mq = matchMedia('(max-width: 700px)');
-  const fit = () => svg.setAttribute('preserveAspectRatio', mq.matches ? 'xMinYMax slice' : 'xMidYMax slice');
+  const fit = () => {
+    svg.setAttribute('viewBox', mq.matches ? `150 0 ${W - 150} ${H}` : `0 0 ${W} ${H}`);
+    svg.setAttribute('preserveAspectRatio', mq.matches ? 'xMinYMax slice' : 'xMidYMax slice');
+  };
   fit(); mq.addEventListener('change', fit);
   // the 7 badge sits in front of its number
   const dot = footer.querySelector('.sk-seven-dot'), seven = footer.querySelector('.sk-seven');
   seven.before(dot);
+  // copyright sits under the scene
+  footer.appendChild(footer.querySelector('.sk-copy'));
   footer.querySelector('.sk-top').addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
 })();
