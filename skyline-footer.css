@@ -79,3 +79,13 @@ body.dark .sk-train-win { fill: #F2C46B; filter: drop-shadow(0 0 3px rgba(242,19
   .sk-sun, .sk-moon { top: 12%; left: 8%; }
   .sk-copy { position: static; padding: .9rem 1rem 4.6rem; line-height: 1.6; }
 }
+
+/* full-width: the footer runs edge to edge; its text stays lined up with the page */
+.sk-footer { width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+.sk-content { max-width: 1080px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+.sk-scene { height: clamp(260px, 26vw, 420px); }
+@media (max-width: 700px) { .sk-content { padding: 2rem 1.4rem 0; } .sk-scene { height: 260px; } }
+
+/* no panel: the footer has no raised box around it, the city just sits on the page */
+.sk-footer { border-radius: 0; box-shadow: none; background: transparent; }
+
