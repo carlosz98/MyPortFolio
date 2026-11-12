@@ -1028,10 +1028,10 @@ const PROJECT_DETAILS = {
     learned:   'Building a full PyQt6 desktop app with a threaded download engine, scoring search results to find the right song, writing ID3v2.3 tags and covers the Zune software actually reads, and packaging it all with PyInstaller and Inno Setup.',
     challenge: 'Guaranteeing every song is correct before it is saved: matching length to Spotify, rejecting remixes and 30-second previews, and re-reading the cover from the finished file, while several downloads run at once.',
   },
-  'Warm Rain of Summer — UE5': {
-    problem:   'Take a narrative adventure game from idea to a playable Unreal Engine 5 build, covering every production stage.',
-    learned:   'Writing a 50-page GDD, modeling in Blender, importing FAB assets, and building gameplay with Blueprints and C++.',
-    challenge: 'Turning a detailed design document into working mechanics while staying within a solo, course-paced scope.',
+  'Warm Rain of Summer — Unreal Engine 5': {
+    problem:   'I wanted to make a game about slowing down: a long trip through real places in Bolivia and South America where the camera, the road and two animal companions carry the story instead of combat.',
+    learned:   'Prototyping fast in Unity, then moving the whole game to Unreal Engine 5.8 in C++: vehicles, companions, a save system, day/night and weather, Megascans streets placed from code, and roads traced from real OpenStreetMap routes.',
+    challenge: 'Making flat pixel-art characters belong in a realistic 3D world, with a lit sprite shader so they catch the same sun, shadow and rim light as everything around them.',
   },
   '2D Pixel Art City — Unity': {
     problem:   'Create a 2D city that feels alive rather than a static backdrop, entirely from custom pixel art.',
