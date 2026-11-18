@@ -678,8 +678,6 @@ function init() {
   resize();
   new ResizeObserver(resize).observe(sceneEl);
 
-  let mx = 0, my = 0, cx = 0, cy = 0;
-  addEventListener('pointermove', e => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; }, { passive: true });
 
   let visible = true;
   new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) tick(); }, { rootMargin: '100px' }).observe(sceneEl);
@@ -694,11 +692,10 @@ function init() {
 
     // scroll: the city rises into view as you reach the bottom
     const r = sceneEl.getBoundingClientRect();
-    const reveal = THREE.MathUtils.clamp(1 - (r.top - innerHeight * 0.35) / (innerHeight * 0.65), 0, 1);
-    cx += (mx - cx) * 0.05; cy += (my - cy) * 0.05;
     const phone = r.width < 700;
-    camera.position.set((phone ? -45 : 10) + cx * 26, 46 + (1 - reveal) * 22 - cy * 8, phone ? 170 : 225);
-    camera.lookAt(phone ? -45 : 10, 22 + (1 - reveal) * 10, -70);
+    // fixed camera: the scene doesn't follow the mouse or the scroll
+    camera.position.set(phone ? -45 : 10, 46, phone ? 170 : 225);
+    camera.lookAt(phone ? -45 : 10, 22, -70);
 
     if (!reduce) {
       animateAlive(dt, t);

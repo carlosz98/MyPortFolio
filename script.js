@@ -4,11 +4,9 @@
 
 /* ─── DARK MODE ──────────────────────────────────────── */
 const toggle = document.querySelector('#dark-mode-toggle');
-const savedMode = localStorage.getItem('color-mode');
-if (savedMode === 'dark') {
-  document.body.classList.add('dark');
-  if (toggle) toggle.checked = true;
-}
+// the site always opens in day mode; the switch still changes it for the visit
+document.body.classList.remove('dark');
+if (toggle) toggle.checked = false;
 if (toggle) {
   toggle.addEventListener('change', () => {
     const isDark = toggle.checked;
