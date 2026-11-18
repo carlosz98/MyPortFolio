@@ -116,6 +116,29 @@
       <div class="section-line"></div>
     </div>
 
+    <article id="project-plumbbob-vita">
+      <div class="article-meta">
+        <h3>PlumbBob Vita — The Sims 1 Engine for PS Vita (C++)</h3>
+        <strong>Nov 2026 – Present · In development</strong>
+        <p>An open-source reimplementation of The Sims 1 engine for the PlayStation Vita, written in C++. The project ships no EA game data: players copy the files from their own copy of The Sims, and the engine reads and runs them.</p>
+        <p>Almost all of The Sims' game logic lives inside its data files. Every object, from the fridge to the Sims themselves, carries its own scripts in SimAntics, a bytecode language stored in BHAV chunks inside .iff files packed into .far archives. PlumbBob reads those formats and runs that bytecode in its own virtual machine: each object is a lightweight thread with its own call stack, and every instruction branches to a true or false target like a flowchart.</p>
+        <p>Stage 1 is done: FAR and IFF readers, a BHAV disassembler that prints SimAntics functions as readable code, the VM's core loop with subroutine calls and yielding, a PC command-line tool for inspecting game files, and self-tests. Next up: testing against real game files, then sprite rendering and the SimAntics primitives.</p>
+        <ul>
+          <li>C++17</li>
+          <li>CMake</li>
+          <li>VitaSDK · PS Vita homebrew</li>
+          <li>Bytecode VM / interpreter design</li>
+          <li>Binary file format parsing</li>
+          <li>Reverse engineering</li>
+        </ul>
+        <a href="https://github.com/carlosz98/sims1-vita" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+      </div>
+      <a class="article-media w98-live" href="https://github.com/carlosz98/sims1-vita" target="_blank" rel="noopener noreferrer" aria-label="Open the PlumbBob Vita repository">
+        <img src="img/plumbbob-vita.jpg" alt="Terminal output of the PlumbBob Vita SimAntics disassembler and VM self-test" loading="lazy" width="1280" height="800">
+        <span class="w98-live-cta">View the code →</span>
+      </a>
+    </article>
+
     <article id="project-retrohub">
       <div class="article-meta">
         <h3>Android Development — Retro Hub</h3>
