@@ -270,30 +270,68 @@ function init() {
     c.userData.v = 2 + rnd() * 3; scene.add(c); clouds.push(c);
   }
 
-  /* birds: a small flock flapping across in the day */
-  const birdMat = new THREE.MeshBasicMaterial({ color: 0x5a5248, side: THREE.DoubleSide, transparent: true, opacity: 0 });
-  const wingGeo = new THREE.PlaneGeometry(3.2, 0.42); wingGeo.translate(1.6, 0, 0);
-  const flock = new THREE.Group(); const birds = [];
-  for (let i = 0; i < 8; i++) {
-    const b = new THREE.Group(), L = new THREE.Mesh(wingGeo, birdMat), R = new THREE.Mesh(wingGeo, birdMat);
-    L.rotation.y = Math.PI; b.add(L, R);
-    b.position.set(-i * 5 - rnd() * 4, Math.abs(i - 3) * 2.2 + rnd() * 2, rnd() * 8);
-    b.userData = { L, R, ph: rnd() * 6.28 }; flock.add(b); birds.push(b);
+  /* birds: a V of gulls with real wings — inner and outer halves, flapping then gliding */
+  const birdMat = new THREE.MeshBasicMaterial({ color: 0x4a423a, side: THREE.DoubleSide, transparent: true, opacity: 0, fog: false });
+  const shapeGeo = pts => { const sh = new THREE.Shape(); pts.forEach(([x, y], i) => sh[i ? 'lineTo' : 'moveTo'](x, y)); return new THREE.ShapeGeometry(sh).rotateX(Math.PI / 2); };
+  const innerGeo = shapeGeo([[0.55, 0], [-0.75, 0], [-0.95, 1.8], [0.35, 1.8]]);
+  const outerGeo = shapeGeo([[0.35, 0], [-0.95, 0], [-2.0, 2.3], [-1.2, 2.2]]);
+  const bodyGeo2 = new THREE.CapsuleGeometry(0.32, 1.5, 3, 8).rotateZ(Math.PI / 2);
+  const headGeo2 = new THREE.SphereGeometry(0.3, 8, 6);
+  const tailGeo2 = shapeGeo([[-0.9, -0.35], [-1.9, -0.55], [-1.9, 0.55], [-0.9, 0.35]]).rotateX(-Math.PI / 2).rotateX(Math.PI / 2);
+  function makeWing(side) {
+    const root = new THREE.Group(); root.scale.z = side;
+    const inner = new THREE.Mesh(innerGeo, birdMat); root.add(inner);
+    const outer = new THREE.Mesh(outerGeo, birdMat); outer.position.z = 1.8; inner.add(outer);
+    return { root, inner, outer };
   }
-  flock.position.set(-170, 70, -95); flock.scale.setScalar(1.1); scene.add(flock);
+  const flock = new THREE.Group(); const birds = [];
+  for (let i = 0; i < 7; i++) {
+    const b = new THREE.Group(), k = Math.ceil(i / 2), sd = i % 2 ? 1 : -1;
+    b.add(new THREE.Mesh(bodyGeo2, birdMat));
+    const hd = new THREE.Mesh(headGeo2, birdMat); hd.position.set(1.05, 0.12, 0); b.add(hd);
+    const tl = new THREE.Mesh(tailGeo2, birdMat); b.add(tl);
+    const R = makeWing(1), L = makeWing(-1); b.add(R.root, L.root);
+    b.position.set(-k * 5.5 + rnd() * 1.2, -k * 1.6 + (sd > 0 ? 0 : 2.4 * k) * 0.5 + rnd() * 0.8, sd * k * 1.2);
+    b.rotation.x = -0.75; // banked toward the camera so you see the wing shape
+    b.userData = { R, L, ph: rnd() * 6.28, base: b.position.y };
+    flock.add(b); birds.push(b);
+  }
+  flock.position.set(-170, 70, -90); flock.scale.setScalar(1.25); scene.add(flock);
 
-  /* a plane climbing out of LaGuardia, with nav lights */
-  const planeMat = new THREE.MeshStandardMaterial({ color: 0xe9e4da, roughness: 0.6 });
+  /* a plane climbing out of LaGuardia: swept wings, engines, tail, nav lights and a contrail */
+  const planeMat = new THREE.MeshStandardMaterial({ color: 0xf1ede6, roughness: 0.45, metalness: 0.15, side: THREE.DoubleSide });
+  const accentMat = new THREE.MeshStandardMaterial({ color: 0xd2553a, roughness: 0.5, side: THREE.DoubleSide });
+  const glassMat = new THREE.MeshStandardMaterial({ color: 0x4a5560, roughness: 0.3 });
   const plane = new THREE.Group();
-  plane.add(new THREE.Mesh(new THREE.CapsuleGeometry(0.8, 9, 4, 8).rotateZ(Math.PI / 2), planeMat));
-  const wingP = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.25, 11), planeMat); plane.add(wingP);
-  const fin = new THREE.Mesh(new THREE.BoxGeometry(1.8, 2.6, 0.25), planeMat); fin.position.set(-4.3, 1.3, 0); plane.add(fin);
-  const navR = glow(0xff3b30, 4); navR.position.set(0, 0, -5.6);
-  const navG = glow(0x3bff7a, 4); navG.position.set(0, 0, 5.6);
-  const strobe = glow(0xffffff, 7); strobe.position.set(-4.5, 2.6, 0);
-  plane.add(navR, navG, strobe);
-  plane.rotation.z = 0.12; plane.scale.setScalar(1.3);
+  const fus = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 12, 14).rotateZ(Math.PI / 2), planeMat); plane.add(fus);
+  const nose = new THREE.Mesh(new THREE.SphereGeometry(0.9, 14, 10), planeMat); nose.scale.set(2.2, 1, 1); nose.position.x = 6; plane.add(nose);
+  const tailCone = new THREE.Mesh(new THREE.ConeGeometry(0.9, 3.2, 14).rotateZ(Math.PI / 2), planeMat); tailCone.position.set(-7.6, 0.25, 0); plane.add(tailCone);
+  const cockpit = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.35, 1.3), glassMat); cockpit.position.set(6.6, 0.45, 0); plane.add(cockpit);
+  const winStrip = new THREE.Mesh(new THREE.BoxGeometry(9.5, 0.22, 1.84), glassMat); winStrip.position.set(0.2, 0.3, 0); plane.add(winStrip);
+  const stripe = new THREE.Mesh(new THREE.BoxGeometry(12.5, 0.14, 1.86), accentMat); stripe.position.set(-0.3, -0.18, 0); plane.add(stripe);
+  const extrude = (pts, depth) => { const sh = new THREE.Shape(); pts.forEach(([x, y], i) => sh[i ? 'lineTo' : 'moveTo'](x, y)); return new THREE.ExtrudeGeometry(sh, { depth, bevelEnabled: false }); };
+  const wingGeoP = extrude([[1.8, 0], [-1.6, 0], [-4.4, 7.6], [-3.2, 7.6]], 0.22).rotateX(Math.PI / 2);
+  [1, -1].forEach(sd => {
+    const w = new THREE.Mesh(wingGeoP, planeMat); w.scale.z = sd; w.position.y = -0.35; plane.add(w);
+    const st = new THREE.Mesh(wingGeoP, planeMat); st.scale.set(0.42, 1, 0.42 * sd); st.position.set(-6.6, 0.3, 0); plane.add(st);
+    const eng = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.42, 2.4, 12).rotateZ(Math.PI / 2), planeMat); eng.position.set(-0.6, -0.95, sd * 3); plane.add(eng);
+    const lip = new THREE.Mesh(new THREE.TorusGeometry(0.48, 0.08, 6, 14).rotateY(Math.PI / 2), accentMat); lip.position.set(0.6, -0.95, sd * 3); plane.add(lip);
+  });
+  const finM = new THREE.Mesh(extrude([[-4.6, 0], [-8.2, 0], [-8.9, 3.6], [-7.4, 3.6]], 0.2), accentMat); finM.position.set(0, 0.6, -0.1); plane.add(finM);
+  const navR = glow(0xff3b30, 4); navR.position.set(-4.4, -0.3, -7.7);
+  const navG = glow(0x3bff7a, 4); navG.position.set(-4.4, -0.3, 7.7);
+  const strobe = glow(0xffffff, 7); strobe.position.set(-8.6, 4.3, 0);
+  const landing = glow(0xfff4d8, 9); landing.position.set(7.4, -0.4, 0);
+  plane.add(navR, navG, strobe, landing);
+  plane.rotation.z = 0.13; plane.scale.setScalar(1.15);
   let planeWait = 1; plane.visible = false; scene.add(plane);
+  // contrail: two soft streams from the engines
+  const CT = 160, ctPos = new Float32Array(CT * 3).fill(-9999), ctAge = new Float32Array(CT).fill(9), ctCol = new Float32Array(CT * 3);
+  const ctGeo = new THREE.BufferGeometry();
+  ctGeo.setAttribute('position', new THREE.BufferAttribute(ctPos, 3)); ctGeo.setAttribute('color', new THREE.BufferAttribute(ctCol, 3));
+  const ctMat = new THREE.PointsMaterial({ map: glowTex, size: 3, vertexColors: true, transparent: true, depthWrite: false, opacity: 0.8 });
+  const ctPts = new THREE.Points(ctGeo, ctMat); ctPts.frustumCulled = false; scene.add(ctPts);
+  let ctNext = 0, ctTimer = 0; const engL = new THREE.Vector3(), engR = new THREE.Vector3();
 
   /* shooting stars */
   const streakTex = (() => {
@@ -315,9 +353,11 @@ function init() {
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
   pGeo.setAttribute('color', new THREE.BufferAttribute(pCol, 3));
-  const pMat = new THREE.PointsMaterial({ map: glowTex, size: 9, vertexColors: true, transparent: true, depthWrite: false });
+  const pMat = new THREE.PointsMaterial({ map: glowTex, size: 12, vertexColors: true, transparent: true, depthWrite: false });
+  pMat.toneMapped = false;
   const pts = new THREE.Points(pGeo, pMat); pts.frustumCulled = false; scene.add(pts);
-  const PALETTE = [0xf2c46b, 0xe8643a, 0xb933ad, 0x7fd1ff, 0xffffff, 0x8be38b].map(c => new THREE.Color(c));
+  const PALETTE = [0xff2d55, 0xffb300, 0x22d3ff, 0x9b5cff, 0x2dff7a, 0xff4fd8, 0xff7a1a].map(c => new THREE.Color(c));
+  const WHITE = new THREE.Color(0xffffff);
   function emit(x, y, z, vx, vy, vz, life, col, kind = 0) {
     const i = pNext; pNext = (pNext + 1) % MAXP;
     pPos.set([x, y, z], i * 3); pVel.set([vx, vy, vz], i * 3); pBase.set([col.r, col.g, col.b], i * 3);
@@ -325,10 +365,10 @@ function init() {
   }
   function burst(x, y, z) {
     const a = PALETTE[Math.floor(Math.random() * PALETTE.length)], b = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-    const n = 160, sp = 30 + Math.random() * 14;
+    const n = 200, sp = 40 + Math.random() * 18;
     for (let k = 0; k < n; k++) {
       const u = Math.random() * 2 - 1, th = Math.random() * 6.283, r = Math.sqrt(1 - u * u), s = sp * (0.75 + Math.random() * 0.25);
-      emit(x, y, z, r * Math.cos(th) * s, u * s, r * Math.sin(th) * s * 0.5, 1.8 + Math.random() * 1.0, k % 3 ? a : b);
+      emit(x, y, z, r * Math.cos(th) * s, u * s, r * Math.sin(th) * s * 0.5, 1.8 + Math.random() * 1.0, k % 9 === 0 ? WHITE : (k % 3 ? a : b));
     flash.position.set(x, y, z); flashLife = 0.35; flash.material.color.copy(a);
     }
   }
@@ -341,7 +381,7 @@ function init() {
         new THREE.Color(Math.random() < 0.5 ? 0x9fdcff : 0xfff2b0));
   }
   const tmpC = new THREE.Color();
-  const flash = glow(0xffffff, 60); scene.add(flash); let flashLife = 0;
+  const flash = glow(0xffffff, 110); scene.add(flash); let flashLife = 0;
   function stepParticles(dt) {
     const bg = bgColor(), add = night > 0.5;
     pMat.blending = add ? THREE.AdditiveBlending : THREE.NormalBlending;
@@ -354,13 +394,13 @@ function init() {
         pPos[j + 1] = -9999; continue;
       }
       const g = pKind[i] === 1 ? 9 : 14;
-      pVel[j + 1] -= g * dt; const drag = pKind[i] === 1 ? 1 : 1 - dt * 1.3;
+      pVel[j + 1] -= g * dt; const drag = pKind[i] === 1 ? 1 : 1 - dt * 0.9;
       pVel[j] *= drag; pVel[j + 1] *= drag; pVel[j + 2] *= drag;
       pPos[j] += pVel[j] * dt; pPos[j + 1] += pVel[j + 1] * dt; pPos[j + 2] += pVel[j + 2] * dt;
       const f = Math.min(1, (pLife[i] / pMax[i]) * 1.6);
       const twinkle = pKind[i] === 1 ? 1 : (0.75 + Math.random() * 0.25);
       tmpC.setRGB(pBase[j], pBase[j + 1], pBase[j + 2]);
-      if (add) tmpC.multiplyScalar(f * twinkle * 1.4); else tmpC.lerp(bg, (1 - f) * 0.8);
+      if (add) tmpC.multiplyScalar(f * twinkle * 1.35); else tmpC.lerp(bg, (1 - f) * 0.8);
       pCol[j] = tmpC.r; pCol[j + 1] = tmpC.g; pCol[j + 2] = tmpC.b;
       if (pKind[i] === 1 && Math.random() < 0.8) // rocket trail
         emit(pPos[j] + (Math.random() - 0.5), pPos[j + 1] - 1, pPos[j + 2], (Math.random() - 0.5) * 2, -2, 0, 0.4, new THREE.Color(0xffc27a));
@@ -399,6 +439,95 @@ function init() {
     litMesh.instanceMatrix.needsUpdate = true;
   }
 
+
+  /* ═══════════ HOLIDAYS: a tree, lights on the 7 line and snow (mid-Nov → Jan 6) ═══════════ */
+  const today = new Date(), mo = today.getMonth(), dy = today.getDate();
+  const XMAS = (mo === 10 && dy >= 15) || mo === 11 || (mo === 0 && dy <= 6) || /[?&]xmas/.test(location.search);
+  const XCOL = [0xff2d55, 0xffc400, 0x22d3ff, 0x2dff7a, 0xff4fd8, 0xff7a1a].map(c => new THREE.Color(c));
+  let xmasTick = () => {};
+  if (XMAS) {
+    const TX = -12, TZ = 36;
+    const tree = new THREE.Group(); tree.position.set(TX, 0, TZ); scene.add(tree);
+    const pine = new THREE.MeshStandardMaterial({ color: 0x2f6b45, roughness: 0.85, flatShading: true });
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 1.1, 3, 8), new THREE.MeshStandardMaterial({ color: 0x6b4a32, roughness: 1 }));
+    trunk.position.y = 1.5; trunk.castShadow = true; tree.add(trunk);
+    const tiers = [[7.5, 10, 7], [6, 9, 12.5], [4.3, 7.5, 17.5], [2.6, 5.5, 21.5]];
+    tiers.forEach(([r, h, y]) => { const c = new THREE.Mesh(new THREE.ConeGeometry(r, h, 10), pine); c.position.y = y; c.castShadow = true; c.receiveShadow = true; tree.add(c); });
+    // the star on top
+    const sh = new THREE.Shape();
+    for (let i = 0; i < 10; i++) { const a = Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? 0.9 : 2.1; sh[i ? 'lineTo' : 'moveTo'](Math.cos(a) * r, Math.sin(a) * r); }
+    const starM = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: 0.5, bevelEnabled: true, bevelSize: 0.15, bevelThickness: 0.15, bevelSegments: 1 }),
+      new THREE.MeshStandardMaterial({ color: 0xffcf3a, emissive: 0xffa800, emissiveIntensity: 0.6, metalness: 0.5, roughness: 0.3 }));
+    starM.position.set(0, 25.8, -0.25); tree.add(starM);
+    const treeLight = new THREE.PointLight(0xffc27a, 0, 60, 1.6); treeLight.position.set(0, 14, 14); tree.add(treeLight);
+    const starGlow = glow(0xffd76a, 14); starGlow.material.toneMapped = false; starGlow.position.set(0, 25.8, 0.6); tree.add(starGlow);
+    // ornaments
+    const ornGeo = new THREE.SphereGeometry(0.55, 10, 8);
+    tiers.forEach(([r, h, y], ti) => {
+      for (let k = 0; k < 7 - ti; k++) {
+        const a = rnd() * 6.28, fy = 0.15 + rnd() * 0.6, rr = r * (1 - fy) + 0.25;
+        const o = new THREE.Mesh(ornGeo, new THREE.MeshStandardMaterial({ color: XCOL[(k + ti) % XCOL.length], metalness: 0.6, roughness: 0.25 }));
+        o.position.set(Math.cos(a) * rr, y - h / 2 + fy * h, Math.sin(a) * rr); tree.add(o);
+      }
+    });
+    // twinkling lights spiralling up the tree
+    const TL = 90, tlPos = new Float32Array(TL * 3), tlCol = new Float32Array(TL * 3), tlBase = [];
+    for (let i = 0; i < TL; i++) {
+      const u = i / TL, y = 2.5 + u * 21, r = 7.6 * (1 - u) + 0.6, a = u * Math.PI * 2 * 5.5;
+      tlPos.set([TX + Math.cos(a) * r, y, TZ + Math.sin(a) * r], i * 3); tlBase.push(XCOL[i % XCOL.length]);
+    }
+    const tlGeo = new THREE.BufferGeometry();
+    tlGeo.setAttribute('position', new THREE.BufferAttribute(tlPos, 3)); tlGeo.setAttribute('color', new THREE.BufferAttribute(tlCol, 3));
+    const tlMat = new THREE.PointsMaterial({ map: glowTex, size: 3.4, vertexColors: true, transparent: true, depthWrite: false, toneMapped: false });
+    scene.add(new THREE.Points(tlGeo, tlMat));
+    // presents
+    [[-6, 4, 0xff2d55], [5, 3, 0x22d3ff], [2, 6, 0xffc400], [-3, 7, 0x2dff7a]].forEach(([x, z, c], i) => {
+      const s = 1.6 + (i % 2) * 0.7, g = new THREE.Mesh(new THREE.BoxGeometry(s * 1.3, s, s), new THREE.MeshStandardMaterial({ color: c, roughness: 0.5 }));
+      g.position.set(TX + x, s / 2, TZ + z); g.rotation.y = i; g.castShadow = true; scene.add(g);
+      const rib = new THREE.Mesh(new THREE.BoxGeometry(s * 1.32, s * 1.02, 0.3), new THREE.MeshStandardMaterial({ color: 0xfff4e0 }));
+      rib.position.copy(g.position); rib.rotation.y = i; scene.add(rib);
+    });
+    // string lights under the 7 line, chasing
+    const DL = 230, dlPos = new Float32Array(DL * 3), dlCol = new Float32Array(DL * 3);
+    for (let i = 0; i < DL; i++) { const x = -340 + i * 3; dlPos.set([x, TRACK_Y - 1.2 - Math.abs(Math.sin((x / 13) * Math.PI)) * 1.1, TRACK_Z + 2.7], i * 3); }
+    const dlGeo = new THREE.BufferGeometry();
+    dlGeo.setAttribute('position', new THREE.BufferAttribute(dlPos, 3)); dlGeo.setAttribute('color', new THREE.BufferAttribute(dlCol, 3));
+    const dlMat = new THREE.PointsMaterial({ map: glowTex, size: 3.4, vertexColors: true, transparent: true, depthWrite: false, toneMapped: false });
+    scene.add(new THREE.Points(dlGeo, dlMat));
+
+    // snow
+    const SN = 1600, snPos = new Float32Array(SN * 3), snV = [];
+    for (let i = 0; i < SN; i++) { snPos.set([-300 + rnd() * 600, rnd() * 160, -120 + rnd() * 240], i * 3); snV.push(3 + rnd() * 4, rnd() * 6.28); }
+    const snGeo = new THREE.BufferGeometry(); snGeo.setAttribute('position', new THREE.BufferAttribute(snPos, 3));
+    const snMat = new THREE.PointsMaterial({ map: glowTex, color: 0xffffff, size: 2.8, transparent: true, opacity: 0.85, depthWrite: false });
+    scene.add(new THREE.Points(snGeo, snMat));
+    const c2 = new THREE.Color();
+    xmasTick = (dt, t, n) => {
+      const add = n > 0.5, lvl = 0.35 + n * 1.0;
+      tlMat.blending = dlMat.blending = add ? THREE.AdditiveBlending : THREE.NormalBlending;
+      for (let i = 0; i < TL; i++) {
+        const tw = 0.55 + 0.45 * Math.sin(t * 3 + i * 1.7);
+        c2.copy(tlBase[i]).multiplyScalar(lvl * 1.6 * tw); tlCol[i * 3] = c2.r; tlCol[i * 3 + 1] = c2.g; tlCol[i * 3 + 2] = c2.b;
+      }
+      tlGeo.attributes.color.needsUpdate = true;
+      const step = Math.floor(t * 4);
+      for (let i = 0; i < DL; i++) {
+        c2.copy(XCOL[(i + step) % 4]).multiplyScalar(lvl * 1.5 * (((i + step) % 8) < 6 ? 1 : 0.35));
+        dlCol[i * 3] = c2.r; dlCol[i * 3 + 1] = c2.g; dlCol[i * 3 + 2] = c2.b;
+      }
+      dlGeo.attributes.color.needsUpdate = true;
+      starGlow.material.opacity = 0.35 + n * 0.6 + Math.sin(t * 2) * 0.08;
+      treeLight.intensity = n * 260;
+      starM.rotation.y = Math.sin(t * 0.8) * 0.4;
+      snMat.color.set(add ? 0xffffff : 0x8f95a6); snMat.opacity = add ? 0.95 : 0.9;
+      for (let i = 0; i < SN; i++) {
+        const j = i * 3; snPos[j + 1] -= snV[i * 2] * dt; snPos[j] += Math.sin(t * 0.7 + snV[i * 2 + 1]) * dt * 1.5;
+        if (snPos[j + 1] < 0) snPos[j + 1] = 160;
+      }
+      snGeo.attributes.position.needsUpdate = true;
+    };
+  }
+
   function animateAlive(dt, t) {
     const n = night, day = 1 - n;
     sunHalo.material.opacity = 0.35 * day;
@@ -406,7 +535,7 @@ function init() {
     blinkers.forEach((g, i) => { g.material.opacity = n * (0.25 + 0.75 * Math.max(0, Math.sin(t * 2.2 + i * 1.7)) ** 6); });
     esColor.setHSL((t * 0.04) % 1, 0.9, 0.5); esCrown.material.color.copy(esColor); esCrown.material.opacity = n * 0.9;
     esTop.emissive.copy(esColor).multiplyScalar(n * 2.4);
-    flashLife = Math.max(0, flashLife - dt); flash.material.opacity = (flashLife / 0.35) * (0.25 + n * 0.6);
+    flashLife = Math.max(0, flashLife - dt); flash.material.opacity = (flashLife / 0.35) * (0.25 + n * 0.75);
     fountain.forEach((g, i) => { g.material.opacity = n * (0.45 + 0.25 * Math.sin(t * 1.5 + i)); });
     head.material.opacity = 0.25 + n * 0.75; beam.material.opacity = n * 0.35; tail.material.opacity = 0.3 + n * 0.7; pool.material.opacity = n * 0.4;
 
@@ -422,20 +551,39 @@ function init() {
     cloudMat.color.set(0xfff6ea).lerp(tmpC.set(0x4a4762), n * 0.85); cloudMat.opacity = 0.92 - n * 0.35;
     clouds.forEach(c => { c.position.x += c.userData.v * dt; if (c.position.x > 340) c.position.x = -340; });
 
-    // birds by day
-    birdMat.opacity = Math.max(0, day * 1.2 - 0.2) * 0.85;
-    flock.position.x += dt * 16; flock.position.y = 70 + Math.sin(t * 0.4) * 4;
-    if (flock.position.x > 300) { flock.position.x = -300; flock.position.y = 60 + Math.random() * 25; }
-    birds.forEach(b => { const f = Math.sin(t * 9 + b.userData.ph) * 0.6; b.userData.L.rotation.z = -f - 0.15; b.userData.R.rotation.z = f + 0.15; });
+    // birds by day: flap for a while, then glide
+    birdMat.opacity = Math.max(0, day * 1.2 - 0.2) * 0.9;
+    flock.position.x += dt * 15; flock.position.y = 70 + Math.sin(t * 0.35) * 5;
+    if (flock.position.x > 300) { flock.position.x = -300; flock.position.y = 58 + Math.random() * 25; }
+    birds.forEach(b => {
+      const u = b.userData, f = Math.sin(t * 7.5 + u.ph), amp = 0.25 + 0.75 * Math.max(0, Math.sin(t * 0.9 + u.ph * 0.3));
+      [u.R, u.L].forEach(w => { w.inner.rotation.x = -(0.12 + amp * 0.55 * f); w.outer.rotation.x = -(amp * 0.5 * f) + 0.12 * (1 - amp); });
+      b.position.y = u.base - f * amp * 0.25;
+    });
 
-    // plane climbs out every so often
-    if (!plane.visible) { planeWait -= dt; if (planeWait < 0) { plane.visible = true; plane.position.set(-230, 30, -80); } }
+    // plane climbs out every so often, banking gently, leaving a contrail by day
+    if (!plane.visible) { planeWait -= dt; if (planeWait < 0) { plane.visible = true; plane.position.set(-240, 28, -85); } }
     else {
-      plane.position.x += dt * 30; plane.position.y += dt * 4.2;
-      if (plane.position.x > 330) { plane.visible = false; planeWait = 14 + Math.random() * 14; }
+      plane.position.x += dt * 30; plane.position.y += dt * 4.4; plane.rotation.x = Math.sin(t * 0.6) * 0.06;
+      if (plane.position.x > 330) { plane.visible = false; planeWait = 12 + Math.random() * 12; }
+      ctTimer -= dt;
+      if (ctTimer < 0 && day > 0.2) {
+        ctTimer = 0.05; plane.updateMatrixWorld();
+        engL.set(-2, -0.95, 3).applyMatrix4(plane.matrixWorld); engR.set(-2, -0.95, -3).applyMatrix4(plane.matrixWorld);
+        [engL, engR].forEach(v => { ctPos.set([v.x, v.y, v.z], ctNext * 3); ctAge[ctNext] = 0; ctNext = (ctNext + 1) % CT; });
+      }
     }
+    const bgc = bgColor();
+    for (let i = 0; i < CT; i++) {
+      ctAge[i] += dt; const f = Math.max(0, 1 - ctAge[i] / 4);
+      tmpC.set(0xffffff).lerp(bgc, 1 - f * 0.9); ctCol[i * 3] = tmpC.r; ctCol[i * 3 + 1] = tmpC.g; ctCol[i * 3 + 2] = tmpC.b;
+      if (f <= 0) ctPos[i * 3 + 1] = -9999;
+    }
+    ctMat.size = 3 + 0; ctMat.opacity = 0.8 * day;
+    ctGeo.attributes.position.needsUpdate = true; ctGeo.attributes.color.needsUpdate = true;
     navR.material.opacity = navG.material.opacity = 0.35 + n * 0.65;
     strobe.material.opacity = (t % 1.3 < 0.08 ? 1 : 0) * (0.4 + n * 0.6);
+    landing.material.opacity = n * 0.8;
 
     // night extras: shooting stars, fireworks now and then, flickering windows, train sparks
     if (n > 0.6) {
@@ -471,6 +619,7 @@ function init() {
     lampGlows.forEach((g, i) => { g.material.opacity = n * (i % 2 ? 0.45 : 0.95); });
     personMat.color.set(0x6f675c).lerp(tmpC.set(0x8a7f70), n); personMat.emissive.setRGB(0.32, 0.24, 0.14).multiplyScalar(n * 0.55);
     if (hint) hint.style.opacity = hint.classList.contains('gone') ? 0 : n * 0.75;
+    xmasTick(dt, t, n);
     stepParticles(dt);
   }
 
