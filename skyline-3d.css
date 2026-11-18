@@ -1,0 +1,26 @@
+/* 3D skyline (skyline-3d.js): the canvas replaces the flat drawing when WebGL works */
+.sk-scene.is-3d { height: clamp(340px, 36vw, 540px); --sk3d-night: 0; }
+/* warm sky behind the city that cools to indigo at night */
+.sk-scene.is-3d::before { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(246,196,140,.45) 55%, rgba(242,170,110,.35) 80%, transparent 100%);
+  opacity: calc(1 - var(--sk3d-night)); }
+.sk-scene.is-3d::after { content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to bottom, transparent 0%, rgba(52,48,84,.55) 55%, rgba(78,56,90,.45) 85%, transparent 100%);
+  opacity: var(--sk3d-night); }
+.sk-scene.is-3d { isolation: isolate; }
+.sk-scene.is-3d::before { z-index: -1; }
+.sk-3d { position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 86%, transparent 100%); }
+.sk-scene.is-3d .sk-svg,
+.sk-scene.is-3d .sk-sky,
+.sk-scene.is-3d .sk-sun,
+.sk-scene.is-3d .sk-moon { display: none; }
+@media (max-width: 700px) { .sk-scene.is-3d { height: 300px; } }
+.sk-3d { cursor: crosshair; }
+.sk-3d-hint { position: absolute; right: 1.4rem; top: 1.2rem; z-index: 2; font-family: var(--font-mono); font-size: .7rem;
+  letter-spacing: .04em; color: var(--ink-3); opacity: 0; pointer-events: none;
+  animation: sk3d-hint 3.2s ease-in-out infinite; }
+.sk-3d-hint.gone { opacity: 0; animation: none; }
+@keyframes sk3d-hint { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@media (max-width: 700px) { .sk-3d-hint { right: 1rem; top: .6rem; } }

@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="toggle-switch.css">
   <link rel="stylesheet" href="neumorphism.css">
   <link rel="stylesheet" href="skyline-footer.css">
+  <link rel="stylesheet" href="skyline-3d.css">
+  <link rel="stylesheet" href="project-cards.css">
   <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/brands.min.css">
   <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/solid.min.css">
   <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
@@ -114,95 +116,6 @@
       <div class="section-line"></div>
     </div>
 
-    <article id="project-warm-rain">
-      <div class="article-meta">
-        <h3>Warm Rain of Summer — Unreal Engine 5</h3>
-        <strong>2025 – Present · In Progress</strong>
-        <p>My own game: a burned-out young man leaves New York and goes back to Bolivia, then travels toward Patagonia by bike and an old van, with a rescued cat and a stray dog riding along. The look is realistic 3D worlds with pixel-art characters, in the spirit of Octopath Traveler and Eastward, and the heart of it is a Polaroid camera you use to take photos for the people you meet.</p>
-        <div class="project-update">
-          <span class="project-update-label">Latest update · Nov 2026</span>
-          <p><span class="project-update-head">Moved from Unity 6 to Unreal Engine 5.8, all in C++.</span> The whole game is now one C++ module of about 19,500 lines across 48 systems: bike riding, the van, the cat and dog, the Polaroid album, camping nights, the journal, a day/night cycle and warm summer rain.</p>
-          <p><span class="project-update-head">A real Altiplano market town.</span> The streets used to be grey boxes. Now the town is built from Quixel Megascans and Fab assets: plaster and brick facades, awnings, market stalls, power lines, parked cars and buses. The C++ code places everything through Unreal's asset registry. Street lamps switch on at dusk, the rain brings fog and wet roads, and raising the Polaroid now takes you into first person, like in Seasons: A Letter to the Future.</p>
-          <div class="project-update-media">
-            <figure>
-              <img src="img/warm-rain-street.jpg" alt="Warm Rain of Summer: the player riding a bike down a Megascans market street at midday, a bus ahead" loading="lazy" width="1280" height="720">
-              <figcaption>Midday on the market street</figcaption>
-            </figure>
-            <figure>
-              <img src="img/warm-rain-market.jpg" alt="Warm Rain of Summer: market stalls, awnings and parked cars along the street" loading="lazy" width="1280" height="720">
-              <figcaption>Stalls, awnings and traffic</figcaption>
-            </figure>
-          </div>
-        </div>
-        <p>The 51-page Game Design Document covers the three pillars (Exploration, Movement, Story), photo quests, camping, pet customization, the world, characters and UI. Long roads are traced from real routes on OpenStreetMap, with real elevation data scaled down to game size.</p>
-        <ul>
-          <li>Unreal Engine 5.8</li>
-          <li>C++ · ~19,500 lines</li>
-          <li>Lumen GI · Day/Night · Weather</li>
-          <li>Quixel Megascans · Fab</li>
-          <li>Pixel-Art Sprites in 3D</li>
-          <li>Editor Python Tooling</li>
-          <li>OpenStreetMap · SRTM Routes</li>
-          <li>51-Page Game Design Doc</li>
-        </ul>
-        <a href="https://github.com/carlosz98/Warm-Rain-Of-Summer-Game-Development-Documentation-in-UE5" target="_blank" rel="noopener noreferrer">Design Doc on GitHub →</a>
-      </div>
-      <div class="article-media">
-        <img class="article-img" src="img/warm-rain-street.jpg" alt="Warm Rain of Summer in Unreal Engine 5.8" loading="lazy" width="1280" height="720">
-      </div>
-    </article>
-
-    <article id="project-voice-of-the-desert">
-      <div class="article-meta">
-        <h3>Voice of the Desert — Media Website</h3>
-        <strong>Freelance · Oct 2026 – Present · Live</strong>
-        <p>A freelance project: a bilingual media site I'm building for my client Felipe Lerma, a host from Chihuahua, Mexico, with his music, videos, news with his own commentary, and his podcast, all in one place. It opens in Spanish with an English switch, and a cinematic desert slideshow sets the mood before you press play.</p>
-        <p>It's also my MAC 272 (Web Development II) Project 1: the next step is a real back end, with a PHP API and a MySQL database on Google Cloud SQL, and media files in Google Cloud Storage, so Felipe can publish his own posts.</p>
-        <p>Every section is its own React component: the photo slideshow with rotating headlines, a music player that keeps playing as you scroll, a video gallery, the podcast player, news cards with "Felipe's take" boxes, a verse of the day, a section about Felipe, and an upload form for listeners. Every piece of text goes through one translation layer, so the whole site switches language at once.</p>
-        <ul>
-          <li>React 18 / Vite</li>
-          <li>Tailwind CSS</li>
-          <li>Framer Motion</li>
-          <li>English / Spanish (i18n)</li>
-          <li>21st.dev components · lucide-react</li>
-          <li>PHP · MySQL · Google Cloud (in progress)</li>
-          <li>Freelance · Client Work</li>
-          <li>GitHub Pages</li>
-        </ul>
-        <a href="https://carlosz98.github.io/voice-of-the-desert/" target="_blank" rel="noopener noreferrer">Visit the Live Site →</a>
-        <a href="https://github.com/carlosz98/voice-of-the-desert" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
-      </div>
-      <a class="article-media w98-live" href="https://carlosz98.github.io/voice-of-the-desert/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Voice of the Desert site">
-        <img src="img/voice-of-the-desert.jpg" alt="Voice of the Desert home page: a desert sunset slideshow with the title DESIERTO, a host card for Felipe Lerma and a music player" loading="lazy" width="1280" height="800">
-        <span class="w98-live-cta">Open the site →</span>
-      </a>
-    </article>
-
-    <article id="project-library-of-tomorrow">
-      <div class="article-meta">
-        <h3>Library of Tomorrow — Full-Stack Library Website</h3>
-        <strong>Oct 2026 · Live</strong>
-        <p>My Java console library, rebuilt as a full website. You can borrow, return and donate books, manga, comics, vinyl and films, open a description page for any item, put up to five in a bag and check out with pickup or delivery, then manage your loans and overdue fines from a member profile with a library card that flips over.</p>
-        <p>Every click runs real SQL, and the page shows you the query. The same class design as the Java version (LibraryItem with Book, Manga, Comic, Vinyl and Movie subclasses) sits on two interchangeable data stores: SQLite compiled to WebAssembly in the browser, or a PHP + MySQL API on a server. Every item gets a generated cover in its own edition style, from dust-jacket hardcovers and numbered manga volumes to LP sleeves and VHS boxes.</p>
-        <ul>
-          <li>React 18 / Vite</li>
-          <li>Tailwind CSS</li>
-          <li>Framer Motion</li>
-          <li>TypeScript · shadcn / 21st.dev components</li>
-          <li>SQL · SQLite (sql.js / WebAssembly)</li>
-          <li>PHP 8 · PDO · MySQL / MariaDB</li>
-          <li>Open Library · MusicBrainz · Wikidata APIs</li>
-          <li>GitHub Actions · GitHub Pages</li>
-        </ul>
-        <a href="https://carlosz98.github.io/NewLibraryManagementSite/" target="_blank" rel="noopener noreferrer">Visit the Live Site →</a>
-        <a href="https://github.com/carlosz98/NewLibraryManagementSite" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
-      </div>
-      <a class="article-media w98-live" href="https://carlosz98.github.io/NewLibraryManagementSite/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Library of Tomorrow site">
-        <img src="img/library-of-tomorrow.jpg" alt="Library of Tomorrow home page: a dark, maximalist split hero with a spinning record and fanned covers" loading="lazy" width="1280" height="800">
-        <span class="w98-live-cta">Open the library →</span>
-      </a>
-    </article>
-
     <article id="project-retrohub">
       <div class="article-meta">
         <h3>Android Development — Retro Hub</h3>
@@ -246,6 +159,119 @@
       </div>
     </article>
 
+    <article id="project-library-of-tomorrow">
+      <div class="article-meta">
+        <h3>Library of Tomorrow — Full-Stack Library Website</h3>
+        <strong>Oct 2026 · Live</strong>
+        <p>My Java console library, rebuilt as a full website. You can borrow, return and donate books, manga, comics, vinyl and films, open a description page for any item, put up to five in a bag and check out with pickup or delivery, then manage your loans and overdue fines from a member profile with a library card that flips over.</p>
+        <p>Every click runs real SQL, and the page shows you the query. The same class design as the Java version (LibraryItem with Book, Manga, Comic, Vinyl and Movie subclasses) sits on two interchangeable data stores: SQLite compiled to WebAssembly in the browser, or a PHP + MySQL API on a server. Every item gets a generated cover in its own edition style, from dust-jacket hardcovers and numbered manga volumes to LP sleeves and VHS boxes.</p>
+        <ul>
+          <li>React 18 / Vite</li>
+          <li>Tailwind CSS</li>
+          <li>Framer Motion</li>
+          <li>TypeScript · shadcn / 21st.dev components</li>
+          <li>SQL · SQLite (sql.js / WebAssembly)</li>
+          <li>PHP 8 · PDO · MySQL / MariaDB</li>
+          <li>Open Library · MusicBrainz · Wikidata APIs</li>
+          <li>GitHub Actions · GitHub Pages</li>
+        </ul>
+        <a href="https://carlosz98.github.io/NewLibraryManagementSite/" target="_blank" rel="noopener noreferrer">Visit the Live Site →</a>
+        <a href="https://github.com/carlosz98/NewLibraryManagementSite" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+      </div>
+      <a class="article-media w98-live" href="https://carlosz98.github.io/NewLibraryManagementSite/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Library of Tomorrow site">
+        <img src="img/library-of-tomorrow.jpg" alt="Library of Tomorrow home page: a dark, maximalist split hero with a spinning record and fanned covers" loading="lazy" width="1280" height="800">
+        <span class="w98-live-cta">Open the library →</span>
+      </a>
+    </article>
+
+    <article id="project-voice-of-the-desert">
+      <div class="article-meta">
+        <h3>Voice of the Desert — Media Website</h3>
+        <strong>Freelance · Oct 2026 – Present · Live</strong>
+        <p>A freelance project: a bilingual media site I'm building for my client Felipe Lerma, a host from Chihuahua, Mexico, with his music, videos, news with his own commentary, and his podcast, all in one place. It opens in Spanish with an English switch, and a cinematic desert slideshow sets the mood before you press play.</p>
+        <p>It's also my MAC 272 (Web Development II) Project 1: the next step is a real back end, with a PHP API and a MySQL database on Google Cloud SQL, and media files in Google Cloud Storage, so Felipe can publish his own posts.</p>
+        <p>Every section is its own React component: the photo slideshow with rotating headlines, a music player that keeps playing as you scroll, a video gallery, the podcast player, news cards with "Felipe's take" boxes, a verse of the day, a section about Felipe, and an upload form for listeners. Every piece of text goes through one translation layer, so the whole site switches language at once.</p>
+        <ul>
+          <li>React 18 / Vite</li>
+          <li>Tailwind CSS</li>
+          <li>Framer Motion</li>
+          <li>English / Spanish (i18n)</li>
+          <li>21st.dev components · lucide-react</li>
+          <li>PHP · MySQL · Google Cloud (in progress)</li>
+          <li>Freelance · Client Work</li>
+          <li>GitHub Pages</li>
+        </ul>
+        <a href="https://carlosz98.github.io/voice-of-the-desert/" target="_blank" rel="noopener noreferrer">Visit the Live Site →</a>
+        <a href="https://github.com/carlosz98/voice-of-the-desert" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+      </div>
+      <a class="article-media w98-live" href="https://carlosz98.github.io/voice-of-the-desert/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Voice of the Desert site">
+        <img src="img/voice-of-the-desert.jpg" alt="Voice of the Desert home page: a desert sunset slideshow with the title DESIERTO, a host card for Felipe Lerma and a music player" loading="lazy" width="1280" height="800">
+        <span class="w98-live-cta">Open the site →</span>
+      </a>
+    </article>
+
+    <article id="project-warm-rain">
+      <div class="article-meta">
+        <h3>Warm Rain of Summer — Unreal Engine 5</h3>
+        <strong>2025 – Present · In Progress</strong>
+        <p>My own game: a burned-out young man leaves New York and goes back to Bolivia, then travels toward Patagonia by bike and an old van, with a rescued cat and a stray dog riding along. The look is realistic 3D worlds with pixel-art characters, in the spirit of Octopath Traveler and Eastward, and the heart of it is a Polaroid camera you use to take photos for the people you meet.</p>
+        <div class="project-update">
+          <span class="project-update-label">Latest update · Nov 2026</span>
+          <p><span class="project-update-head">Moved from Unity 6 to Unreal Engine 5.8, all in C++.</span> The whole game is now one C++ module of about 19,500 lines across 48 systems: bike riding, the van, the cat and dog, the Polaroid album, camping nights, the journal, a day/night cycle and warm summer rain.</p>
+          <p><span class="project-update-head">A real Altiplano market town.</span> The streets used to be grey boxes. Now the town is built from Quixel Megascans and Fab assets: plaster and brick facades, awnings, market stalls, power lines, parked cars and buses. The C++ code places everything through Unreal's asset registry. Street lamps switch on at dusk, the rain brings fog and wet roads, and raising the Polaroid now takes you into first person, like in Seasons: A Letter to the Future.</p>
+          <div class="project-update-media">
+            <figure>
+              <img src="img/warm-rain-street.jpg" alt="Warm Rain of Summer: the player riding a bike down a Megascans market street at midday, a bus ahead" loading="lazy" width="1280" height="720">
+              <figcaption>Midday on the market street</figcaption>
+            </figure>
+            <figure>
+              <img src="img/warm-rain-market.jpg" alt="Warm Rain of Summer: market stalls, awnings and parked cars along the street" loading="lazy" width="1280" height="720">
+              <figcaption>Stalls, awnings and traffic</figcaption>
+            </figure>
+          </div>
+        </div>
+        <p>The 51-page Game Design Document covers the three pillars (Exploration, Movement, Story), photo quests, camping, pet customization, the world, characters and UI. Long roads are traced from real routes on OpenStreetMap, with real elevation data scaled down to game size.</p>
+        <ul>
+          <li>Unreal Engine 5.8</li>
+          <li>C++ · ~19,500 lines</li>
+          <li>Lumen GI · Day/Night · Weather</li>
+          <li>Quixel Megascans · Fab</li>
+          <li>Pixel-Art Sprites in 3D</li>
+          <li>Editor Python Tooling</li>
+          <li>OpenStreetMap · SRTM Routes</li>
+          <li>51-Page Game Design Doc</li>
+        </ul>
+        <a href="https://github.com/carlosz98/Warm-Rain-Of-Summer-Game-Development-Documentation-in-UE5" target="_blank" rel="noopener noreferrer">Design Doc on GitHub →</a>
+      </div>
+      <div class="article-media">
+        <img class="article-img" src="img/warm-rain-street.jpg" alt="Warm Rain of Summer in Unreal Engine 5.8" loading="lazy" width="1280" height="720">
+      </div>
+    </article>
+
+    <article id="project-mp3-wizard">
+      <div class="article-meta">
+        <h3>The MP3 Wizard — Python Desktop App</h3>
+        <strong>Oct 2026 · v1.0.0</strong>
+        <p>A Windows desktop app that turns a Spotify playlist, album or song link into fully tagged MP3s for my Zune 30GB. Built to look like the old-school P2P apps of the mid-2000s, with Library, Transfer, Zune Check and Control Panel tabs, a built-in player, and a little wizard who pops up to comment on your downloads.</p>
+        <p>Under the hood it reads public Spotify metadata without an account or API key, then finds each song by scoring search results on length, title and artist, skipping remixes, live versions and covers. SoundCloud is the backup source. A song only lands in your folder after it passes every check: 320 kbps MP3, length matched to Spotify, Zune-safe ID3v2.3 tags, and a 500×500 cover read back from the file. It also repairs older libraries, writes Zune playlist files, detects a plugged-in Zune, and ships as a one-click installer.</p>
+        <ul>
+          <li>Python 3</li>
+          <li>PyQt6 Desktop UI</li>
+          <li>yt-dlp · FFmpeg</li>
+          <li>Mutagen · ID3v2.3 Tags</li>
+          <li>Song-matching Algorithm</li>
+          <li>Multithreaded Downloads</li>
+          <li>Command-line Mode</li>
+          <li>PyInstaller · Inno Setup</li>
+          <li>Unit Tests</li>
+        </ul>
+        <a href="contact.html">Private repo · ask me for a demo →</a>
+      </div>
+      <div class="article-media">
+        <video src="video/mp3-wizard.mp4" poster="img/mp3-wizard.png" controls muted loop playsinline preload="metadata" aria-label="The MP3 Wizard downloading a playlist: songs are matched, downloaded, tagged and given covers while the wizard comments"></video>
+      </div>
+    </article>
+
     <article id="project-win98blog">
       <div class="article-meta">
         <h3>Win98 Blog — My Blog as a Windows 98 Desktop</h3>
@@ -277,25 +303,6 @@
       </a>
     </article>
 
-    <article id="project-framer-blog">
-      <div class="article-meta">
-        <h3>Framer Blog — The First Win98 Blog</h3>
-        <strong>2025 · Live</strong>
-        <p>The first version of my blog, built in Framer before I rebuilt it from scratch in React. It has the same Windows 98 idea: a BIOS-style boot screen with my stack, a teal desktop with icons, Clippy, a taskbar and a Home window where I post progress and updates on my projects.</p>
-        <p>Framer let me prototype the look and the layout fast, without code. Once I knew what I wanted, I rebuilt it in React so every window could be a real working app.</p>
-        <ul>
-          <li>Framer</li>
-          <li>No-code Web Design</li>
-          <li>Win98 UI Design</li>
-        </ul>
-        <a href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer">Visit the Framer Blog →</a>
-      </div>
-      <a class="article-media w98-live" href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer" aria-label="Open the Framer blog">
-        <img src="img/framer-blog.jpg" alt="Boot screen of Carlos's Framer blog: Windows 98 OS, programmer and software development" loading="lazy" width="1016" height="573">
-        <span class="w98-live-cta">Boot it up →</span>
-      </a>
-    </article>
-
     <article id="project-gunbound">
       <div class="article-meta">
         <h3>GunBound Replica — Unity 6</h3>
@@ -317,30 +324,6 @@
       </div>
       <div class="article-media">
         <iframe src="https://www.youtube.com/embed/75j3qdD0zp4?si=za7XspSCHdoVw61F&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Gunbound Replica demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </article>
-
-    <article id="project-mp3-wizard">
-      <div class="article-meta">
-        <h3>The MP3 Wizard — Python Desktop App</h3>
-        <strong>Oct 2026 · v1.0.0</strong>
-        <p>A Windows desktop app that turns a Spotify playlist, album or song link into fully tagged MP3s for my Zune 30GB. Built to look like the old-school P2P apps of the mid-2000s, with Library, Transfer, Zune Check and Control Panel tabs, a built-in player, and a little wizard who pops up to comment on your downloads.</p>
-        <p>Under the hood it reads public Spotify metadata without an account or API key, then finds each song by scoring search results on length, title and artist, skipping remixes, live versions and covers. SoundCloud is the backup source. A song only lands in your folder after it passes every check: 320 kbps MP3, length matched to Spotify, Zune-safe ID3v2.3 tags, and a 500×500 cover read back from the file. It also repairs older libraries, writes Zune playlist files, detects a plugged-in Zune, and ships as a one-click installer.</p>
-        <ul>
-          <li>Python 3</li>
-          <li>PyQt6 Desktop UI</li>
-          <li>yt-dlp · FFmpeg</li>
-          <li>Mutagen · ID3v2.3 Tags</li>
-          <li>Song-matching Algorithm</li>
-          <li>Multithreaded Downloads</li>
-          <li>Command-line Mode</li>
-          <li>PyInstaller · Inno Setup</li>
-          <li>Unit Tests</li>
-        </ul>
-        <a href="contact.html">Private repo · ask me for a demo →</a>
-      </div>
-      <div class="article-media">
-        <video src="video/mp3-wizard.mp4" poster="img/mp3-wizard.png" controls muted loop playsinline preload="metadata" aria-label="The MP3 Wizard downloading a playlist: songs are matched, downloaded, tagged and given covers while the wizard comments"></video>
       </div>
     </article>
 
@@ -369,30 +352,6 @@
       </div>
     </article>
 
-    <article id="project-portfolio">
-      <div class="article-meta">
-        <h3>Personal Portfolio — This Website</h3>
-        <strong>2025 – Present · Live</strong>
-        <p>The site you're on right now, hand-built with plain HTML, CSS and JavaScript — no frameworks, no build step, deployed on GitHub Pages. It started as a simple class page and grew into a full design system: a warm editorial palette with a terracotta accent, DM Serif Display and DM Mono type, and a light/dark theme that remembers your choice.</p>
-        <p>Under the surface it is packed with hand-written interactions: a skills constellation drawn on canvas, a retro terminal that opens with <code>/</code>, a typing robot guide, a project filter and list/grid toggle, scroll reveals, 3D tilt and glare on media, an image zoom modal, a custom cursor with a trail, ambient particles, film grain, page transitions and a live "last commit" badge pulled from the GitHub API.</p>
-        <ul>
-          <li>HTML5 · CSS3</li>
-          <li>Vanilla JS (ES6+)</li>
-          <li>Canvas API</li>
-          <li>IntersectionObserver</li>
-          <li>CSS Custom Properties · Dark Mode</li>
-          <li>localStorage</li>
-          <li>GitHub REST API</li>
-          <li>Responsive Design</li>
-          <li>GitHub Pages</li>
-        </ul>
-        <a href="https://github.com/carlosz98/MyPortFolio" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
-      </div>
-      <div class="article-media">
-        <img class="article-img" src="img/placeholder-portfolio.svg" alt="Personal portfolio website preview">
-      </div>
-    </article>
-
     <article id="project-ios-win98">
       <div class="article-meta">
         <h3>iOS Development — Win98 Retro App</h3>
@@ -410,67 +369,6 @@
       </div>
       <div class="article-media">
         <img class="article-img" src="img/ios.png" alt="iOS Win98 Retro App">
-      </div>
-    </article>
-
-    <article id="project-swiftui-shop">
-      <div class="article-meta">
-        <h3>SwiftUI Shop — E-Commerce App</h3>
-        <strong>May 2025</strong>
-        <p>A small iOS storefront built for iOS development class practice. Users browse a product grid of sweaters, add and remove items from a cart that keeps a running total, and check out through a simulated payment flow that clears the cart and shows a success state.</p>
-        <p>The app is split the SwiftUI way: a <code>Product</code> model, a <code>CartManager</code> <code>ObservableObject</code> that publishes cart state to every view, a <code>PaymentHandler</code> that completes asynchronously, and reusable components for product cards, cart rows and buttons.</p>
-        <ul>
-          <li>Swift / SwiftUI</li>
-          <li>ObservableObject · @Published</li>
-          <li>EnvironmentObject State</li>
-          <li>Reusable Components</li>
-          <li>Async Payment Flow</li>
-          <li>Xcode · XCTest</li>
-        </ul>
-        <a href="https://github.com/carlosz98/E-Commerce-App" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
-      </div>
-      <div class="article-media">
-        <img class="article-img" src="img/placeholder-ecommerce.svg" alt="SwiftUI Shop app preview">
-      </div>
-    </article>
-
-    <article id="project-employee-mgmt">
-      <div class="article-meta">
-        <h3>Employee Management System — C++</h3>
-        <strong>Feb 2025</strong>
-        <p>The final project for Advanced C++: a menu-driven system to add, update, delete and look up employee records. A <code>Manager</code> class inherits from <code>Employee</code> with a polymorphic <code>displayDetails()</code>, records persist to file, and custom exception classes handle bad input and file errors.</p>
-        <ul>
-          <li>C++ · C++11</li>
-          <li>Inheritance &amp; Polymorphism</li>
-          <li>std::thread · Multithreading</li>
-          <li>File I/O Persistence</li>
-          <li>Custom Exceptions</li>
-          <li>STL · std::vector</li>
-          <li>Menu-driven CLI</li>
-        </ul>
-        <a href="https://github.com/carlosz98/Employee-Management-System---C--" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
-      </div>
-      <div class="article-media">
-        <iframe src="https://www.youtube.com/embed/kEqftDn_TNY?si=U8ZmVa-vjceiF4Kg&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Employee Management System demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </article>
-
-    <article id="project-flappy-bird">
-      <div class="article-meta">
-        <h3>Flappy Bird — Unity Replica</h3>
-        <strong>Feb 2025</strong>
-        <p>A Flappy Bird remake for MAC 280 (Videogame Programming). Three focused scripts drive the game: <code>BirdScript</code> for input and physics, <code>PipeScript</code> for movement and cleanup, and <code>PipeSpawnerScript</code> for timed spawning with random gap heights — plus scoring and a game-over UI.</p>
-        <ul>
-          <li>Unity 2D / C#</li>
-          <li>Rigidbody2D Physics</li>
-          <li>Collider Triggers</li>
-          <li>Procedural Pipe Spawning</li>
-          <li>Score &amp; Game-Over UI</li>
-        </ul>
-        <a href="https://github.com/carlosz98/FlappyBird-Project---Unity" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
-      </div>
-      <div class="article-media">
-        <iframe src="https://www.youtube.com/embed/H0MAK-MvcbE?si=mG6cCFmeQ4BCpgS8&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Flappy Bird demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
     </article>
 
@@ -496,6 +394,93 @@
       </div>
     </article>
 
+    <article id="project-employee-mgmt">
+      <div class="article-meta">
+        <h3>Employee Management System — C++</h3>
+        <strong>Feb 2025</strong>
+        <p>The final project for Advanced C++: a menu-driven system to add, update, delete and look up employee records. A <code>Manager</code> class inherits from <code>Employee</code> with a polymorphic <code>displayDetails()</code>, records persist to file, and custom exception classes handle bad input and file errors.</p>
+        <ul>
+          <li>C++ · C++11</li>
+          <li>Inheritance &amp; Polymorphism</li>
+          <li>std::thread · Multithreading</li>
+          <li>File I/O Persistence</li>
+          <li>Custom Exceptions</li>
+          <li>STL · std::vector</li>
+          <li>Menu-driven CLI</li>
+        </ul>
+        <a href="https://github.com/carlosz98/Employee-Management-System---C--" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+      </div>
+      <div class="article-media">
+        <iframe src="https://www.youtube.com/embed/kEqftDn_TNY?si=U8ZmVa-vjceiF4Kg&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Employee Management System demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </article>
+
+    <article id="project-netflix-db">
+      <div class="article-meta">
+        <h3>Netflix Database &amp; GCP</h3>
+        <strong>Dec 2024</strong>
+        <p>A Netflix-style relational database in MySQL, hosted on a Google Cloud SQL instance. Kaggle CSV datasets were loaded through Cloud Storage buckets and the GCloud Shell, then explored with Metabase dashboards and charts.</p>
+        <ul>
+          <li>MySQL</li>
+          <li>Google Cloud SQL · GCP</li>
+          <li>Cloud Storage Buckets</li>
+          <li>GCloud Shell</li>
+          <li>Metabase Dashboards</li>
+          <li>Kaggle Datasets</li>
+        </ul>
+        <a href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub →</a>
+      </div>
+      <div class="article-media">
+        <iframe src="https://www.youtube.com/embed/4tRYxzllkQA?si=ruYxzyhPC4BDRYZx&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Netflix GCP demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </article>
+
+    <article id="project-swiftui-shop">
+      <div class="article-meta">
+        <h3>SwiftUI Shop — E-Commerce App</h3>
+        <strong>May 2025</strong>
+        <p>A small iOS storefront built for iOS development class practice. Users browse a product grid of sweaters, add and remove items from a cart that keeps a running total, and check out through a simulated payment flow that clears the cart and shows a success state.</p>
+        <p>The app is split the SwiftUI way: a <code>Product</code> model, a <code>CartManager</code> <code>ObservableObject</code> that publishes cart state to every view, a <code>PaymentHandler</code> that completes asynchronously, and reusable components for product cards, cart rows and buttons.</p>
+        <ul>
+          <li>Swift / SwiftUI</li>
+          <li>ObservableObject · @Published</li>
+          <li>EnvironmentObject State</li>
+          <li>Reusable Components</li>
+          <li>Async Payment Flow</li>
+          <li>Xcode · XCTest</li>
+        </ul>
+        <a href="https://github.com/carlosz98/E-Commerce-App" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+      </div>
+      <div class="article-media">
+        <img class="article-img" src="img/placeholder-ecommerce.svg" alt="SwiftUI Shop app preview">
+      </div>
+    </article>
+
+    <article id="project-portfolio">
+      <div class="article-meta">
+        <h3>Personal Portfolio — This Website</h3>
+        <strong>2025 – Present · Live</strong>
+        <p>The site you're on right now, hand-built with plain HTML, CSS and JavaScript — no frameworks, no build step, deployed on GitHub Pages. It started as a simple class page and grew into a full design system: a warm editorial palette with a terracotta accent, DM Serif Display and DM Mono type, and a light/dark theme that remembers your choice.</p>
+        <p>Under the surface it is packed with hand-written interactions: a skills constellation drawn on canvas, a retro terminal that opens with <code>/</code>, a typing robot guide, a project filter, scroll reveals, 3D tilt and glare on media, an image zoom modal, a custom cursor with a trail, ambient particles, film grain, page transitions and a live "last commit" badge pulled from the GitHub API. The footer is a 3D Queens skyline built with Three.js: the 7 train, the Unisphere and Manhattan, with day and night, walkers, birds and fireworks.</p>
+        <ul>
+          <li>HTML5 · CSS3</li>
+          <li>Vanilla JS (ES6+)</li>
+          <li>Three.js · WebGL</li>
+          <li>Canvas API</li>
+          <li>IntersectionObserver</li>
+          <li>CSS Custom Properties · Dark Mode</li>
+          <li>localStorage</li>
+          <li>GitHub REST API</li>
+          <li>Responsive Design</li>
+          <li>GitHub Pages</li>
+        </ul>
+        <a href="https://github.com/carlosz98/MyPortFolio" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+      </div>
+      <div class="article-media">
+        <img class="article-img" src="img/placeholder-portfolio.svg" alt="Personal portfolio website preview">
+      </div>
+    </article>
+
     <article id="project-dmv">
       <div class="article-meta">
         <h3>DMV Project — Java</h3>
@@ -516,22 +501,22 @@
       </div>
     </article>
 
-    <article id="project-gpa-calc">
+    <article id="project-flappy-bird">
       <div class="article-meta">
-        <h3>College GPA Calculator — C++</h3>
-        <strong>Jan 2025</strong>
-        <p>A C++ console tool that asks for the number of classes, each class's name, credits and grade, then rounds and returns the overall weighted GPA.</p>
+        <h3>Flappy Bird — Unity Replica</h3>
+        <strong>Feb 2025</strong>
+        <p>A Flappy Bird remake for MAC 280 (Videogame Programming). Three focused scripts drive the game: <code>BirdScript</code> for input and physics, <code>PipeScript</code> for movement and cleanup, and <code>PipeSpawnerScript</code> for timed spawning with random gap heights — plus scoring and a game-over UI.</p>
         <ul>
-          <li>C++</li>
-          <li>OOP</li>
-          <li>Input Validation</li>
-          <li>Weighted Averages</li>
-          <li>Console App</li>
+          <li>Unity 2D / C#</li>
+          <li>Rigidbody2D Physics</li>
+          <li>Collider Triggers</li>
+          <li>Procedural Pipe Spawning</li>
+          <li>Score &amp; Game-Over UI</li>
         </ul>
-        <a href="https://github.com/carlosz98/College-Gpa-Calculator---C-" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+        <a href="https://github.com/carlosz98/FlappyBird-Project---Unity" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
       </div>
       <div class="article-media">
-        <iframe src="https://www.youtube.com/embed/jCxr4QT_Mm4?si=9IS4X9yaA45DokbB&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="GPA Calculator demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://www.youtube.com/embed/H0MAK-MvcbE?si=mG6cCFmeQ4BCpgS8&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Flappy Bird demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
     </article>
 
@@ -557,23 +542,22 @@
       </div>
     </article>
 
-    <article id="project-netflix-db">
+    <article id="project-gpa-calc">
       <div class="article-meta">
-        <h3>Netflix Database &amp; GCP</h3>
-        <strong>Dec 2024</strong>
-        <p>A Netflix-style relational database in MySQL, hosted on a Google Cloud SQL instance. Kaggle CSV datasets were loaded through Cloud Storage buckets and the GCloud Shell, then explored with Metabase dashboards and charts.</p>
+        <h3>College GPA Calculator — C++</h3>
+        <strong>Jan 2025</strong>
+        <p>A C++ console tool that asks for the number of classes, each class's name, credits and grade, then rounds and returns the overall weighted GPA.</p>
         <ul>
-          <li>MySQL</li>
-          <li>Google Cloud SQL · GCP</li>
-          <li>Cloud Storage Buckets</li>
-          <li>GCloud Shell</li>
-          <li>Metabase Dashboards</li>
-          <li>Kaggle Datasets</li>
+          <li>C++</li>
+          <li>OOP</li>
+          <li>Input Validation</li>
+          <li>Weighted Averages</li>
+          <li>Console App</li>
         </ul>
-        <a href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub →</a>
+        <a href="https://github.com/carlosz98/College-Gpa-Calculator---C-" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
       </div>
       <div class="article-media">
-        <iframe src="https://www.youtube.com/embed/4tRYxzllkQA?si=ruYxzyhPC4BDRYZx&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Netflix GCP demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://www.youtube.com/embed/jCxr4QT_Mm4?si=9IS4X9yaA45DokbB&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="GPA Calculator demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
     </article>
 
@@ -595,6 +579,25 @@
       <div class="article-media">
         <iframe src="https://www.youtube.com/embed/PmNVaZcAHDA?si=kIy8YFba_ycCdVr4&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Pet Adoption Center demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
+    </article>
+
+    <article id="project-framer-blog">
+      <div class="article-meta">
+        <h3>Framer Blog — The First Win98 Blog</h3>
+        <strong>2025 · Live</strong>
+        <p>The first version of my blog, built in Framer before I rebuilt it from scratch in React. It has the same Windows 98 idea: a BIOS-style boot screen with my stack, a teal desktop with icons, Clippy, a taskbar and a Home window where I post progress and updates on my projects.</p>
+        <p>Framer let me prototype the look and the layout fast, without code. Once I knew what I wanted, I rebuilt it in React so every window could be a real working app.</p>
+        <ul>
+          <li>Framer</li>
+          <li>No-code Web Design</li>
+          <li>Win98 UI Design</li>
+        </ul>
+        <a href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer">Visit the Framer Blog →</a>
+      </div>
+      <a class="article-media w98-live" href="https://charlysblog.framer.website/" target="_blank" rel="noopener noreferrer" aria-label="Open the Framer blog">
+        <img src="img/framer-blog.jpg" alt="Boot screen of Carlos's Framer blog: Windows 98 OS, programmer and software development" loading="lazy" width="1016" height="573">
+        <span class="w98-live-cta">Boot it up →</span>
+      </a>
     </article>
 
   </section>
@@ -842,7 +845,9 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="project-cards.js"></script>
   <script src="skyline-footer.js"></script>
+  <script type="module" src="skyline-3d.js"></script>
   <script>
     const scripts = [
       "Welcome! Stranger...",
