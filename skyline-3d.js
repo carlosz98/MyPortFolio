@@ -270,34 +270,6 @@ function init() {
     c.userData.v = 2 + rnd() * 3; scene.add(c); clouds.push(c);
   }
 
-  /* birds: a V of gulls with real wings — inner and outer halves, flapping then gliding */
-  const birdMat = new THREE.MeshBasicMaterial({ color: 0x4a423a, side: THREE.DoubleSide, transparent: true, opacity: 0, fog: false });
-  const shapeGeo = pts => { const sh = new THREE.Shape(); pts.forEach(([x, y], i) => sh[i ? 'lineTo' : 'moveTo'](x, y)); return new THREE.ShapeGeometry(sh).rotateX(Math.PI / 2); };
-  const innerGeo = shapeGeo([[0.55, 0], [-0.75, 0], [-0.95, 1.8], [0.35, 1.8]]);
-  const outerGeo = shapeGeo([[0.35, 0], [-0.95, 0], [-2.0, 2.3], [-1.2, 2.2]]);
-  const bodyGeo2 = new THREE.CapsuleGeometry(0.32, 1.5, 3, 8).rotateZ(Math.PI / 2);
-  const headGeo2 = new THREE.SphereGeometry(0.3, 8, 6);
-  const tailGeo2 = shapeGeo([[-0.9, -0.35], [-1.9, -0.55], [-1.9, 0.55], [-0.9, 0.35]]).rotateX(-Math.PI / 2).rotateX(Math.PI / 2);
-  function makeWing(side) {
-    const root = new THREE.Group(); root.scale.z = side;
-    const inner = new THREE.Mesh(innerGeo, birdMat); root.add(inner);
-    const outer = new THREE.Mesh(outerGeo, birdMat); outer.position.z = 1.8; inner.add(outer);
-    return { root, inner, outer };
-  }
-  const flock = new THREE.Group(); const birds = [];
-  for (let i = 0; i < 7; i++) {
-    const b = new THREE.Group(), k = Math.ceil(i / 2), sd = i % 2 ? 1 : -1;
-    b.add(new THREE.Mesh(bodyGeo2, birdMat));
-    const hd = new THREE.Mesh(headGeo2, birdMat); hd.position.set(1.05, 0.12, 0); b.add(hd);
-    const tl = new THREE.Mesh(tailGeo2, birdMat); b.add(tl);
-    const R = makeWing(1), L = makeWing(-1); b.add(R.root, L.root);
-    b.position.set(-k * 5.5 + rnd() * 1.2, -k * 1.6 + (sd > 0 ? 0 : 2.4 * k) * 0.5 + rnd() * 0.8, sd * k * 1.2);
-    b.rotation.x = -0.75; // banked toward the camera so you see the wing shape
-    b.userData = { R, L, ph: rnd() * 6.28, base: b.position.y };
-    flock.add(b); birds.push(b);
-  }
-  flock.position.set(-170, 70, -90); flock.scale.setScalar(1.25); scene.add(flock);
-
   /* a plane climbing out of LaGuardia: swept wings, engines, tail, nav lights and a contrail */
   const planeMat = new THREE.MeshStandardMaterial({ color: 0xf1ede6, roughness: 0.45, metalness: 0.15, side: THREE.DoubleSide });
   const accentMat = new THREE.MeshStandardMaterial({ color: 0xd2553a, roughness: 0.5, side: THREE.DoubleSide });
@@ -550,16 +522,6 @@ function init() {
     // clouds drift and dim at night
     cloudMat.color.set(0xfff6ea).lerp(tmpC.set(0x4a4762), n * 0.85); cloudMat.opacity = 0.92 - n * 0.35;
     clouds.forEach(c => { c.position.x += c.userData.v * dt; if (c.position.x > 340) c.position.x = -340; });
-
-    // birds by day: flap for a while, then glide
-    birdMat.opacity = Math.max(0, day * 1.2 - 0.2) * 0.9;
-    flock.position.x += dt * 15; flock.position.y = 70 + Math.sin(t * 0.35) * 5;
-    if (flock.position.x > 300) { flock.position.x = -300; flock.position.y = 58 + Math.random() * 25; }
-    birds.forEach(b => {
-      const u = b.userData, f = Math.sin(t * 7.5 + u.ph), amp = 0.25 + 0.75 * Math.max(0, Math.sin(t * 0.9 + u.ph * 0.3));
-      [u.R, u.L].forEach(w => { w.inner.rotation.x = -(0.12 + amp * 0.55 * f); w.outer.rotation.x = -(amp * 0.5 * f) + 0.12 * (1 - amp); });
-      b.position.y = u.base - f * amp * 0.25;
-    });
 
     // plane climbs out every so often, banking gently, leaving a contrail by day
     if (!plane.visible) { planeWait -= dt; if (planeWait < 0) { plane.visible = true; plane.position.set(-240, 28, -85); } }
