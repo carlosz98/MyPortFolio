@@ -349,25 +349,25 @@ function initConstellation() {
     { name: 'C#',            level: 80, group: 'lang',   projects: ['Flappy Bird', 'Gunbound'] },
     { name: 'Kotlin',        level: 85, group: 'lang',   projects: ['Retro Hub (55k+ lines)'] },
     { name: 'SwiftUI',       level: 65, group: 'lang',   projects: ['iOS Win98 App', 'SwiftUI Shop'] },
-    { name: 'HTML/CSS/JS',   level: 85, group: 'web',    projects: ['Voice of the Desert', 'Library of Tomorrow', 'This Portfolio', 'Win98 Blog', 'PetHome Vet'] },
+    { name: 'HTML/CSS/JS',   level: 85, group: 'web',    projects: ['FLIXDEX — Netflix DB web app', 'Voice of the Desert', 'Library of Tomorrow', 'This Portfolio', 'Win98 Blog', 'PetHome Vet'] },
     { name: 'PHP',           level: 68, group: 'web',    projects: ['Library of Tomorrow (PHP + MySQL API)', 'Voice of the Desert (MAC 272 back end)', 'Pet Adoption Center'] },
-    { name: 'Node.js',       level: 55, group: 'web',    projects: ['MAC 272 coursework (Web Dev II)'] },
-    { name: 'SQL',           level: 82, group: 'data',   projects: ['Library of Tomorrow (SQLite + MySQL)', 'Netflix DB', 'Voice of the Desert (Cloud SQL, next)'] },
+    { name: 'Node.js',       level: 65, group: 'web',    projects: ['FLIXDEX API — Express + mysql2 (Netflix DB)', 'Netflix DB data-cleaning pipeline', 'MAC 272 coursework (Web Dev II)'] },
+    { name: 'SQL',           level: 88, group: 'data',   projects: ['Netflix DB — 3NF schema, views, procedures, trigger', 'Library of Tomorrow (SQLite + MySQL)', 'Voice of the Desert (Cloud SQL, next)'] },
     { name: 'Unity',         level: 78, group: 'engine', projects: ['Flappy Bird', 'Gunbound', 'Pixel City'] },
     { name: 'Unreal Engine', level: 72, group: 'engine', projects: ['Warm Rain of Summer (UE 5.8 · C++)'] },
     { name: 'Android',       level: 85, group: 'mobile', projects: ['Retro Hub — Compose, MVVM, FCM'] },
-    { name: 'GCP',           level: 70, group: 'data',   projects: ['Netflix DB (Cloud SQL)', 'Retro Hub (Cloud Functions)', 'Voice of the Desert (Cloud SQL + Storage)'] },
+    { name: 'GCP',           level: 75, group: 'data',   projects: ['Netflix DB (Cloud SQL, Auth Proxy, Compute Engine, Storage)', 'Retro Hub (Cloud Functions)', 'Voice of the Desert (Cloud SQL + Storage)'] },
     { name: 'Firebase',      level: 78, group: 'data',   projects: ['Retro Hub', 'Win98 Blog DevFeed'] },
     { name: 'OOP',           level: 95, group: 'cs',     projects: ['All Projects'] },
     { name: 'Data Structs',  level: 88, group: 'cs',     projects: ['Library System', 'DMV'] },
     { name: 'Algorithms',    level: 85, group: 'cs',     projects: ['GPA Calc', 'Employee Mgmt'] },
-    { name: 'Python',        level: 70, group: 'lang',   projects: ['The MP3 Wizard (PyQt6 desktop app)', 'SpotifyConverted for Zune (Sunnify fork)'] },
+    { name: 'Python',        level: 70, group: 'lang',   projects: ['The MP3 Wizard (PyQt6 desktop app)', 'SpotifyConverted for Zune (Sunnify fork)', 'Netflix DB v1 (pymysql ingestion)'] },
     { name: 'React',         level: 78, group: 'web',    projects: ['Voice of the Desert', 'Library of Tomorrow', 'Win98 Blog'] },
     { name: 'TypeScript',    level: 60, group: 'web',    projects: ['Library of Tomorrow'] },
     { name: 'Git/GitHub',    level: 85, group: 'cs',     projects: ['Every project', 'GitHub Actions + Pages deploys'] },
     { name: 'Three.js',      level: 62, group: 'web',    projects: ['This Portfolio — 3D Queens skyline footer (WebGL)'] },
   ];
-  const connections = [[0,14],[0,16],[1,14],[1,15],[2,14],[3,11],[5,12],[8,12],[8,13],[9,10],[11,13],[14,15],[14,16],[15,16],[6,8],[5,6],[5,7],[7,12],[6,7],[6,12],[7,8],[17,14],[17,16],[18,5],[18,19],[19,5],[18,13],[18,7],[20,5],[20,3],[20,14],[21,5],[21,18],[21,10]];
+  const connections = [[0,14],[0,16],[1,14],[1,15],[2,14],[3,11],[5,12],[8,12],[8,13],[9,10],[11,13],[14,15],[14,16],[15,16],[6,8],[5,6],[5,7],[7,12],[6,7],[6,12],[7,8],[17,14],[17,16],[18,5],[18,19],[19,5],[18,13],[18,7],[20,5],[20,3],[20,14],[21,5],[21,18],[21,10],[17,8],[5,8],[7,13]];
   const groupColors = { lang:'#C84B2F', web:'#2D7A8A', data:'#7A4A8A', engine:'#4A8A2D', mobile:'#8A6A2D', cs:'#8A2D4A' };
 
   const section = document.createElement('section');
@@ -915,7 +915,7 @@ function initCounters() {
   const workHeader = document.querySelector('.recent-work .section-header');
   if (!workHeader) return;
   const stats = [
-    {label:'Projects',value:22,suffix:''},
+    {label:'Projects',value:23,suffix:''},
     {label:'Languages',value:9,suffix:''},
     {label:'Certificates',value:9,suffix:''},
     {label:'Commits',value:200,suffix:'+'},
