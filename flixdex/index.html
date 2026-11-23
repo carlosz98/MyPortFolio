@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLIXDEX — Netflix Database Explorer</title>
+  <meta name="description" content="A Netflix-style catalog explorer built on a normalized MySQL database hosted on Google Cloud SQL.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Profile picker -->
+  <section id="profiles-screen" class="profiles-screen" hidden>
+    <div class="brand brand--big">FLIXDEX</div>
+    <h1>Who's watching?</h1>
+    <div id="profile-list" class="profile-list"></div>
+  </section>
+
+  <!-- Main app -->
+  <div id="app" hidden>
+    <header id="topbar" class="topbar">
+      <a href="#/home" class="brand">FLIXDEX</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#/home"     data-nav="home">Home</a>
+        <a href="#/shows"    data-nav="shows">TV Shows</a>
+        <a href="#/movies"   data-nav="movies">Movies</a>
+        <a href="#/mylist"   data-nav="mylist">My List</a>
+        <a href="#/insights" data-nav="insights">Insights</a>
+        <a href="#/about"    data-nav="about">About</a>
+      </nav>
+      <div class="topbar-right">
+        <label class="search" for="search-input">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg>
+          <input id="search-input" type="search" placeholder="Titles, people, genres" autocomplete="off">
+        </label>
+        <button id="profile-button" class="profile-chip" title="Switch profile"></button>
+      </div>
+    </header>
+
+    <main id="view"></main>
+
+    <footer class="footer">
+      Data: Kaggle “Netflix Movies and TV Shows” · MySQL on Google Cloud SQL · Node.js + Express ·
+      <a href="https://github.com/carlosz98" target="_blank" rel="noopener">Carlos Zabala</a>
+      <span class="static-note"> · Live demo: static build of the MySQL data (My List is saved in this browser)</span>
+    </footer>
+  </div>
+
+  <!-- Title details modal -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" data-close aria-label="Close">✕</button>
+      <div id="modal-body"></div>
+    </article>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

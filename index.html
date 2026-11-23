@@ -116,6 +116,56 @@
       <div class="section-line"></div>
     </div>
 
+    <article id="project-netflix-db">
+      <div class="article-meta">
+        <h3>Netflix Database &amp; GCP</h3>
+        <strong>Dec 2024 – Present · v2 · Featured</strong>
+        <p>The Kaggle Netflix catalog (7,787 movies and shows) as a cloud database on Google Cloud SQL, with Metabase dashboards and FLIXDEX, a Netflix-style web app where every row is a live MySQL query.</p>
+        <div class="project-update">
+          <span class="project-update-label">Latest update · Nov 2026 · v2</span>
+          <p><span class="project-update-head">Rebuilt from one flat table into 11 normalized tables.</span> Cast, directors, countries and genres each get a lookup table and a junction table. Dates and durations become real typed columns. On top: 5 views, stored procedures for search and “More Like This”, and a trigger that stops a Kids profile from saving mature titles.</p>
+          <p><span class="project-update-head">Fixed two v1 bugs I spotted in my own demo.</span> Every <code>date_added</code> had been saved as <code>0000-00-00</code>, and the genres table held whole combinations, so my “Top 10 Genres” chart was ten bars of 1. v2 parses the dates and splits the lists into 42 real genres.</p>
+          <p><span class="project-update-head">New: FLIXDEX.</span> A Node.js + Express app with profiles, genre rows, live search across titles and cast, My List, and an Insights page. The cleaning pipeline loads the full dataset in about 2 seconds, and one search query went from 60 s to 25 ms after I restructured it.</p>
+          <div class="project-update-media">
+            <figure>
+              <img src="img/netflix-flixdex.jpg" alt="FLIXDEX home page with a hero banner and rows of titles by genre" loading="lazy">
+              <figcaption>v2 · FLIXDEX home</figcaption>
+            </figure>
+            <figure>
+              <img src="img/netflix-insights.jpg" alt="FLIXDEX Insights page with titles added per year, top genres and top countries" loading="lazy">
+              <figcaption>v2 · Insights from SQL views</figcaption>
+            </figure>
+            <figure>
+              <img src="img/netflix-v1-cloudsql.jpg" alt="v1 titles table in Cloud SQL Studio" loading="lazy">
+              <figcaption>v1 · Cloud SQL Studio</figcaption>
+            </figure>
+            <figure>
+              <img src="img/netflix-v1-metabase.jpg" alt="v1 Metabase collection with Netflix charts" loading="lazy">
+              <figcaption>v1 · Metabase analytics</figcaption>
+            </figure>
+          </div>
+        </div>
+        <p>v1 (June 2025) loaded the CSV with a Python pymysql pipeline into Cloud SQL for MySQL 8. Fixing a broken import meant moving every layer to utf8mb4, and I used EXPLAIN to tune a composite index. Metabase on a Compute Engine VM connected through the Cloud SQL Auth Proxy. The repo keeps v1 and can migrate its data into v2. It also includes a step-by-step GCP guide covering Cloud Storage, Cloud Run deployment, backups and exports.</p>
+        <ul>
+          <li>MySQL 8 · 3NF schema design</li>
+          <li>Views · Stored Procedures · Triggers</li>
+          <li>Window Functions · CTEs · FULLTEXT</li>
+          <li>Google Cloud SQL · Cloud SQL Auth Proxy</li>
+          <li>Cloud Storage · Cloud Shell · Cloud Run</li>
+          <li>Compute Engine · Metabase</li>
+          <li>Node.js · Express · mysql2</li>
+          <li>Python · pymysql (v1)</li>
+          <li>HTML · CSS · JavaScript</li>
+          <li>Kaggle Dataset · Data Cleaning</li>
+        </ul>
+        <a href="https://carlosz98.github.io/MyPortFolio/flixdex/" target="_blank" rel="noopener noreferrer">Visit the Live Site →</a>
+        <a href="https://github.com/carlosz98/Netflix-Database-GCP" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+      </div>
+      <div class="article-media">
+        <iframe src="https://www.youtube.com/embed/4tRYxzllkQA?si=ruYxzyhPC4BDRYZx&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Netflix GCP demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </article>
+
     <article id="project-plumbbob-vita">
       <div class="article-meta">
         <h3>PlumbBob Vita — The Sims 1 Engine for PS Vita (C++)</h3>
@@ -435,26 +485,6 @@
       </div>
       <div class="article-media">
         <iframe src="https://www.youtube.com/embed/kEqftDn_TNY?si=U8ZmVa-vjceiF4Kg&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Employee Management System demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </article>
-
-    <article id="project-netflix-db">
-      <div class="article-meta">
-        <h3>Netflix Database &amp; GCP</h3>
-        <strong>Dec 2024</strong>
-        <p>A Netflix-style relational database in MySQL, hosted on a Google Cloud SQL instance. Kaggle CSV datasets were loaded through Cloud Storage buckets and the GCloud Shell, then explored with Metabase dashboards and charts.</p>
-        <ul>
-          <li>MySQL</li>
-          <li>Google Cloud SQL · GCP</li>
-          <li>Cloud Storage Buckets</li>
-          <li>GCloud Shell</li>
-          <li>Metabase Dashboards</li>
-          <li>Kaggle Datasets</li>
-        </ul>
-        <a href="https://github.com/carlosz98?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub →</a>
-      </div>
-      <div class="article-media">
-        <iframe src="https://www.youtube.com/embed/4tRYxzllkQA?si=ruYxzyhPC4BDRYZx&amp;enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Netflix GCP demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
     </article>
 
